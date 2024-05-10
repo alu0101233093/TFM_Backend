@@ -1,6 +1,6 @@
 import { Auth, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { firebaseApp } from "..";
-import { isValidEmail, singUpUser } from "../entities/singUpUser";
+import { isValidEmail } from "../entities/singUpUser";
 
 export class FirebaseAuth {
 
@@ -10,11 +10,11 @@ export class FirebaseAuth {
         this.authentication = getAuth(firebaseApp)
     }
 
-    public createUser(user: singUpUser){
-        if(!isValidEmail(user.email))
+    public createUser(email: string, password: string){
+        if(!isValidEmail(email))
             return Error('Bad Request. Wrong email format')
     
-        return createUserWithEmailAndPassword(this.authentication, user.email, user.password)
+        return createUserWithEmailAndPassword(this.authentication, email, password)
     }
 
     public logIn(email: string, password: string){

@@ -1,20 +1,25 @@
-import { Database, DatabaseReference, equalTo, get, getDatabase, limitToFirst, orderByChild, query, ref, push } from "firebase/database";
+import { Database, DatabaseReference, equalTo, get, getDatabase, limitToFirst, orderByChild, query, ref, set } from "firebase/database";
 import { firebaseApp } from "..";
-import { user_firebase_rtdb } from "../entities/user_firebase_rtdb";
+import { user_firebase_rtdb, user_firebase_rtdb_value } from "../entities/user_firebase_rtdb";
+import { singUpUser } from "../entities/singUpUser";
 
 export class FirebaseRTDB {
     private database: Database
-    private user_ref: DatabaseReference
-    // private reviews_ref: DatabaseReference
+    private reference: DatabaseReference
 
     constructor(){
         this.database = getDatabase(firebaseApp)
-        this.user_ref = ref(this.database, 'users')
+        this.reference = ref(this.database)
         //this.reviews_ref = ref(this.database, 'reviews')
     }
 
-    public setUser(user: user_firebase_rtdb) {
-        return push(this.user_ref, user)
+    public setUser(user: singUpUser, user_id: string) {
+        this.reference = ref(this.database, 'users/' + user_id)
+        const user_db: user_firebase_rtdb_value = {
+            ...user,
+            profile_pic: '/users/' + user_id
+        }
+        return set(this.reference, user_db)
     }
 
     public async getEmailByUsername(username: string) {
