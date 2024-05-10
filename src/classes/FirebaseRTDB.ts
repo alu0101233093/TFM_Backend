@@ -22,14 +22,21 @@ export class FirebaseRTDB {
         return set(this.reference, user_db)
     }
 
-    public async getEmailByUsername(username: string) {
-        const resultPath = query(ref(this.database, 'users'), orderByChild('username'), equalTo(username), limitToFirst(1))
-        const result = await get(resultPath)
-        if (result.exists()) {
-            const userData: user_firebase_rtdb = result.val()
-            return Object.values(userData)[0].email
-        } else {
-            return ''
+    public async getEmailByUsername(username: string): Promise<string> {
+        try {
+            const resultPath = query(ref(this.database, 'users'), orderByChild('username'), equalTo(username), limitToFirst(1));
+            const result = await get(resultPath);
+    
+            if (result.exists()) {
+                const userData: user_firebase_rtdb = result.val();
+                const userEmail = Object.values(userData)[0].email;
+                return userEmail as string;
+            } else {
+                throw new Error;
+            }
+        } catch (error) {
+            throw new Error('Username not found');
         }
     }
+    
 }
