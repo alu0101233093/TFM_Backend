@@ -2,7 +2,7 @@ export interface singUpUser {
     username: string
     password: string
     email: string
-    profile_pic: string
+    profile_pic: File
     verified: boolean
 }
 

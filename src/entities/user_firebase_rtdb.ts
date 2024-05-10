@@ -1,4 +1,4 @@
-interface UserData {
+export interface user_firebase_rtdb_value {
     email: string;
     profile_pic: string;
     username: string;
@@ -6,5 +6,5 @@ interface UserData {
 }
 
 export interface user_firebase_rtdb {
-    [userId: string]: UserData;
+    [user_id: string]: user_firebase_rtdb_value;
 }
