@@ -13,11 +13,11 @@ export class FirebaseRTDB {
         //this.reviews_ref = ref(this.database, 'reviews')
     }
 
-    public setUser(user: singUpUser, user_id: string) {
+    public setUser(user: singUpUser, user_id: string, profile_pic_url: string) {
         this.reference = ref(this.database, 'users/' + user_id)
         const user_db: user_firebase_rtdb_value = {
             ...user,
-            profile_pic: '/users/' + user_id
+            profile_pic: profile_pic_url
         }
         return set(this.reference, user_db)
     }
