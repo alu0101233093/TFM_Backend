@@ -21,7 +21,7 @@ export class FirebaseStr {
             try {
                 // Process the file data
                 if (picture == undefined) 
-                    reject
+                    resolve(this.url_prefix + 'default' + this.url_sufix);
                 else {
                     const sharpImage = sharp(picture.buffer);
                     sharpImage.resize({ width: 300, height: 300, fit: 'cover', position: 'center' })

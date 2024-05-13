@@ -29,7 +29,7 @@ movie_router.get('/', async (req, res) => {
         res.status(400).send('Bad request. Movie identifier needed')
 
     const MOVIE_ID = req.query.movie_id
-    const URL = BASE_URL + '/3/movie/' + MOVIE_ID + '?' + LANGUAGE
+    const URL = BASE_URL + '/3/movie/' + MOVIE_ID + LANGUAGE
 
     try {
         const response = await axios.get(URL, {

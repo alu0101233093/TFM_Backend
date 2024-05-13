@@ -20,7 +20,6 @@ user_router.post('/signup', upload.single('profile_pic'), (req, res) => {
         ...req.body,
         profile_pic: req.file
     }
-    console.log(user_request)
 
     auth.createUser(user_request.email,user_request.password)
     .then((user_credential) => {
@@ -40,14 +39,19 @@ user_router.post('/signup', upload.single('profile_pic'), (req, res) => {
     })
 })
 
-user_router.get('/login', (req, res) => {
+user_router.post('/login', express.urlencoded(), (req, res) => {
+    console.log(req.body)
     const user: logInUser = req.body
     
     db.getEmailByUsername(user.username)
     .then((email) => {
         auth.logIn(email, user.password)
-        .then(() => {
-            res.status(200).send('User loged in successfuly')
+        .then((user_credential) => {
+            user_credential.user.getIdToken().then((jwt) => {
+                res.status(200).json({ jwt, message: 'User logged in successfully' })
+            }).catch((error) => {
+                res.status(500).send(error.message)
+            })
         }).catch((error) => {
             res.status(401).send(error.message)
         })

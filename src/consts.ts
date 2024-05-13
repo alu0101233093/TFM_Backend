@@ -1,7 +1,7 @@
 export const PORT = 3000
 export const BASE_URL = 'https://api.themoviedb.org'
 export const MOVIE_URL = BASE_URL + '/3/search/movie'
-export const LANGUAGE = 'language=es-ES'
+export const LANGUAGE = '?language=es-ES'
 
 export const DEFAULT_MOVIE_REQUEST = {
     include_adult: 'true',
