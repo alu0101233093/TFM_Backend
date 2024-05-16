@@ -1,27 +1,27 @@
-import { Auth, UserCredential, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { firebaseApp } from "..";
+import { firebaseAdminApp } from "..";
 import { isValidEmail } from "../entities/singUpUser";
+import { user_firebase_auth } from "../entities/user_firebase_auth";
+import { UserRecord } from "firebase-admin/lib/auth/user-record";
+import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 
 export class FirebaseAuth {
 
-    private authentication: Auth
-
     constructor(){
-        this.authentication = getAuth(firebaseApp)
     }
 
-    public createUser(email: string, password: string): Promise<UserCredential>{
-        if(!isValidEmail(email))
+    public createUser(user: user_firebase_auth): Promise<UserRecord> {
+        if(!isValidEmail(user.email))
             return Promise.reject(new Error('Invalid email format'))
     
-        return createUserWithEmailAndPassword(this.authentication, email, password)
+        return firebaseAdminApp.auth().createUser(user)
+    }
+    
+    public verifyJWT(jwt: string): Promise<DecodedIdToken>{
+        return firebaseAdminApp.auth().verifyIdToken(jwt)
     }
 
-    public logIn(email: string, password: string){
-        return signInWithEmailAndPassword(this.authentication, email, password)
-    }
-
-    public logOut(){
-        return this.authentication.signOut()
+    public updateUser(uid: string, user: user_firebase_auth){
+        console.log(user)
+        return firebaseAdminApp.auth().updateUser(uid, user)
     }
 }
