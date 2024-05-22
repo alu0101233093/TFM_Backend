@@ -4,9 +4,9 @@ import { FirebaseAuth } from '../classes/FirebaseAuth'
 // import { FirebaseRTDB } from '../classes/FirebaseRTDB'
 import { FirebaseStr } from '../classes/FirebaseStr'
 import { user_firebase_auth } from '../entities/user_firebase_auth'
-import { firebaseApp } from '..'
-import * as authapp from 'firebase/auth'
-import { logInUser } from '../entities/logInUser'
+// import { firebaseApp } from '..'
+// import * as authapp from 'firebase/auth'
+// import { logInUser } from '../entities/logInUser'
 
 const auth = new FirebaseAuth
 // const db = new FirebaseRTDB
@@ -89,35 +89,35 @@ user_router.post('/updateData', express.urlencoded(), (req, res) => {
     }
 })
 
-/// TEMPORAL PARA TESTEAR
-user_router.post('/getjwt', express.urlencoded(), (req, res) => {
-    console.log(req.body)
-    const user: logInUser = req.body
+// /// TEMPORAL PARA TESTEAR
+// user_router.post('/getjwt', express.urlencoded(), (req, res) => {
+//     console.log(req.body)
+//     const user: logInUser = req.body
     
-    const auth = authapp.getAuth(firebaseApp)
-    authapp.signInWithEmailAndPassword(auth, user.username, user.password)
-    .then((user_credentials) => {
-        user_credentials.user.getIdToken().then((jwt) => {
-            res.status(200).send(jwt)
-        })
-    }).catch((error) => {
-        res.status(500).send(error.message)
-    })
-})
+//     const auth = authapp.getAuth(firebaseApp)
+//     authapp.signInWithEmailAndPassword(auth, user.username, user.password)
+//     .then((user_credentials) => {
+//         user_credentials.user.getIdToken().then((jwt) => {
+//             res.status(200).send(jwt)
+//         })
+//     }).catch((error) => {
+//         res.status(500).send(error.message)
+//     })
+// })
 
-/// TEMPORAL PARA TESTEAR
-user_router.post('/getuser', express.urlencoded(), (req, res) => {
-    console.log(req.body)
-    const user: logInUser = req.body
+// /// TEMPORAL PARA TESTEAR
+// user_router.post('/getuser', express.urlencoded(), (req, res) => {
+//     console.log(req.body)
+//     const user: logInUser = req.body
     
-    const auth = authapp.getAuth(firebaseApp)
-    authapp.signInWithEmailAndPassword(auth, user.username, user.password)
-    .then((user_credentials) => {
-        res.status(200).send(user_credentials.user)
-    }).catch((error) => {
-        res.status(500).send(error.message)
-    })
-})
+//     const auth = authapp.getAuth(firebaseApp)
+//     authapp.signInWithEmailAndPassword(auth, user.username, user.password)
+//     .then((user_credentials) => {
+//         res.status(200).send(user_credentials.user)
+//     }).catch((error) => {
+//         res.status(500).send(error.message)
+//     })
+// })
 
 /// PARA FRONTEND
 // user_router.post('/login', express.urlencoded(), (req, res) => {

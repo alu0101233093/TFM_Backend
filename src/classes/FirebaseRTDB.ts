@@ -1,5 +1,7 @@
 // import { Database, DatabaseReference, getDatabase, ref } from "firebase/database";
 // import { firebaseApp } from "..";
+import { firebaseAdminApp } from ".."
+import { Review } from "../entities/review"
 
 export class FirebaseRTDB {
     // private database: Database
@@ -12,14 +14,43 @@ export class FirebaseRTDB {
     }
 
 
-    // public setUser(user: singUpUser, user_id: string, profile_pic_url: string) {
-    //     this.reference = ref(this.database, 'users/' + user_id)
-    //     const user_db: user_firebase_rtdb_value = {
-    //         ...user,
-    //         profile_pic: profile_pic_url
-    //     }
-    //     return set(this.reference, user_db)
-    // }
+    public async setReview(review: Review, movie_id: string): Promise<string> {
+        const reference = firebaseAdminApp.database().ref(`reviews/${movie_id}`);
+        
+        return reference.push(review)
+            .then((snapshot) => {
+                const key = snapshot.key;
+                if (key) {
+                    console.log(`Review added with key: ${key}`);
+                    return key;
+                } else {
+                    throw new Error('Failed to get key for the new review.');
+                }
+            })
+            .catch((error) => {
+                throw new Error(`Error adding review: ${error.message}`);
+            });
+    }
+
+    public async getReviews(movie_id: string): Promise<Record<string,Review>> {
+        const reference = firebaseAdminApp.database().ref('reviews/' + movie_id);
+        
+        return reference.get().then((snapshot) => {
+            if (snapshot.exists()) {
+                const reviews: Record<string,Review> = snapshot.val();
+                return reviews;
+            } else {
+                return {};
+            }
+        }).catch((error) => {
+            throw new Error(`Error getting reviews: ${error.message}`);
+        });
+    }
+
+    public removeReview(movie_id: string, review_id: string): Promise<void> {
+        const reference = firebaseAdminApp.database().ref(`reviews/${movie_id}/${review_id}`);
+        return reference.remove()
+    }
 
     // public async getEmailByUsername(username: string): Promise<string> {
     //     try {
