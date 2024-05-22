@@ -1,6 +1,6 @@
 import express from 'express'
 import axios from 'axios'
-import { HEADERS, MOVIE_URL, DEFAULT_MOVIE_REQUEST, BASE_URL, LANGUAGE } from '../consts'
+import { MOVIE_API_HEADERS, MOVIE_URL, DEFAULT_MOVIE_REQUEST, BASE_URL, LANGUAGE_QUERY } from '../consts'
 
 const movie_router = express.Router()
 
@@ -14,7 +14,7 @@ movie_router.get('/list', async (req, res) => {
     try {
         const response = await axios.get(MOVIE_URL, {
             params: request,
-            headers: HEADERS
+            headers: MOVIE_API_HEADERS
         });
         console.log(response)
         res.send(response.data)
@@ -29,11 +29,11 @@ movie_router.get('/', async (req, res) => {
         res.status(400).send('Bad request. Movie identifier needed')
 
     const MOVIE_ID = req.query.movie_id
-    const URL = BASE_URL + '/3/movie/' + MOVIE_ID + LANGUAGE
+    const URL = BASE_URL + '/3/movie/' + MOVIE_ID + LANGUAGE_QUERY
 
     try {
         const response = await axios.get(URL, {
-            headers: HEADERS
+            headers: MOVIE_API_HEADERS
         });
         console.log(response)
         res.send(response.data)
@@ -52,7 +52,7 @@ movie_router.get('/credits', async (req, res) => {
 
     try {
         const response = await axios.get(URL, {
-            headers: HEADERS
+            headers: MOVIE_API_HEADERS
         });
         console.log(response)
         res.send(response.data)

@@ -17,10 +17,11 @@ const upload = multer({
     storage: multer.memoryStorage()
 });
 
-user_router.post('/signup', upload.single('profile_pic'), (req, res) => {
+user_router.post('/signup', upload.single('photoURL'), (req, res) => {
     let user_request: user_firebase_auth = {
         ...req.body,
-        profile_pic: ''
+        profile_pic: '',
+        emailVerified: req.body.emailVerified === 'true'
     }
 
     auth.createUser(user_request)
@@ -42,14 +43,7 @@ user_router.post('/signup', upload.single('profile_pic'), (req, res) => {
     })
 })
 
-user_router.post('/update', upload.single('photoURL'), (req, res) => {
-    let user_request: user_firebase_auth = {
-        ...req.body,
-        emailVerified: req.body.emailVerified === 'true',
-        photoURL: ''
-    }
-
-    //////////////////// no diferencia entre photoURL vacío o indefinido, estaría bien para saber cuando actualizar
+user_router.post('/updateProfilePic', upload.single('photoURL'), (req, res) => {
 
     const jwt = req.headers.authorization?.split(' ')[1]
 
@@ -57,14 +51,33 @@ user_router.post('/update', upload.single('photoURL'), (req, res) => {
         auth.verifyJWT(jwt)
         .then((decodedIdToken) => {
             storage.savePicture(req.file, decodedIdToken.uid)
-            .then((image_url) => {
-                user_request.photoURL = image_url
-                auth.updateUser(decodedIdToken.uid, user_request)
-                .then(() => {
-                    res.status(201).send('User data updated successfuly')
-                }).catch((error) => {
-                    res.status(400).send(error.message)
-                })
+            .then((_url) => {
+                res.status(201).send('User data updated successfuly')
+            }).catch((error) => {
+                res.status(403).send(error.message)
+            })
+        }).catch((error) => {
+            res.status(401).send(error.message)
+        })
+    } else {
+        res.status(400).send('JWT not found')
+    }
+})
+
+user_router.post('/updateData', express.urlencoded(), (req, res) => {
+    let user_request: user_firebase_auth = {
+        ...req.body,
+        emailVerified: req.body.emailVerified === 'true'
+    }
+
+    const jwt = req.headers.authorization?.split(' ')[1]
+
+    if(jwt){
+        auth.verifyJWT(jwt)
+        .then((decodedIdToken) => {
+            auth.updateUser(decodedIdToken.uid, user_request)
+            .then(() => {
+                res.status(201).send('User data updated successfuly')
             }).catch((error) => {
                 res.status(400).send(error.message)
             })

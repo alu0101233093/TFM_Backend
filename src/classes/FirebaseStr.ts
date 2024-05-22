@@ -1,22 +1,16 @@
 import { firebaseAdminApp } from ".."
 import sharp from "sharp"
+import { FB_BUCKET_URL, FB_IMAGE_URL_PREFIX, FB_IMAGE_URL_SUFIX } from "../consts"
 
 export class FirebaseStr {
 
-    private url_prefix: string
-    private url_sufix: string
-
-    constructor(){
-        this.url_prefix = 'https://firebasestorage.googleapis.com/v0/b/miw-tfm-moviemeter.appspot.com/o/users%2F'
-        this.url_sufix = '.png?alt=media'
-    }
+    constructor(){}
 
     public async savePicture(picture: Express.Multer.File | undefined, userId: string): Promise<string> {
-        
         return new Promise<string>((resolve, reject) => {
             try {
                 if (picture == undefined) {
-                    resolve(this.url_prefix + 'default' + this.url_sufix)
+                    resolve(FB_IMAGE_URL_PREFIX + 'default' + FB_IMAGE_URL_SUFIX)
                 } else {
                     const sharpImage = sharp(picture.buffer)
                     sharpImage.resize({ width: 300, height: 300, fit: 'cover', position: 'center' })
@@ -24,22 +18,12 @@ export class FirebaseStr {
                     .toBuffer()
                     .then(async (processedImageBuffer) => {
                         const fileRef = firebaseAdminApp.storage()
-                        .bucket('miw-tfm-moviemeter.appspot.com')
+                        .bucket(FB_BUCKET_URL)
                         .file(`users/${userId}.png`)
 
-                        const stream = fileRef.createWriteStream({
-                            metadata: {
-                            contentType: 'image/png'
-                            }
-                        })
-                        stream.on('error', (error) => {
-                            reject(error)
-                        })
-            
-                        stream.on('finish', () => {
-                            resolve(this.url_prefix + userId + this.url_sufix)
-                        })
-            
+                        const stream = fileRef.createWriteStream({ metadata: { contentType: 'image/png' } })
+                        stream.on('error', (error) => { reject(error) })
+                        stream.on('finish', () => { resolve(FB_IMAGE_URL_PREFIX + userId + FB_IMAGE_URL_SUFIX) })
                         stream.end(processedImageBuffer)
                     })
                     .catch((error) => {
@@ -50,5 +34,16 @@ export class FirebaseStr {
                 reject(error)
             }
         })
+    }
+
+    ////////////////// GET profile pic
+    // si no se encuentra devuelve el url default
+
+    public hasProfilePic(uid: string): Promise<[boolean]> {
+        return firebaseAdminApp
+        .storage()
+        .bucket(FB_BUCKET_URL)
+        .file(FB_IMAGE_URL_PREFIX + uid + FB_IMAGE_URL_SUFIX)
+        .exists()
     }
 }

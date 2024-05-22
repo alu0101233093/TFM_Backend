@@ -9,6 +9,10 @@ export class FirebaseAuth {
     constructor(){
     }
 
+    public getUser(uid: string): Promise<UserRecord> {
+        return firebaseAdminApp.auth().getUser(uid)
+    }
+
     public createUser(user: user_firebase_auth): Promise<UserRecord> {
         if(!isValidEmail(user.email))
             return Promise.reject(new Error('Invalid email format'))
@@ -21,7 +25,6 @@ export class FirebaseAuth {
     }
 
     public updateUser(uid: string, user: user_firebase_auth){
-        console.log(user)
         return firebaseAdminApp.auth().updateUser(uid, user)
     }
 }
