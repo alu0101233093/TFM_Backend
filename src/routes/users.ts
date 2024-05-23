@@ -17,6 +17,38 @@ const upload = multer({
     storage: multer.memoryStorage()
 });
 
+
+/**
+ * @openapi
+ * /users/signup:
+ *   post:
+ *     summary: Signup a new user
+ *     tags: [Users]
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               displayName:
+ *                 type: string
+ *               emailVerified:
+ *                 type: boolean
+ *               photoURL:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: User signed up successfully
+ *       400:
+ *         description: Bad request
+ *       500:
+ *         description: Internal server error
+ */
 user_router.post('/signup', upload.single('photoURL'), (req, res) => {
     let user_request: user_firebase_auth = {
         ...req.body,
@@ -31,7 +63,7 @@ user_router.post('/signup', upload.single('photoURL'), (req, res) => {
             user_request.photoURL = image_url
             auth.updateUser(user_record.uid, user_request)
             .then(() => {
-                res.status(201).send('User signed up successfuly')
+                res.status(201).send(user_record)
             }).catch((error) => {
                 res.status(500).send(error.message)
             })
@@ -43,6 +75,31 @@ user_router.post('/signup', upload.single('photoURL'), (req, res) => {
     })
 })
 
+/**
+ * @openapi
+ * /users/updateProfilePic:
+ *   post:
+ *     summary: Update user profile picture
+ *     tags: [Users]
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               photoURL:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: User data updated successfully
+ *       400:
+ *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
+ */
 user_router.post('/updateProfilePic', upload.single('photoURL'), (req, res) => {
 
     const jwt = req.headers.authorization?.split(' ')[1]
@@ -64,7 +121,35 @@ user_router.post('/updateProfilePic', upload.single('photoURL'), (req, res) => {
     }
 })
 
-user_router.post('/updateData', express.urlencoded(), (req, res) => {
+/**
+ * @openapi
+ * /users/updateData:
+ *   post:
+ *     summary: Update user data
+ *     tags: [Users]
+ *     requestBody:
+ *       content:
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               displayName:
+ *                 type: string
+ *               emailVerified:
+ *                 type: boolean
+ *     responses:
+ *       201:
+ *         description: User data updated successfully
+ *       400:
+ *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Internal server error
+ */
+user_router.post('/updateData', express.urlencoded({ extended: true }), (req, res) => {
     let user_request: user_firebase_auth = {
         ...req.body,
         emailVerified: req.body.emailVerified === 'true'

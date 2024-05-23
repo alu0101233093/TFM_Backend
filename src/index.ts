@@ -12,6 +12,7 @@ export const firebaseAdminApp = admin.initializeApp({
 
 import movie_router from './routes/movies'
 import user_router from './routes/users'
+import { swaggerDocs } from './swagger';
 
 const expressApp = express()
 
@@ -20,4 +21,5 @@ expressApp.use('/users', user_router)
 
 expressApp.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
+    swaggerDocs(expressApp, PORT)
 })

@@ -7,6 +7,31 @@ import { FirebaseRTDB } from '../classes/FirebaseRTDB'
 const movie_router = express.Router()
 const database = new FirebaseRTDB
 
+/**
+ * @openapi
+ * /movies/search:
+ *   get:
+ *     summary: Search for movies
+ *     tags: [Movies]
+ *     parameters:
+ *       - name: q
+ *         in: query
+ *         required: true
+ *         description: Query string for searching movies
+ *         schema:
+ *           type: string
+ *       - name: page
+ *         in: query
+ *         required: false
+ *         description: Page number for pagination
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: A list of movies
+ *       500:
+ *         description: Internal server error
+ */
 movie_router.get('/search', async (req, res) => {
     const request = {
         ...DEFAULT_MOVIE_REQUEST,
@@ -27,6 +52,27 @@ movie_router.get('/search', async (req, res) => {
     }
 })
 
+/**
+ * @openapi
+ * /movies:
+ *   get:
+ *     summary: Get movie details
+ *     tags: [Movies]
+ *     parameters:
+ *       - name: movie_id
+ *         in: query
+ *         required: true
+ *         description: The ID of the movie
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Movie details
+ *       400:
+ *         description: Bad request. Movie identifier needed
+ *       500:
+ *         description: Internal server error
+ */
 movie_router.get('/', async (req, res) => {
     if(!req.query.movie_id)
         res.status(400).send('Bad request. Movie identifier needed')
@@ -46,6 +92,27 @@ movie_router.get('/', async (req, res) => {
     }
 })
 
+/**
+ * @openapi
+ * /movies/credits:
+ *   get:
+ *     summary: Get movie credits
+ *     tags: [Movies]
+ *     parameters:
+ *       - name: movie_id
+ *         in: query
+ *         required: true
+ *         description: The ID of the movie
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Movie credits
+ *       400:
+ *         description: Bad request. Movie identifier needed
+ *       500:
+ *         description: Internal server error
+ */
 movie_router.get('/credits', async (req, res) => {
     if(!req.query.movie_id)
         res.status(400).send('Bad request. Movie identifier needed')
@@ -65,7 +132,40 @@ movie_router.get('/credits', async (req, res) => {
     }
 })
 
-movie_router.post('/reviews', express.urlencoded(), (req, res) => {
+/**
+ * @openapi
+ * /movies/reviews:
+ *   post:
+ *     summary: Post a review for a movie
+ *     tags: [Movies]
+ *     parameters:
+ *       - name: movie_id
+ *         in: query
+ *         required: true
+ *         description: The ID of the movie
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       content:
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               score:
+ *                 type: number
+ *               review:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Review published
+ *       400:
+ *         description: Bad request. Movie identifier needed
+ *       500:
+ *         description: Internal server error
+ */
+movie_router.post('/reviews', express.urlencoded({ extended: true }), (req, res) => {
     if(!req.query.movie_id)
         res.status(400).send('Bad request. Movie identifier needed')
     
@@ -81,6 +181,27 @@ movie_router.post('/reviews', express.urlencoded(), (req, res) => {
     })
 })
 
+/**
+ * @openapi
+ * /movies/reviews:
+ *   get:
+ *     summary: Get reviews for a movie
+ *     tags: [Movies]
+ *     parameters:
+ *       - name: movie_id
+ *         in: query
+ *         required: true
+ *         description: The ID of the movie
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: A list of reviews
+ *       400:
+ *         description: Bad request. Movie identifier needed
+ *       500:
+ *         description: Internal server error
+ */
 movie_router.get('/reviews', (req, res) => {
     if(!req.query.movie_id)
         res.status(400).send('Bad request. Movie identifier needed')
@@ -94,6 +215,33 @@ movie_router.get('/reviews', (req, res) => {
     })
 })
 
+/**
+ * @openapi
+ * /movies/reviews:
+ *   delete:
+ *     summary: Delete a review for a movie
+ *     tags: [Movies]
+ *     parameters:
+ *       - name: movie_id
+ *         in: query
+ *         required: true
+ *         description: The ID of the movie
+ *         schema:
+ *           type: string
+ *       - name: review_id
+ *         in: query
+ *         required: true
+ *         description: The ID of the review
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Review removed successfully
+ *       400:
+ *         description: Bad request. Movie identifier or review ID needed
+ *       500:
+ *         description: Internal server error
+ */
 movie_router.delete('/reviews', (req, res) => {
     if(!req.query.movie_id)
         res.status(400).send('Bad request. Movie identifier needed')
