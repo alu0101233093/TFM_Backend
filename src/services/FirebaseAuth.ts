@@ -1,6 +1,6 @@
 import { firebaseAdminApp } from "..";
-import { isValidEmail } from "../entities/singUpUser";
-import { user_firebase_auth } from "../entities/user_firebase_auth";
+import { isValidEmail } from "../entities/user_firebase_auth";
+import { User_firebase_auth } from "../entities/user_firebase_auth";
 import { UserRecord } from "firebase-admin/lib/auth/user-record";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 
@@ -13,7 +13,7 @@ export class FirebaseAuth {
         return firebaseAdminApp.auth().getUser(uid)
     }
 
-    public createUser(user: user_firebase_auth): Promise<UserRecord> {
+    public createUser(user: User_firebase_auth): Promise<UserRecord> {
         if(!isValidEmail(user.email))
             return Promise.reject(new Error('Invalid email format'))
     
@@ -24,7 +24,7 @@ export class FirebaseAuth {
         return firebaseAdminApp.auth().verifyIdToken(jwt)
     }
 
-    public updateUser(uid: string, user: user_firebase_auth){
+    public updateUser(uid: string, user: User_firebase_auth){
         return firebaseAdminApp.auth().updateUser(uid, user)
     }
 }

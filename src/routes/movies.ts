@@ -2,7 +2,7 @@ import express from 'express'
 import axios from 'axios'
 import { MOVIE_API_HEADERS, MOVIE_URL, DEFAULT_MOVIE_REQUEST, BASE_URL, LANGUAGE_QUERY } from '../consts'
 import { Review } from '../entities/review'
-import { FirebaseRTDB } from '../classes/FirebaseRTDB'
+import { FirebaseRTDB } from '../services/FirebaseRTDB'
 
 const movie_router = express.Router()
 const database = new FirebaseRTDB
@@ -124,7 +124,7 @@ movie_router.get('/credits', async (req, res) => {
         const response = await axios.get(URL, {
             headers: MOVIE_API_HEADERS
         })
-        console.log(response)
+        console.log(response.data)
         res.send(response.data)
     } catch (error) {
         console.error('Error:', error)
@@ -171,10 +171,10 @@ movie_router.post('/reviews', express.urlencoded({ extended: true }), (req, res)
     
     const MOVIE_ID: string = req.query.movie_id as string
     const REVIEW: Review = {...req.body}
-    console.log(REVIEW)
 
     database.setReview(REVIEW, MOVIE_ID)
     .then((review_id) => {
+        console.log('Review published with id:' + review_id)
         res.status(201).send('Review published with id:' + review_id)
     }).catch((error) => {
         res.status(500).send(error.message)
