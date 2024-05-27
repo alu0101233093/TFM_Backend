@@ -9,7 +9,6 @@ const storage = new FirebaseStr
 export const signUp: RequestHandler = (req, res) => {
     let user_request: User_firebase_auth = {
         ...req.body,
-        photoURL: '',
         emailVerified: req.body.emailVerified === 'true'
     }
 

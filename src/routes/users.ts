@@ -46,6 +46,8 @@ user_router.post('/signUp', upload.single('photoURL'), signUp)
  *   post:
  *     summary: Update user profile picture
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       content:
  *         multipart/form-data:
@@ -69,10 +71,12 @@ user_router.post('/updateProfilePic', upload.single('photoURL'), updateProfilePi
 
 /**
  * @openapi
- * /users/updateData:
+ * /users/updateUserData:
  *   post:
  *     summary: Update user data
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       content:
  *         application/x-www-form-urlencoded:
