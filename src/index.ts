@@ -1,19 +1,17 @@
 import express from 'express'
+import cors from 'cors'
 import { PORT, firebaseConfig } from './consts'
-import { initializeApp } from 'firebase/app'
-import * as admin from 'firebase-admin'
 import { credential } from 'firebase-admin'
+import { swaggerDocs } from './swagger'
+import * as admin from 'firebase-admin'
 
-export const firebaseApp = initializeApp(firebaseConfig);
 export const firebaseAdminApp = admin.initializeApp({
-    credential: credential.cert('miw-tfm-moviemeter-firebase-adminsdk-y4a07-184e00d3ed.json'),
-    databaseURL: "https://miw-tfm-moviemeter-default-rtdb.europe-west1.firebasedatabase.app"
-  });
+  credential: credential.cert('miw-tfm-moviemeter-firebase-adminsdk-y4a07-184e00d3ed.json'),
+  databaseURL: firebaseConfig.databaseURL
+});
 
 import movie_router from './routes/movies'
 import user_router from './routes/users'
-import cors from 'cors'
-import { swaggerDocs } from './swagger'
 
 const expressApp = express()
 

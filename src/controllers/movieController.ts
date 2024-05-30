@@ -1,8 +1,8 @@
 import get from "axios"
 import { RequestHandler } from "express"
 import { MOVIE_API_HEADERS, MOVIE_URL, DEFAULT_MOVIE_REQUEST, BASE_URL, LANGUAGE_QUERY } from '../consts'
-import { carouselMovie } from "../entities/carouselMovie"
-import { moviePoster } from "../entities/moviePoster"
+import { CarouselMovie } from "../entities/carouselMovie"
+import { MoviePoster } from "../entities/moviePoster"
 
 export const searchMovie: RequestHandler = (req, res) => {
     const request = {
@@ -15,7 +15,12 @@ export const searchMovie: RequestHandler = (req, res) => {
         params: request,
         headers: MOVIE_API_HEADERS
     }).then((response) => {
-        res.send(response.data)
+        const MOVIES: MoviePoster[] = response.data.results.map((movie: any) => ({
+            poster_path: 'https://media.themoviedb.org/t/p/original/' + movie.poster_path,
+            id: movie.id,
+            title: movie.title,
+        }))
+        res.json(MOVIES)
     }).catch(() => {
         res.status(500).send('Internal server error')
     })
@@ -59,7 +64,7 @@ export const getCarousel: RequestHandler = (_req, res) => {
     get(URL, {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
-        const MOVIES: carouselMovie[] = response.data.results.map((movie: any) => ({
+        const MOVIES: CarouselMovie[] = response.data.results.map((movie: any) => ({
             backdrop_path: 'https://media.themoviedb.org/t/p/w1920_and_h800_bestv2' + movie.backdrop_path,
             id: movie.id,
             title: movie.title,
@@ -77,8 +82,8 @@ export const getHomeList: RequestHandler = (_req, res) => {
     get(URL, {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
-        const MOVIES: moviePoster[] = response.data.results.map((movie: any) => ({
-            poster_path: 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/' + movie.poster_path,
+        const MOVIES: MoviePoster[] = response.data.results.map((movie: any) => ({
+            poster_path: 'https://media.themoviedb.org/t/p/original/' + movie.poster_path,
             id: movie.id,
             title: movie.title,
         }))
