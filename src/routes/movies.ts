@@ -1,5 +1,5 @@
 import express from 'express'
-import { getCarousel, getCredits, getMovie, searchMovie } from '../controllers/movieController'
+import { getCarousel, getCredits, getHomeList, getMovie, searchMovie } from '../controllers/movieController'
 import { deleteReview, getReviews, postReview } from '../controllers/reviewController'
 
 const movie_router = express.Router()
@@ -196,5 +196,35 @@ movie_router.delete('/reviews', deleteReview)
  *         description: Internal server error
  */
 movie_router.get('/carousel', getCarousel)
+
+/**
+ * @openapi
+ * /movies/home-list:
+ *   get:
+ *     summary: Get a list of movies for the home page
+ *     tags: [Movies]
+ *     responses:
+ *       200:
+ *         description: A list of movies
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   poster_path:
+ *                     type: string
+ *                     description: The path to the movie poster image
+ *                   id:
+ *                     type: integer
+ *                     description: The movie ID
+ *                   title:
+ *                     type: string
+ *                     description: The title of the movie
+ *       500:
+ *         description: Internal server error
+ */
+movie_router.get('/home-list', getHomeList)
 
 export default movie_router
