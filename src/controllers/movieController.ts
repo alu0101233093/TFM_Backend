@@ -83,7 +83,7 @@ export const getHomeList: RequestHandler = (_req, res) => {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
         const MOVIES: MoviePoster[] = response.data.results.map((movie: any) => ({
-            poster_path: 'https://media.themoviedb.org/t/p/original/' + movie.poster_path,
+            poster_path: 'https://media.themoviedb.org/t/p/w300_and_h450_bestv2/' + movie.poster_path,
             id: movie.id,
             title: movie.title,
         }))

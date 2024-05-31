@@ -36,9 +36,6 @@ export class FirebaseStr {
         })
     }
 
-    ////////////////// GET profile pic
-    // si no se encuentra devuelve el url default
-
     public hasProfilePic(uid: string): Promise<[boolean]> {
         return firebaseAdminApp
         .storage()

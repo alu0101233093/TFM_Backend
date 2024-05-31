@@ -1,13 +1,13 @@
 import express from 'express'
 import cors from 'cors'
-import { PORT, firebaseConfig } from './consts'
+import { PORT, databaseURL } from './consts'
 import { credential } from 'firebase-admin'
 import { swaggerDocs } from './swagger'
 import * as admin from 'firebase-admin'
 
 export const firebaseAdminApp = admin.initializeApp({
   credential: credential.cert('miw-tfm-moviemeter-firebase-adminsdk-y4a07-184e00d3ed.json'),
-  databaseURL: firebaseConfig.databaseURL
+  databaseURL: databaseURL
 });
 
 import movie_router from './routes/movies'
