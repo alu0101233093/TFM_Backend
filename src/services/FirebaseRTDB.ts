@@ -17,7 +17,6 @@ export class FirebaseRTDB {
             .then((snapshot) => {
                 const key = snapshot.key;
                 if (key) {
-                    console.log('Review added with key: ' + key);
                     return key;
                 } else {
                     throw new Error('Failed to get key for the new review.');

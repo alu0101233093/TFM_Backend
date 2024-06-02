@@ -15,7 +15,10 @@ export class FirebaseAuth {
 
     public createUser(user: User_firebase_auth): Promise<UserRecord> {
         if(!isValidEmail(user.email))
-            return Promise.reject(new Error('Invalid email format'))
+            return Promise.reject({
+                code: 'backend/invalid-email',
+                message: 'The provided email has an invalid format'
+            })
     
         return firebaseAdminApp.auth().createUser(user)
     }

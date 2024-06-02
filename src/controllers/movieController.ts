@@ -21,8 +21,8 @@ export const searchMovie: RequestHandler = (req, res) => {
             title: movie.title,
         }))
         res.json(MOVIES)
-    }).catch(() => {
-        res.status(500).send('Internal server error')
+    }).catch((error) => {
+        res.status(500).send(error)
     })
 }
 
@@ -37,8 +37,8 @@ export const getMovie: RequestHandler = (req, res) => {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
         res.send(response.data)
-    }).catch(() => {
-        res.status(500).send('Internal server error')
+    }).catch((error) => {
+        res.status(500).send(error)
     }) 
 }
 
@@ -53,8 +53,8 @@ export const getCredits: RequestHandler = (req, res) => {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
         res.send(response.data)
-    }).catch(() => {
-        res.status(500).send('Internal server error')
+    }).catch((error) => {
+        res.status(500).send(error)
     })
 }
 
@@ -71,8 +71,8 @@ export const getCarousel: RequestHandler = (_req, res) => {
             overview: movie.overview,
         }))
         res.json(MOVIES)
-    }).catch(() => {
-        res.status(500).send('Internal server error')
+    }).catch((error) => {
+        res.status(500).send(error)
     })
 }
 
@@ -88,7 +88,7 @@ export const getHomeList: RequestHandler = (_req, res) => {
             title: movie.title,
         }))
         res.json(MOVIES)
-    }).catch(() => {
-        res.status(500).send('Internal server error')
+    }).catch((error) => {
+        res.status(500).send(error)
     })
 }

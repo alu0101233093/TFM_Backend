@@ -15,7 +15,7 @@ export const postReview: RequestHandler = (req, res) => {
     .then((review_id) => {
         res.status(201).send('Review published with id:' + review_id)
     }).catch((error) => {
-        res.status(500).send(error.message)
+        res.status(500).send(error)
     })
 }
 
@@ -28,7 +28,7 @@ export const getReviews: RequestHandler = (req, res) => {
     .then((reviews: Record<string, Review>) => {
         res.status(200).json(reviews)
     }).catch((error) => {
-        res.status(500).send(error.message)
+        res.status(500).send(error)
     })
 }
 
@@ -42,6 +42,6 @@ export const deleteReview: RequestHandler = (req, res) => {
     .then((_) => {
         res.status(200).send('Review with ID ' + REVIEW_ID + ' removed successfuly')
     }).catch((error) => {
-        res.status(500).send(error.message)
+        res.status(500).send(error)
     })
 }
