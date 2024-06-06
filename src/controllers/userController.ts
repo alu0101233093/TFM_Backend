@@ -22,9 +22,12 @@ export const signUp: RequestHandler = (req, res) => {
             .then(() => {
                 res.status(201).send({message: 'User signed up'})
             }).catch((error) => {
+                auth.deleteUser(user_record.uid)
+                storage.deleteProfilePic(user_record.uid)
                 res.status(500).send(error)
             })
         }).catch((error) => {
+            auth.deleteUser(user_record.uid)
             res.status(400).send(error)
         })
     }).catch((error) => {
@@ -34,10 +37,10 @@ export const signUp: RequestHandler = (req, res) => {
 
 export const updateProfilePic: RequestHandler = (req, res) => {
 
-    const jwt = req.headers.authorization?.split(' ')[1]
+    const idToken = req.headers.authorization?.split(' ')[1]
 
-    if(jwt){
-        auth.verifyJWT(jwt)
+    if(idToken){
+        auth.verifyIdToken(idToken)
         .then((decodedIdToken) => {
             storage.savePicture(req.file, decodedIdToken.uid)
             .then((_url) => {
@@ -49,7 +52,7 @@ export const updateProfilePic: RequestHandler = (req, res) => {
             res.status(401).send(error)
         })
     } else {
-        res.status(400).send('JWT not found')
+        res.status(400).send('idToken not found')
     }
 }
 
@@ -62,7 +65,7 @@ export const updateUser: RequestHandler = (req, res) => {
     const jwt = req.headers.authorization?.split(' ')[1]
 
     if(jwt){
-        auth.verifyJWT(jwt)
+        auth.verifyIdToken(jwt)
         .then((decodedIdToken) => {
             auth.updateUser(decodedIdToken.uid, user_request)
             .then(() => {

@@ -38,7 +38,7 @@ const upload = multer({
  *       500:
  *         description: Internal server error
  */
-user_router.post('/signUp', upload.single('photoURL'), signUp)
+user_router.post('/signUp', upload.single('photo'), signUp)
 
 /**
  * @openapi
@@ -67,7 +67,7 @@ user_router.post('/signUp', upload.single('photoURL'), signUp)
  *       403:
  *         description: Forbidden
  */
-user_router.post('/updateProfilePic', upload.single('photoURL'), updateProfilePic)
+user_router.post('/updateProfilePic', upload.single('photo'), updateProfilePic)
 
 /**
  * @openapi

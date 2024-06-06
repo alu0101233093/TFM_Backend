@@ -45,4 +45,12 @@ export class FirebaseStr {
         .file(FB_IMAGE_URL_PREFIX + uid + FB_IMAGE_URL_SUFIX)
         .exists()
     }
+
+    public deleteProfilePic(uid: string) {
+        return firebaseAdminApp
+        .storage()
+        .bucket(FB_BUCKET_URL)
+        .file(FB_IMAGE_URL_PREFIX + uid + FB_IMAGE_URL_SUFIX)
+        .delete()
+    }
 }

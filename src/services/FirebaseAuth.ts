@@ -23,11 +23,15 @@ export class FirebaseAuth {
         return firebaseAdminApp.auth().createUser(user)
     }
     
-    public verifyJWT(jwt: string): Promise<DecodedIdToken>{
-        return firebaseAdminApp.auth().verifyIdToken(jwt)
+    public verifyIdToken(idToken: string): Promise<DecodedIdToken>{
+        return firebaseAdminApp.auth().verifyIdToken(idToken)
     }
 
     public updateUser(uid: string, user: User_firebase_auth){
         return firebaseAdminApp.auth().updateUser(uid, user)
+    }
+
+    public deleteUser(uid: string){
+        return firebaseAdminApp.auth().deleteUser(uid)
     }
 }
