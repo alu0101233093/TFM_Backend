@@ -1,6 +1,6 @@
 import express from 'express'
 import multer from 'multer'
-import { signUp, updateProfilePic, updateUser } from '../controllers/userController'
+import { deleteUser, signUp, updateProfilePic, updateUser } from '../controllers/userController'
 
 const user_router = express.Router()
 const upload = multer({
@@ -100,5 +100,25 @@ user_router.post('/updateProfilePic', upload.single('photo'), updateProfilePic)
  *         description: Internal server error
  */
 user_router.post('/updateUserData', express.urlencoded({ extended: true }), updateUser)
+
+/**
+ * @openapi
+ * /users/deleteUser:
+ *   delete:
+ *     summary: Delete user
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User deleted successfully
+ *       400:
+ *         description: Bad request. IdToken not found on request
+ *       401:
+ *         description: Unauthorized. Invalid IdToken
+ *       500:
+ *         description: Internal server error
+ */
+user_router.delete('/deleteUser', deleteUser)
 
 export default user_router

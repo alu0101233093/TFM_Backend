@@ -42,7 +42,7 @@ export class FirebaseStr {
         return firebaseAdminApp
         .storage()
         .bucket(FB_BUCKET_URL)
-        .file(FB_IMAGE_URL_PREFIX + uid + FB_IMAGE_URL_SUFIX)
+        .file('users/' + uid + '.png')
         .exists()
     }
 
@@ -50,7 +50,7 @@ export class FirebaseStr {
         return firebaseAdminApp
         .storage()
         .bucket(FB_BUCKET_URL)
-        .file(FB_IMAGE_URL_PREFIX + uid + FB_IMAGE_URL_SUFIX)
+        .file('users/' + uid + '.png')
         .delete()
     }
 }

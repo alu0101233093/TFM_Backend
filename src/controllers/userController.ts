@@ -2,9 +2,11 @@ import { RequestHandler } from "express"
 import { FirebaseAuth } from '../services/FirebaseAuth'
 import { FB_IMAGE_DEFAULT, FirebaseStr } from '../services/FirebaseStr'
 import { User_firebase_auth } from '../entities/user_firebase_auth'
+import { FirebaseRTDB } from "../services/FirebaseRTDB"
 
 const auth = new FirebaseAuth
 const storage = new FirebaseStr
+const database = new FirebaseRTDB
 
 export const signUp: RequestHandler = (req, res) => {
     let user_request: User_firebase_auth = {
@@ -62,10 +64,10 @@ export const updateUser: RequestHandler = (req, res) => {
         emailVerified: req.body.emailVerified === 'true'
     }
 
-    const jwt = req.headers.authorization?.split(' ')[1]
+    const idToken = req.headers.authorization?.split(' ')[1]
 
-    if(jwt){
-        auth.verifyIdToken(jwt)
+    if(idToken){
+        auth.verifyIdToken(idToken)
         .then((decodedIdToken) => {
             auth.updateUser(decodedIdToken.uid, user_request)
             .then(() => {
@@ -77,6 +79,29 @@ export const updateUser: RequestHandler = (req, res) => {
             res.status(401).send(error)
         })
     } else {
-        res.status(500).send('JWT not found on request')
+        res.status(400).send('IdToken not found on request')
+    }
+}
+
+export const deleteUser: RequestHandler = (req, res) => {
+    if(req.headers.authorization){
+        const idToken: string = req.headers.authorization?.split(' ')[1]
+        auth.verifyIdToken(idToken)
+        .then((decodedIdToken) => {
+            auth.deleteUser(decodedIdToken.uid).catch((error) => {
+                res.status(500).send(error)
+            })
+            storage.deleteProfilePic(decodedIdToken.uid).catch((error) => {
+                res.status(500).send(error)
+            })
+            database.deleteUserReviews(decodedIdToken.uid).catch((error) => {
+                res.status(500).send(error)
+            })
+            res.status(200).send('User deleted successfuly')
+        }).catch((error) => {
+            res.status(401).send(error)
+        })
+    } else {
+        res.status(400).send('IdToken not found on request')
     }
 }
