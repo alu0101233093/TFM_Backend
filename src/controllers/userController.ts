@@ -46,7 +46,7 @@ export const updateProfilePic: RequestHandler = (req, res) => {
         .then((decodedIdToken) => {
             storage.savePicture(req.file, decodedIdToken.uid)
             .then((_url) => {
-                res.status(201).send('User data updated successfuly')
+                res.status(201).send({message: 'User data updated successfuly'})
             }).catch((error) => {
                 res.status(403).send(error)
             })
@@ -54,7 +54,7 @@ export const updateProfilePic: RequestHandler = (req, res) => {
             res.status(401).send(error)
         })
     } else {
-        res.status(400).send('idToken not found')
+        res.status(400).send({message: 'idToken not found'})
     }
 }
 
@@ -71,7 +71,7 @@ export const updateUser: RequestHandler = (req, res) => {
         .then((decodedIdToken) => {
             auth.updateUser(decodedIdToken.uid, user_request)
             .then(() => {
-                res.status(201).send('User data updated successfuly')
+                res.status(201).send({message: 'User data updated successfuly'})
             }).catch((error) => {
                 res.status(400).send(error)
             })
@@ -79,29 +79,31 @@ export const updateUser: RequestHandler = (req, res) => {
             res.status(401).send(error)
         })
     } else {
-        res.status(400).send('IdToken not found on request')
+        res.status(400).send({message: 'IdToken not found on request'})
     }
 }
 
 export const deleteUser: RequestHandler = (req, res) => {
     if(req.headers.authorization){
-        const idToken: string = req.headers.authorization?.split(' ')[1]
+        const idToken: string = req.headers.authorization
         auth.verifyIdToken(idToken)
         .then((decodedIdToken) => {
-            auth.deleteUser(decodedIdToken.uid).catch((error) => {
-                res.status(500).send(error)
+            Promise.all([
+                auth.deleteUser(decodedIdToken.uid),
+                storage.deleteProfilePic(decodedIdToken.uid),
+                database.deleteUserReviews(decodedIdToken.uid)
+            ])
+            .then(() => {
+                res.status(200).send({message: 'User deleted successfuly'})
             })
-            storage.deleteProfilePic(decodedIdToken.uid).catch((error) => {
+            .catch((error) => {
                 res.status(500).send(error)
-            })
-            database.deleteUserReviews(decodedIdToken.uid).catch((error) => {
-                res.status(500).send(error)
-            })
-            res.status(200).send('User deleted successfuly')
-        }).catch((error) => {
-            res.status(401).send(error)
+            });
         })
+        .catch((error) => {
+            res.status(401).send(error)
+        });
     } else {
-        res.status(400).send('IdToken not found on request')
+        res.status(400).send({message: 'IdToken not found on request'})
     }
 }

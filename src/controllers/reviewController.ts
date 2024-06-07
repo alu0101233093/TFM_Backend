@@ -8,7 +8,7 @@ const auth = new FirebaseAuth
 
 export const postReview: RequestHandler = (req, res) => {
     if (!req.query.movie_id)
-        res.status(400).send('Bad request. Movie identifier needed')
+        res.status(400).send({message: 'Bad request. Movie identifier needed'})
 
     const idToken = req.headers.authorization?.split(' ')[1]
 
@@ -24,7 +24,7 @@ export const postReview: RequestHandler = (req, res) => {
 
                 database.setReview(REVIEW, MOVIE_ID)
                     .then((review_id) => {
-                        res.status(201).send('Review published with id:' + review_id)
+                        res.status(201).send({message: 'Review published with id:' + review_id})
                     }).catch((error) => {
                         res.status(500).send(error)
                     })
@@ -32,14 +32,14 @@ export const postReview: RequestHandler = (req, res) => {
                 res.status(401).send(error)
             })
     } else {
-        res.status(400).send('IdToken not found on request')
+        res.status(400).send({message: 'IdToken not found on request'})
     }
 
 }
 
 export const getReviews: RequestHandler = (req, res) => {
     if (!req.query.movie_id)
-        res.status(400).send('Bad request. Movie identifier needed')
+        res.status(400).send({message: 'Bad request. Movie identifier needed'})
 
     const MOVIE_ID: string = req.query.movie_id as string
     database.getReviews(MOVIE_ID)
@@ -52,13 +52,13 @@ export const getReviews: RequestHandler = (req, res) => {
 
 export const deleteReview: RequestHandler = (req, res) => {
     if (!req.query.movie_id)
-        res.status(400).send('Bad request. Movie identifier needed')
+        res.status(400).send({message: 'Bad request. Movie identifier needed'})
 
     const MOVIE_ID: string = req.query.movie_id as string
     const REVIEW_ID: string = req.query.review_id as string
     database.removeReview(MOVIE_ID, REVIEW_ID)
         .then((_) => {
-            res.status(200).send('Review with ID ' + REVIEW_ID + ' removed successfuly')
+            res.status(200).send({message: 'Review with ID ' + REVIEW_ID + ' removed successfuly'})
         }).catch((error) => {
             res.status(500).send(error)
         })

@@ -47,10 +47,20 @@ export class FirebaseStr {
     }
 
     public deleteProfilePic(uid: string) {
-        return firebaseAdminApp
-        .storage()
-        .bucket(FB_BUCKET_URL)
-        .file('users/' + uid + '.png')
-        .delete()
+        return new Promise<void>((resolve,reject) => {
+            return firebaseAdminApp
+            .storage()
+            .bucket(FB_BUCKET_URL)
+            .file('users/' + uid + '.png')
+            .delete()
+            .then(() => resolve())
+            .catch((error: any) => {
+                if(error.code == 404) {
+                    resolve()
+                } else {
+                    reject(error)
+                }
+            })
+        })
     }
 }

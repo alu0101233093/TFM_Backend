@@ -28,7 +28,7 @@ export const searchMovie: RequestHandler = (req, res) => {
 
 export const getMovie: RequestHandler = (req, res) => {
     if(!req.query.movie_id)
-        res.status(400).send('Bad request. Movie identifier needed')
+        res.status(400).send({message: 'Bad request. Movie identifier needed'})
 
     const MOVIE_ID: string = req.query.movie_id as string
     const URL = BASE_URL + '/3/movie/' + MOVIE_ID + LANGUAGE_QUERY
@@ -44,7 +44,7 @@ export const getMovie: RequestHandler = (req, res) => {
 
 export const getCredits: RequestHandler = (req, res) => {
     if(!req.query.movie_id)
-        res.status(400).send('Bad request. Movie identifier needed')
+        res.status(400).send({message: 'Bad request. Movie identifier needed'})
 
     const MOVIE_ID: string = req.query.movie_id as string
     const URL = BASE_URL + '/3/movie/' + MOVIE_ID + '/credits' + LANGUAGE_QUERY

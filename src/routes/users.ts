@@ -119,6 +119,6 @@ user_router.post('/updateUserData', express.urlencoded({ extended: true }), upda
  *       500:
  *         description: Internal server error
  */
-user_router.delete('/deleteUser', deleteUser)
+user_router.delete('/', deleteUser)
 
 export default user_router
