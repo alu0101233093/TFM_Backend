@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import { ServiceAccount } from 'firebase-admin'
 dotenv.config()
 
 export const PORT = parseInt(process.env.PORT || '3000', 10)
@@ -19,4 +20,12 @@ export const MOVIE_API_HEADERS = {
     Authorization: process.env.MOVIE_API_AUTHORIZATION || ''
 }
 
-export const databaseURL = process.env.FIREBASE_DATABASE_URL || ''
+export const DATABASE_URL = process.env.FIREBASE_DATABASE_URL || ''
+export const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:4200'
+
+export const FIREBASE_ADMIN_CREDENTIALS: ServiceAccount = {
+    projectId: process.env.FIREBASE_CERT_PROJECT_ID || '',
+    privateKey: process.env.FIREBASE_CERT_PRIVATE_KEY || '',
+    clientEmail: process.env.FIREBASE_CERT_CLIENT_MAIL || ''
+}
+  

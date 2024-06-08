@@ -27,7 +27,7 @@ const upload = multer({
  *                 type: string
  *               emailVerified:
  *                 type: boolean
- *               photoURL:
+ *               photo:
  *                 type: string
  *                 format: binary
  *     responses:
@@ -43,7 +43,7 @@ user_router.post('/signUp', upload.single('photo'), signUp)
 /**
  * @openapi
  * /users/updateProfilePic:
- *   post:
+ *   patch:
  *     summary: Update user profile picture
  *     tags: [Users]
  *     security:
@@ -54,7 +54,7 @@ user_router.post('/signUp', upload.single('photo'), signUp)
  *           schema:
  *             type: object
  *             properties:
- *               photoURL:
+ *               photo:
  *                 type: string
  *                 format: binary
  *     responses:
@@ -67,12 +67,12 @@ user_router.post('/signUp', upload.single('photo'), signUp)
  *       403:
  *         description: Forbidden
  */
-user_router.post('/updateProfilePic', upload.single('photo'), updateProfilePic)
+user_router.patch('/updateProfilePic', upload.single('photo'), updateProfilePic)
 
 /**
  * @openapi
  * /users/updateUserData:
- *   post:
+ *   put:
  *     summary: Update user data
  *     tags: [Users]
  *     security:
@@ -99,7 +99,7 @@ user_router.post('/updateProfilePic', upload.single('photo'), updateProfilePic)
  *       500:
  *         description: Internal server error
  */
-user_router.post('/updateUserData', express.urlencoded({ extended: true }), updateUser)
+user_router.put('/updateUserData', express.urlencoded({ extended: true }), updateUser)
 
 /**
  * @openapi

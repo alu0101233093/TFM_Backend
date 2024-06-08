@@ -9,10 +9,6 @@ export class FirebaseAuth {
     constructor(){
     }
 
-    public getUser(uid: string): Promise<UserRecord> {
-        return firebaseAdminApp.auth().getUser(uid)
-    }
-
     public createUser(user: User_firebase_auth): Promise<UserRecord> {
         if(!isValidEmail(user.email))
             return Promise.reject({
