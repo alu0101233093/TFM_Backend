@@ -85,7 +85,7 @@ export const updateUser: RequestHandler = (req, res) => {
 
 export const deleteUser: RequestHandler = (req, res) => {
     if(req.headers.authorization){
-        const idToken: string = req.headers.authorization
+        const idToken: string = req.headers.authorization?.split(' ')[1]
         auth.verifyIdToken(idToken)
         .then((decodedIdToken) => {
             Promise.all([

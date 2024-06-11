@@ -18,13 +18,14 @@ export const postReview: RequestHandler = (req, res) => {
                 const MOVIE_ID: string = req.query.movie_id as string
                 const REVIEW: Review = { 
                     ...req.body,
+                    score: parseFloat(req.body.score),
                     uid: decodedIdToken.uid,
                     photoURL: decodedIdToken.picture
                 }
 
                 database.setReview(REVIEW, MOVIE_ID)
                     .then((review_id) => {
-                        res.status(201).send({message: 'Review published with id:' + review_id})
+                        res.status(201).send({message: 'Review published successfuly.', reviewId: review_id})
                     }).catch((error) => {
                         res.status(500).send(error)
                     })
