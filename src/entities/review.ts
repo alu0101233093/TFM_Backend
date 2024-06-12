@@ -3,7 +3,7 @@ export interface Review {
     username: string
     photoURL: string
     score: number
-    review: string
+    text: string
 }
 
 export interface MovieReviews {

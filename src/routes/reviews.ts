@@ -26,7 +26,7 @@ const reviews_router = express.Router()
  *                 type: string
  *               score:
  *                 type: number
- *               review:
+ *               text:
  *                 type: string
  *     security:
  *       - bearerAuth: []

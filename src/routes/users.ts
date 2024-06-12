@@ -1,6 +1,6 @@
 import express from 'express'
 import multer from 'multer'
-import { deleteUser, signUp, updateProfilePic, updateUser } from '../controllers/userController'
+import { deleteUser, signUp, updateUserData } from '../controllers/userController'
 
 const user_router = express.Router()
 const upload = multer({
@@ -42,44 +42,13 @@ user_router.post('/signUp', upload.single('photo'), signUp)
 
 /**
  * @openapi
- * /users/updateProfilePic:
- *   patch:
- *     summary: Update user profile picture
- *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       content:
- *         multipart/form-data:
- *           schema:
- *             type: object
- *             properties:
- *               photo:
- *                 type: string
- *                 format: binary
- *     responses:
- *       201:
- *         description: User data updated successfully
- *       400:
- *         description: Bad request
- *       401:
- *         description: Unauthorized
- *       403:
- *         description: Forbidden
- */
-user_router.patch('/updateProfilePic', upload.single('photo'), updateProfilePic)
-
-/**
- * @openapi
- * /users/updateUserData:
+ * /users/updateData:
  *   put:
  *     summary: Update user data
  *     tags: [Users]
- *     security:
- *       - bearerAuth: []
  *     requestBody:
  *       content:
- *         application/x-www-form-urlencoded:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
@@ -87,19 +56,18 @@ user_router.patch('/updateProfilePic', upload.single('photo'), updateProfilePic)
  *                 type: string
  *               displayName:
  *                 type: string
- *               emailVerified:
- *                 type: boolean
+ *               photo:
+ *                 type: string
+ *                 format: binary
  *     responses:
  *       201:
- *         description: User data updated successfully
+ *         description: User updated successfully
  *       400:
  *         description: Bad request
- *       401:
- *         description: Unauthorized
  *       500:
  *         description: Internal server error
  */
-user_router.put('/updateUserData', express.urlencoded({ extended: true }), updateUser)
+user_router.put('/updateData', upload.single('photo'), updateUserData)
 
 /**
  * @openapi
