@@ -1,7 +1,7 @@
 import { Database } from "firebase-admin/lib/database/database";
 import * as admin from 'firebase-admin';
 import { firebaseAdminApp } from ".."
-import { MovieReviews, Review } from "../entities/review"
+import { AllReviews, MovieReviews, Review } from "../entities/review"
 
 export class FirebaseRTDB {
 
@@ -11,8 +11,8 @@ export class FirebaseRTDB {
         this.database = firebaseAdminApp.database()
     }
 
-    public async setReview(review: Review, movie_id: string): Promise<string> {
-        const reference = this.database.ref('reviews/' + movie_id);
+    public async setReview(review: Review, movie_id: string, critic: boolean): Promise<string> {
+        const reference = this.database.ref(critic ? 'criticReviews/' + movie_id : 'reviews/' + movie_id);
 
         return reference.push(review)
             .then((snapshot) => {
@@ -28,50 +28,67 @@ export class FirebaseRTDB {
             });
     }
 
-    public async getReviews(movie_id: string): Promise<Record<string, Review>> {
-        const reference = this.database.ref('reviews/' + movie_id);
+    public async getReviews(movie_id: string): Promise<AllReviews> {
+        const spectatorsReference = this.database.ref('reviews/' + movie_id);
+        const criticsReference = this.database.ref('criticReviews/' + movie_id);
+        let result: AllReviews = {spectators: {}, critics: {}}
 
-        return reference.get().then((snapshot) => {
-            if (snapshot.exists()) {
-                const reviews: Record<string, Review> = snapshot.val();
-                return reviews;
+        return spectatorsReference.get().then((spectatorsSnapshot) => {
+            if (spectatorsSnapshot.exists()) {
+                const spectatorsReviews: Record<string, Review> = spectatorsSnapshot.val();
+                result.spectators = spectatorsReviews
+                return criticsReference.get().then((criticsSnapshot) => {
+                    if(criticsSnapshot){
+                        const criticsReviews: Record<string, Review> = criticsSnapshot.val();
+                        result.critics = criticsReviews
+                    }
+                    return result 
+                }).catch((error) => {
+                    throw new Error('Error getting reviews: ' + error.message);
+                });
             } else {
-                return {};
+                return result;
             }
         }).catch((error) => {
             throw new Error('Error getting reviews: ' + error.message);
         });
     }
 
-    public removeReview(movie_id: string, review_id: string): Promise<void> {
-        const reference = this.database.ref('reviews/' + movie_id + '/' + review_id);
+    public removeReview(movie_id: string, review_id: string, critic: boolean): Promise<void> {
+        const reviewURL = critic ? 'criticReviews' : 'reviews'
+        const reference = this.database.ref(reviewURL + '/' + movie_id + '/' + review_id);
         return reference.remove()
     }
 
     public async deleteUserReviews(uid: string): Promise<void> {
-        const reviewsRef = this.database.ref('reviews');
-
-        return reviewsRef.once('value')
-        .then(snapshot => {
-            if (snapshot.exists()) {
-                const updates: { [key: string]: null } = {};
-
-                snapshot.forEach((movieSnapshot: admin.database.DataSnapshot) => {
-                    const movieReviews: MovieReviews = movieSnapshot.val();
-                    for (const reviewId in movieReviews) {
-                        const review = movieReviews[reviewId];
-                        if (review.uid === uid) {
-                            updates[`/reviews/${movieSnapshot.key}/${reviewId}`] = null;
-                        }
-                    }
-                });
-
-                return this.database.ref().update(updates)
-            } else {
-                return Promise.reject();
-            }
-        }).catch(error => {
-            console.error('Error deleting reviews:', error);
-        });
+        return this.deleteReviews('criticReviews', uid).then(() => {
+            return this.deleteReviews('reviews', uid)
+        })
     }
+    
+    private async deleteReviews(reviewsURL: string, uid: string): Promise<void> {
+        try {
+            const reviewsRef = this.database.ref(reviewsURL);
+            const snapshot = await reviewsRef.once('value');
+            if (!snapshot.exists()) {
+                return Promise.resolve();
+            }
+    
+            const updates: { [key: string]: null } = {};
+            snapshot.forEach((movieSnapshot: admin.database.DataSnapshot) => {
+                const movieReviews: MovieReviews = movieSnapshot.val();
+                for (const reviewId in movieReviews) {
+                    const review = movieReviews[reviewId];
+                    if (review.uid === uid) {
+                        updates[`/${reviewsURL}/${movieSnapshot.key}/${reviewId}`] = null;
+                    }
+                }
+            });
+    
+            await this.database.ref().update(updates);
+        } catch (error) {
+            console.error('Error deleting reviews:', error);
+            return Promise.reject(error);
+        }
+    }    
 }

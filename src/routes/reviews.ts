@@ -93,6 +93,8 @@ reviews_router.get('/', getReviews)
  *         description: Review removed successfully
  *       400:
  *         description: Bad request. Movie identifier or review ID needed
+ *       401:
+ *         description: Unauthorized. Authentication required.
  *       500:
  *         description: Internal server error
  */

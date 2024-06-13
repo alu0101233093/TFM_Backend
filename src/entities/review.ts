@@ -9,3 +9,8 @@ export interface Review {
 export interface MovieReviews {
     [reviewId: string]: Review;
 }
+
+export interface AllReviews {
+    spectators: Record<string, Review>
+    critics: Record<string, Review>
+}

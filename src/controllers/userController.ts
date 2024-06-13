@@ -1,4 +1,4 @@
-import { RequestHandler } from "express"
+import { RequestHandler, Response } from "express"
 import { FirebaseAuth } from '../services/FirebaseAuth'
 import { FB_IMAGE_DEFAULT, FirebaseStr } from '../services/FirebaseStr'
 import { User_firebase_auth } from '../entities/user_firebase_auth'
@@ -37,37 +37,42 @@ export const signUp: RequestHandler = (req, res) => {
         })
 }
 
-export const updateUserData: RequestHandler = (req, res) => {
+export const updateData: RequestHandler = (req, res) => {
     const idToken = req.headers.authorization?.split(' ')[1]
 
     if (idToken) {
         auth.verifyIdToken(idToken)
         .then((decodedIdToken) => {
-            let photoURL = decodedIdToken.picture
+            let user_request: User_firebase_auth = {
+                ...req.body,
+                emailVerified: decodedIdToken.email_verified == true,
+                photoURL: decodedIdToken.picture
+            }
             if(req.file){
                 storage.savePicture(req.file, decodedIdToken.uid)
                 .then((url) => {
-                    photoURL = url
+                    user_request.photoURL = url
+                    updateUser(decodedIdToken.uid, user_request, res);
                 }).catch((error) => {
                     res.status(500).send(error)
                 })
+            } else {
+                updateUser(decodedIdToken.uid, user_request, res)
             }
-
-            let user_request: User_firebase_auth = {
-                ...req.body,
-                emailVerified: decodedIdToken.email_verified!,
-                photoURL
-            }
-            auth.updateUser(decodedIdToken.uid, user_request)
-            .then((_user_record) => {
-                res.status(201).send({ message: 'User updated' })
-            }).catch((error) => {
-                res.status(400).send(error)
-            })
         }).catch((error) => {
             res.status(401).send(error)
         })
     }
+}
+
+const updateUser = (uid: string, user: User_firebase_auth, res: Response) => {
+    console.log(user.photoURL)
+    auth.updateUser(uid, user)
+    .then((_user_record) => {
+        res.status(201).send({ message: 'User updated' })
+    }).catch((error) => {
+        res.status(400).send(error)
+    })
 }
 
 export const deleteUser: RequestHandler = (req, res) => {

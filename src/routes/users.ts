@@ -1,6 +1,6 @@
 import express from 'express'
 import multer from 'multer'
-import { deleteUser, signUp, updateUserData } from '../controllers/userController'
+import { deleteUser, signUp, updateData } from '../controllers/userController'
 
 const user_router = express.Router()
 const upload = multer({
@@ -67,7 +67,7 @@ user_router.post('/signUp', upload.single('photo'), signUp)
  *       500:
  *         description: Internal server error
  */
-user_router.put('/updateData', upload.single('photo'), updateUserData)
+user_router.put('/updateData', upload.single('photo'), updateData)
 
 /**
  * @openapi
