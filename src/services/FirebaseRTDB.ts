@@ -38,20 +38,18 @@ export class FirebaseRTDB {
             if (spectatorsSnapshot.exists()) {
                 const spectatorsReviews: Record<string, Review> = spectatorsSnapshot.val();
                 result.spectators = spectatorsReviews
-                return criticsReference.get().then((criticsSnapshot) => {
-                    if(criticsSnapshot){
-                        const criticsReviews: Record<string, Review> = criticsSnapshot.val();
-                        result.critics = criticsReviews
-                    }
-                    return result 
-                }).catch((error) => {
-                    throw new Error('Error getting reviews: ' + error.message);
-                });
-            } else {
-                return result;
             }
+            return criticsReference.get().then((criticsSnapshot) => {
+                if(criticsSnapshot.exists()){
+                    const criticsReviews: Record<string, Review> = criticsSnapshot.val();
+                    result.critics = criticsReviews
+                }
+                return result 
+            }).catch((error) => {
+                throw new Error('Error getting critic reviews: ' + error.message);
+            });
         }).catch((error) => {
-            throw new Error('Error getting reviews: ' + error.message);
+            throw new Error('Error getting spectator reviews: ' + error.message);
         });
     }
 

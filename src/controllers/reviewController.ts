@@ -22,8 +22,8 @@ export const postReview: RequestHandler = (req, res) => {
                     uid: decodedIdToken.uid,
                     photoURL: decodedIdToken.picture
                 }
-
-                database.setReview(REVIEW, MOVIE_ID, decodedIdToken.email_verified!)
+                
+                database.setReview(REVIEW, MOVIE_ID, decodedIdToken.email_verified == true)
                     .then((review_id) => {
                         res.status(201).send({ message: 'Review published successfuly.', reviewId: review_id })
                     }).catch((error) => {
