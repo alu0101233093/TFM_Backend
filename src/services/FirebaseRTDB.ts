@@ -2,6 +2,7 @@ import { Database } from "firebase-admin/lib/database/database";
 import * as admin from 'firebase-admin';
 import { firebaseAdminApp } from ".."
 import { AllReviews, MovieReviews, Review } from "../entities/review"
+import { VerificationRequest } from "../entities/verificationRequest";
 
 export class FirebaseRTDB {
 
@@ -90,5 +91,22 @@ export class FirebaseRTDB {
             console.error('Error deleting reviews:', error);
             return Promise.reject(error);
         }
-    }    
+    }
+
+    public async setVerificationRequest(request: VerificationRequest): Promise<string> {
+        const reference = this.database.ref('verificationRequests');
+
+        return reference.push(request)
+            .then((snapshot) => {
+                const key = snapshot.key;
+                if (key) {
+                    return key;
+                } else {
+                    throw new Error('Failed to get key for the new request.');
+                }
+            })
+            .catch((error) => {
+                throw new Error('Error adding review: ' + error.message);
+            });
+    }
 }

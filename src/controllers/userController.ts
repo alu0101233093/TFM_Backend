@@ -3,6 +3,7 @@ import { FirebaseAuth } from '../services/FirebaseAuth'
 import { FB_IMAGE_DEFAULT, FirebaseStr } from '../services/FirebaseStr'
 import { User_firebase_auth } from '../entities/user_firebase_auth'
 import { FirebaseRTDB } from "../services/FirebaseRTDB"
+import { VerificationRequest } from "../entities/verificationRequest"
 
 const auth = new FirebaseAuth
 const storage = new FirebaseStr
@@ -66,7 +67,6 @@ export const updateData: RequestHandler = (req, res) => {
 }
 
 const updateUser = (uid: string, user: User_firebase_auth, res: Response) => {
-    console.log(user.photoURL)
     auth.updateUser(uid, user)
     .then((_user_record) => {
         res.status(201).send({ message: 'User updated' })
@@ -75,26 +75,54 @@ const updateUser = (uid: string, user: User_firebase_auth, res: Response) => {
     })
 }
 
-export const deleteUser: RequestHandler = (req, res) => {
-    if (req.headers.authorization) {
-        const idToken: string = req.headers.authorization?.split(' ')[1]
+export const saveVerificationRequest: RequestHandler = (req, res) => {
+    const idToken = req.headers.authorization?.split(' ')[1]
+
+    if (idToken) {
         auth.verifyIdToken(idToken)
-            .then((decodedIdToken) => {
-                Promise.all([
-                    auth.deleteUser(decodedIdToken.uid),
-                    storage.deleteProfilePic(decodedIdToken.uid),
-                    database.deleteUserReviews(decodedIdToken.uid)
-                ])
-                    .then(() => {
-                        res.status(200).send({ message: 'User deleted successfuly' })
-                    })
-                    .catch((error) => {
-                        res.status(500).send(error)
-                    });
+        .then((decodedIdToken) => {
+            const newRequest: VerificationRequest = {
+                uid: decodedIdToken.uid,
+                user: {
+                    emailVerified: decodedIdToken.email_verified == true,
+                    email: decodedIdToken.email,
+                    photoURL: decodedIdToken.picture
+                },
+                text: req.body.text
+            }
+            database.setVerificationRequest(newRequest)
+            .then((requestID) => {
+                res.status(201).send({message: 'Saved request with ID: ' + requestID})
+            }).catch((error) => {
+                res.status(500).send(error)
+            })
+        })
+    } else {
+        res.status(400).send({ message: 'IdToken not found on request' })
+    }
+}
+
+export const deleteUser: RequestHandler = (req, res) => {
+    const idToken = req.headers.authorization?.split(' ')[1]
+
+    if (idToken) {
+        auth.verifyIdToken(idToken)
+        .then((decodedIdToken) => {
+            Promise.all([
+                auth.deleteUser(decodedIdToken.uid),
+                storage.deleteProfilePic(decodedIdToken.uid),
+                database.deleteUserReviews(decodedIdToken.uid)
+            ])
+            .then(() => {
+                res.status(200).send({ message: 'User deleted successfuly' })
             })
             .catch((error) => {
-                res.status(401).send(error)
+                res.status(500).send(error)
             });
+        })
+        .catch((error) => {
+            res.status(401).send(error)
+        });
     } else {
         res.status(400).send({ message: 'IdToken not found on request' })
     }
