@@ -3,8 +3,8 @@ import { RequestHandler } from "express"
 import { MOVIE_API_HEADERS, MOVIE_URL, DEFAULT_MOVIE_REQUEST, BASE_URL, LANGUAGE_QUERY, BACKDROP_URL_PREFIX, POSTER_URL_PREFIX } from '../consts'
 import { CarouselMovie } from "../entities/carouselMovie"
 import { MoviePoster } from "../entities/moviePoster"
-import { BasicActor } from "../entities/basicActor"
-import { Actor, genderToString } from "../entities/actor"
+import { Actor } from "../entities/actor"
+import { ActorProfile, genderToString } from "../entities/actorProfile"
 
 export const searchMovie: RequestHandler = (req, res) => {
     const request = {
@@ -58,7 +58,7 @@ export const getCredits: RequestHandler = (req, res) => {
     get(URL, {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
-        const shortResponse: BasicActor[] = response.data.cast
+        const shortResponse: Actor[] = response.data.cast
         .slice(0, 30)
         .map((actor: any) => ({
           id: actor.id,
@@ -88,7 +88,7 @@ export const getActor: RequestHandler = (req, res) => {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
         const data = response.data;
-        const actor: Actor = {
+        const actor: ActorProfile = {
             biography: data.biography,
             birthday: data.birthday,
             deathday: data.deathday,

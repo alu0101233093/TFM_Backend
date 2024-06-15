@@ -1,7 +1,7 @@
 import { RequestHandler, Response } from "express"
 import { FirebaseAuth } from '../services/FirebaseAuth'
 import { FB_IMAGE_DEFAULT, FirebaseStr } from '../services/FirebaseStr'
-import { User_firebase_auth } from '../entities/user_firebase_auth'
+import { UserFirebaseAuth } from '../entities/userFirebaseAuth'
 import { FirebaseRTDB } from "../services/FirebaseRTDB"
 import { VerificationRequest } from "../entities/verificationRequest"
 
@@ -10,7 +10,7 @@ const storage = new FirebaseStr
 const database = new FirebaseRTDB
 
 export const signUp: RequestHandler = (req, res) => {
-    let user_request: User_firebase_auth = {
+    let user_request: UserFirebaseAuth = {
         ...req.body,
         emailVerified: req.body.emailVerified === 'true',
         photoURL: FB_IMAGE_DEFAULT
@@ -44,7 +44,7 @@ export const updateData: RequestHandler = (req, res) => {
     if (idToken) {
         auth.verifyIdToken(idToken)
         .then((decodedIdToken) => {
-            let user_request: User_firebase_auth = {
+            let user_request: UserFirebaseAuth = {
                 ...req.body,
                 emailVerified: decodedIdToken.email_verified == true,
                 photoURL: decodedIdToken.picture
@@ -66,7 +66,7 @@ export const updateData: RequestHandler = (req, res) => {
     }
 }
 
-const updateUser = (uid: string, user: User_firebase_auth, res: Response) => {
+const updateUser = (uid: string, user: UserFirebaseAuth, res: Response) => {
     auth.updateUser(uid, user)
     .then((_user_record) => {
         res.status(201).send({ message: 'User updated' })

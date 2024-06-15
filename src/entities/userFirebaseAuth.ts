@@ -1,4 +1,4 @@
-export interface User_firebase_auth {
+export interface UserFirebaseAuth {
     email: string
     emailVerified: boolean
     password: string

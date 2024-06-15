@@ -1,6 +1,6 @@
 import { firebaseAdminApp } from "..";
-import { isValidEmail } from "../entities/user_firebase_auth";
-import { User_firebase_auth } from "../entities/user_firebase_auth";
+import { isValidEmail } from "../entities/userFirebaseAuth";
+import { UserFirebaseAuth } from "../entities/userFirebaseAuth";
 import { UserRecord } from "firebase-admin/lib/auth/user-record";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 
@@ -9,7 +9,7 @@ export class FirebaseAuth {
     constructor(){
     }
 
-    public createUser(user: User_firebase_auth): Promise<UserRecord> {
+    public createUser(user: UserFirebaseAuth): Promise<UserRecord> {
         if(!isValidEmail(user.email))
             return Promise.reject({
                 code: 'backend/invalid-email',
@@ -23,7 +23,7 @@ export class FirebaseAuth {
         return firebaseAdminApp.auth().verifyIdToken(idToken)
     }
 
-    public updateUser(uid: string, user: User_firebase_auth){
+    public updateUser(uid: string, user: UserFirebaseAuth){
         return firebaseAdminApp.auth().updateUser(uid, user)
     }
 
