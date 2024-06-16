@@ -45,9 +45,12 @@ export const updateRequestStatus: RequestHandler = (req, res) => {
                     res.status(400).send('Bad request. RequestID or newStatus not provided.')
                 }
                 database.updateRequestStatus(requestID, newStatus)
-                .then((_uid) => {
-                    // auth.updateUserRol(uid)
-                    res.status(200).send({message: 'User rol changed successfuly'})
+                .then((uid) => {
+                    auth.changeUserRol(uid).then(() => {
+                        res.status(200).send({message: 'User rol changed successfuly'})
+                    }).catch((error) => {
+                        res.status(500).send(error)
+                    })
                 }).catch((error) => {
                     res.status(400).send(error)
                 })
