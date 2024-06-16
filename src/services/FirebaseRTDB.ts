@@ -61,8 +61,15 @@ export class FirebaseRTDB {
     }
 
     public async deleteUserReviews(uid: string): Promise<void> {
-        return this.deleteReviews('criticReviews', uid).then(() => {
-            return this.deleteReviews('reviews', uid)
+        this.deleteReviews('criticReviews', uid)
+        .catch((error) => {
+            return Promise.reject({message: "Error deleting user reviews. ", error})
+        })
+
+        this.deleteReviews('reviews', uid)
+        .then(() => {return Promise.resolve()})
+        .catch((error) => {
+            return Promise.reject({message: "Error deleting user reviews. ", error})
         })
     }
     
@@ -87,7 +94,6 @@ export class FirebaseRTDB {
     
             return this.database.ref().update(updates);
         }).catch((error) => {
-            console.error('Error deleting reviews:', error);
             return Promise.reject(error);
         });
     }
@@ -117,17 +123,20 @@ export class FirebaseRTDB {
         const reference = this.database.ref('verificationRequests');
 
         return reference.push(request)
-            .then((snapshot) => {
-                const key = snapshot.key;
-                if (key) {
-                    return key;
-                } else {
-                    throw new Error('Failed to get key for the new request.');
-                }
-            })
-            .catch((error) => {
-                throw new Error('Error adding review: ' + error.message);
-            });
+        .then((snapshot) => {
+            const key = snapshot.key;
+            if (key) {
+                return key;
+            } else {
+                return Promise.reject({
+                    message: 'Error saving request.', 
+                    error: 'Failed to get key for the new request.'
+                });
+            }
+        })
+        .catch((error) => {
+            return Promise.reject({message:'Error saving request.', error});
+        });
     }
 
     public async updateRequestStatus(requestID: string, newStatus: string): Promise<string> {

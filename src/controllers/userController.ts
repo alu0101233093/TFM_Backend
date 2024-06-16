@@ -53,7 +53,7 @@ export const updateData: RequestHandler = (req, res) => {
                 storage.savePicture(req.file, decodedIdToken.uid)
                 .then((url) => {
                     user_request.photoURL = url
-                    updateUser(decodedIdToken.uid, user_request, res);
+                    updateUser(decodedIdToken.uid, user_request, res)
                 }).catch((error) => {
                     res.status(500).send(error)
                 })
@@ -64,16 +64,16 @@ export const updateData: RequestHandler = (req, res) => {
             res.status(401).send(error)
         })
     } else {
-        res.status(400).send({ message: 'IdToken not found on request' })
+        res.status(400).send({message: 'IdToken not found on request'})
     }
 }
 
-const updateUser = (uid: string, user: UserFirebaseAuth, res: Response) => {
-    auth.updateUser(uid, user)
+const updateUser = async (uid: string, user: UserFirebaseAuth, res: Response) => {
+    return auth.updateUser(uid, user)
     .then((_user_record) => {
-        res.status(201).send({ message: 'User updated' })
+        res.status(201).send({message: 'User updated'})
     }).catch((error) => {
-        res.status(400).send(error)
+        res.status(400).send({message: "Error saving user information. ", error})
     })
 }
 
@@ -99,9 +99,11 @@ export const saveVerificationRequest: RequestHandler = (req, res) => {
             }).catch((error) => {
                 res.status(500).send(error)
             })
+        }).catch((error) => {
+            res.status(401).send(error)
         })
     } else {
-        res.status(400).send({ message: 'IdToken not found on request' })
+        res.status(400).send({message: 'IdToken not found on request'})
     }
 }
 
@@ -117,7 +119,7 @@ export const deleteUser: RequestHandler = (req, res) => {
                 database.deleteUserReviews(decodedIdToken.uid)
             ])
             .then(() => {
-                res.status(200).send({ message: 'User deleted successfuly' })
+                res.status(200).send({message: 'User deleted successfuly'})
             })
             .catch((error) => {
                 res.status(500).send(error)

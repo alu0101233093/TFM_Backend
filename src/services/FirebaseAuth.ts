@@ -21,6 +21,9 @@ export class FirebaseAuth {
 
     public async verifyIdToken(idToken: string): Promise<DecodedIdToken>{
         return firebaseAdminApp.auth().verifyIdToken(idToken)
+        .catch((error) => {
+            return Promise.reject({message: "Session expired. LogIn again. ", error})
+        })
     }
 
     public async updateUser(uid: string, user: UserFirebaseAuth){
@@ -39,5 +42,8 @@ export class FirebaseAuth {
 
     public async deleteUser(uid: string){
         return firebaseAdminApp.auth().deleteUser(uid)
+        .catch((error) => {
+            return Promise.reject({message: "Error deleting user. ", error})
+        })
     }
 }

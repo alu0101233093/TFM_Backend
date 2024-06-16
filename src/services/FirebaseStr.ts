@@ -45,7 +45,7 @@ export class FirebaseStr {
     }
 
     public deleteProfilePic(uid: string) {
-        return new Promise<void>((resolve,reject) => {
+        return new Promise<void>(async (resolve,reject) => {
             return firebaseAdminApp
             .storage()
             .bucket(FB_BUCKET_URL)
@@ -56,7 +56,7 @@ export class FirebaseStr {
                 if(error.code == 404) {
                     resolve()
                 } else {
-                    reject(error)
+                    reject({message: "Error deleting profile picture. ", error})
                 }
             })
         })

@@ -31,7 +31,7 @@ export const postReview: RequestHandler = (req, res) => {
                 res.status(500).send({message: "Error saving review. ", error})
             })
         }).catch((error) => {
-            res.status(401).send({message: "Session expired. LogIn again. ", error})
+            res.status(401).send(error)
         })
     } else {
         res.status(400).send({message: 'IdToken not found on request'})
@@ -71,7 +71,7 @@ export const deleteReview: RequestHandler = (req, res) => {
                 res.status(500).send({message: "Error deleting review. ", error})
             })
         }).catch((error) => {
-            res.status(401).send({message: "Session expired. LogIn again. ", error})
+            res.status(401).send(error)
         })
     } else {
         res.status(400).send({message: 'IdToken not found on request'})
