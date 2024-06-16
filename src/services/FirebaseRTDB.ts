@@ -91,6 +91,27 @@ export class FirebaseRTDB {
         }
     }
 
+    public async getVerificationRequests(): Promise<VerificationRequest[]> {
+        const requestsReference = this.database.ref('verificationRequests');
+
+        return requestsReference.get().then((criticsSnapshot) => {
+            if(criticsSnapshot.exists()){
+                const requestsObject = criticsSnapshot.val();
+                const requests: VerificationRequest[] = Object.keys(requestsObject).map(key => {
+                    return {
+                        requestID: key,
+                        ...requestsObject[key]
+                    } as VerificationRequest;
+                });
+                return requests;
+            } else {
+                return Promise.reject('No requests found.')
+            }
+        }).catch((error) => {
+            return Promise.reject('Error getting critic reviews: ' + error.message);
+        });
+    }
+
     public async setVerificationRequest(request: VerificationRequest): Promise<string> {
         const reference = this.database.ref('verificationRequests');
 

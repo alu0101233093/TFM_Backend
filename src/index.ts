@@ -13,6 +13,7 @@ export const firebaseAdminApp = admin.initializeApp({
 import movie_router from './routes/movies'
 import reviews_router from './routes/reviews'
 import user_router from './routes/users'
+import verification_router from './routes/verification'
 
 const expressApp = express()
 
@@ -21,6 +22,7 @@ expressApp.use(cors({ origin: FRONTEND_URL }))
 expressApp.use('/movies', movie_router)
 expressApp.use('/reviews', reviews_router)
 expressApp.use('/users', user_router)
+expressApp.use('/verification', verification_router)
 
 expressApp.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)

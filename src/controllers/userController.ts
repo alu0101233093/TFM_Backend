@@ -63,6 +63,8 @@ export const updateData: RequestHandler = (req, res) => {
         }).catch((error) => {
             res.status(401).send(error)
         })
+    } else {
+        res.status(400).send({ message: 'IdToken not found on request' })
     }
 }
 
@@ -83,6 +85,7 @@ export const saveVerificationRequest: RequestHandler = (req, res) => {
         .then((decodedIdToken) => {
             const newRequest: VerificationRequest = {
                 uid: decodedIdToken.uid,
+                status: 'Pending',
                 user: {
                     emailVerified: decodedIdToken.email_verified == true,
                     email: decodedIdToken.email,

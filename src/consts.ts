@@ -31,4 +31,5 @@ export const FIREBASE_ADMIN_CREDENTIALS: ServiceAccount = {
     privateKey: process.env.FIREBASE_CERT_PRIVATE_KEY || '',
     clientEmail: process.env.FIREBASE_CERT_CLIENT_MAIL || ''
 }
-  
+
+export const ADMIN_UID = process.env.ADMIN_UID || ''
