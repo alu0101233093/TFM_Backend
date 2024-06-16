@@ -26,7 +26,7 @@ export class FirebaseRTDB {
                 }
             })
             .catch((error) => {
-                return Promise.reject('Error adding review: ' + error.message);
+                return Promise.reject(error);
             });
     }
 
@@ -47,10 +47,10 @@ export class FirebaseRTDB {
                 }
                 return result 
             }).catch((error) => {
-                return Promise.reject('Error getting critic reviews: ' + error.message);
+                return Promise.reject({message: "Error getting critic reviews. ", error});
             });
         }).catch((error) => {
-            return Promise.reject('Error getting spectator reviews: ' + error.message);
+            return Promise.reject({message: "Error getting critic reviews. ", error});
         });
     }
 

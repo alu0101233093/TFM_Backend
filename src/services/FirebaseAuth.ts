@@ -9,21 +9,21 @@ export class FirebaseAuth {
     constructor(){
     }
 
-    public createUser(user: UserFirebaseAuth): Promise<UserRecord> {
+    public async createUser(user: UserFirebaseAuth): Promise<UserRecord> {
         if(!isValidEmail(user.email))
-            return Promise.reject({
-                code: 'backend/invalid-email',
-                message: 'The provided email has an invalid format'
-            })
+            return Promise.reject({message: 'The provided email has an invalid format'})
     
         return firebaseAdminApp.auth().createUser(user)
+        .catch((error) => {
+            return Promise.reject({message: "Error creating user. ", error})
+        })
     }
-    
-    public verifyIdToken(idToken: string): Promise<DecodedIdToken>{
+
+    public async verifyIdToken(idToken: string): Promise<DecodedIdToken>{
         return firebaseAdminApp.auth().verifyIdToken(idToken)
     }
 
-    public updateUser(uid: string, user: UserFirebaseAuth){
+    public async updateUser(uid: string, user: UserFirebaseAuth){
         return firebaseAdminApp.auth().updateUser(uid, user)
     }
 
@@ -37,7 +37,7 @@ export class FirebaseAuth {
         });
     }
 
-    public deleteUser(uid: string){
+    public async deleteUser(uid: string){
         return firebaseAdminApp.auth().deleteUser(uid)
     }
 }
