@@ -1,5 +1,5 @@
 import express from 'express'
-import { getRequests, updateRequest } from '../controllers/verificationController'
+import { getRequests, updateRequestStatus } from '../controllers/verificationController'
 
 const verification_router = express.Router()
 
@@ -95,6 +95,6 @@ verification_router.get('/', getRequests)
  *                 message:
  *                   type: string
  */
-verification_router.patch('/', express.json(), updateRequest)
+verification_router.patch('/', express.json(), updateRequestStatus)
 
 export default verification_router

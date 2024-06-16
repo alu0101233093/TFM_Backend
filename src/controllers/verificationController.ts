@@ -30,7 +30,7 @@ export const getRequests: RequestHandler = (req, res) => {
     }
 }
 
-export const updateRequest: RequestHandler = (req, res) => {
+export const updateRequestStatus: RequestHandler = (req, res) => {
     const idToken = req.headers.authorization?.split(' ')[1]
 
     if (idToken) {
@@ -44,15 +44,18 @@ export const updateRequest: RequestHandler = (req, res) => {
                 if(!requestID || !newStatus){
                     res.status(400).send('Bad request. RequestID or newStatus not provided.')
                 }
-                database.updateVerificationRequestStatus(requestID, newStatus)
-                .then((message) => {
-                    res.status(200).send({message})
+                database.updateRequestStatus(requestID, newStatus)
+                .then((_uid) => {
+                    // auth.updateUserRol(uid)
+                    res.status(200).send({message: 'User rol changed successfuly'})
                 }).catch((error) => {
                     res.status(400).send(error)
                 })
             }
+        }).catch((_error) => {
+            res.status(401).send({ message: 'Invalid IdToken.' })
         })
     } else {
-        res.status(400).send({ message: 'IdToken not found on request' })
+        res.status(400).send({ message: 'IdToken not found on request.' })
     }
 }

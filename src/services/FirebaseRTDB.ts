@@ -21,11 +21,11 @@ export class FirebaseRTDB {
                 if (key) {
                     return key;
                 } else {
-                    throw new Error('Failed to get key for the new review.');
+                    return Promise.reject('Failed to get key for the new review.');
                 }
             })
             .catch((error) => {
-                throw new Error('Error adding review: ' + error.message);
+                return Promise.reject('Error adding review: ' + error.message);
             });
     }
 
@@ -34,7 +34,7 @@ export class FirebaseRTDB {
         const criticsReference = this.database.ref('criticReviews/' + movie_id);
         let result: AllReviews = {spectators: {}, critics: {}}
 
-        return spectatorsReference.get().then((spectatorsSnapshot) => {
+        return spectatorsReference.get().then(async (spectatorsSnapshot) => {
             if (spectatorsSnapshot.exists()) {
                 const spectatorsReviews: Record<string, Review> = spectatorsSnapshot.val();
                 result.spectators = spectatorsReviews
@@ -46,10 +46,10 @@ export class FirebaseRTDB {
                 }
                 return result 
             }).catch((error) => {
-                throw new Error('Error getting critic reviews: ' + error.message);
+                return Promise.reject('Error getting critic reviews: ' + error.message);
             });
         }).catch((error) => {
-            throw new Error('Error getting spectator reviews: ' + error.message);
+            return Promise.reject('Error getting spectator reviews: ' + error.message);
         });
     }
 
@@ -66,11 +66,11 @@ export class FirebaseRTDB {
     }
     
     private async deleteReviews(reviewsURL: string, uid: string): Promise<void> {
-        try {
-            const reviewsRef = this.database.ref(reviewsURL);
-            const snapshot = await reviewsRef.once('value');
+        const reviewsRef = this.database.ref(reviewsURL);
+    
+        return reviewsRef.once('value').then((snapshot) => {
             if (!snapshot.exists()) {
-                return Promise.resolve();
+                return;
             }
     
             const updates: { [key: string]: null } = {};
@@ -84,11 +84,11 @@ export class FirebaseRTDB {
                 }
             });
     
-            await this.database.ref().update(updates);
-        } catch (error) {
+            return this.database.ref().update(updates);
+        }).catch((error) => {
             console.error('Error deleting reviews:', error);
             return Promise.reject(error);
-        }
+        });
     }
 
     public async getVerificationRequests(): Promise<VerificationRequest[]> {
@@ -129,16 +129,70 @@ export class FirebaseRTDB {
             });
     }
 
-    public async updateVerificationRequestStatus(requestID: string, newStatus: string): Promise<string> {
-        const reference = this.database.ref('verificationRequests/' + requestID);
-    
-        return reference.update({ status: newStatus })
-            .then(() => {
-                return `Request ${requestID} updated successfully.`;
+    public async updateRequestStatus(requestID: string, newStatus: string): Promise<string> {
+        const reference = this.database.ref(`verificationRequests/${requestID}`);
+
+        return reference.once('value')
+            .then(async (snapshot) => {
+                const request = snapshot.val();
+                if (!request) {
+                    return Promise.reject(`Request ${requestID} not found.`);
+                }
+
+                const uid = request.uid;
+
+                if (newStatus != 'Pending') {
+                    const sourcePath = newStatus === 'Approved' ? '/reviews' : '/criticReviews';
+                    const destinationPath = newStatus === 'Approved' ? '/criticReviews' : '/reviews';
+
+                    return this.moveReviews(uid, sourcePath, destinationPath)
+                    .then(async () => {
+                        return reference.update({ status: newStatus })
+                            .then(() => Promise.resolve(request.uid));
+                    })
+                    .catch((error) => {
+                        return Promise.reject(`Error moving reviews from ${sourcePath} to ${destinationPath}: ${error.message}`);
+                    });
+                } else {
+                    return Promise.resolve(request.uid);
+                }
             })
             .catch((error) => {
-                throw new Error('Error updating request: ' + error.message);
+                return Promise.reject(`Error updating request: ${error.message}`);
             });
+    }
+
+    private async moveReviews(uid: string, sourcePath: string, destinationPath: string): Promise<void> {
+        const sourceRef = this.database.ref(sourcePath);
+        const destinationRef = this.database.ref(destinationPath)
+
+        return sourceRef.once('value')
+        .then((snapshot) => {
+            const reviews = snapshot.val();
+            if (!reviews) {
+                return; // No hay revisiones para mover
+            }
+
+            const updates: { [key: string]: any } = {};
+            const deletions: { [key: string]: null } = {};
+
+            Object.keys(reviews).forEach((movieId) => {
+                const movieReviews = reviews[movieId];
+                Object.keys(movieReviews).forEach((reviewId) => {
+                    const review = movieReviews[reviewId] as Review;
+                    if (review.uid === uid) {
+                        updates[`${movieId}/${reviewId}`] = review;
+                        deletions[`${movieId}/${reviewId}`] = null;
+                    }
+                });
+            });
+
+            return destinationRef.update(updates)
+                .then(() => sourceRef.update(deletions));
+        })
+        .catch((error) => {
+            return Promise.reject(`Error moving reviews from ${sourcePath} to ${destinationPath}: ${error.message}`);
+        });
     }
     
 }
