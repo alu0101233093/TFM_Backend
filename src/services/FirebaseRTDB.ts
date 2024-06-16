@@ -149,7 +149,7 @@ export class FirebaseRTDB {
                     return this.moveReviews(uid, sourcePath, destinationPath)
                     .then(async () => {
                         return reference.update({ status: newStatus })
-                            .then(() => Promise.resolve(request.uid));
+                            .then(() => {return Promise.resolve(request.uid)});
                     })
                     .catch((error) => {
                         return Promise.reject(`Error moving reviews from ${sourcePath} to ${destinationPath}: ${error.message}`);
@@ -168,10 +168,10 @@ export class FirebaseRTDB {
         const destinationRef = this.database.ref(destinationPath)
 
         return sourceRef.once('value')
-        .then((snapshot) => {
+        .then(async (snapshot) => {
             const reviews = snapshot.val();
             if (!reviews) {
-                return; // No hay revisiones para mover
+                return Promise.resolve();
             }
 
             const updates: { [key: string]: any } = {};
@@ -188,8 +188,11 @@ export class FirebaseRTDB {
                 });
             });
 
-            return destinationRef.update(updates)
-                .then(() => sourceRef.update(deletions));
+            if(!updates){
+                return Promise.resolve()
+            } else {
+                return destinationRef.update(updates).then(() => sourceRef.update(deletions));
+            }
         })
         .catch((error) => {
             return Promise.reject(`Error moving reviews from ${sourcePath} to ${destinationPath}: ${error.message}`);

@@ -27,10 +27,14 @@ export class FirebaseAuth {
         return firebaseAdminApp.auth().updateUser(uid, user)
     }
 
-    public async changeUserRol(uid: string) {
-        return firebaseAdminApp.auth().getUser(uid).then((user) => {
-            return firebaseAdminApp.auth().updateUser(uid, {emailVerified: !user.emailVerified})
+    public async changeUserRol(uid: string, newRol: boolean) {
+        return firebaseAdminApp.auth().updateUser(uid, { emailVerified: newRol })
+        .then(() => {
+            Promise.resolve(`User rol updated successfully.`);
         })
+        .catch((error) => {
+            Promise.reject(error);
+        });
     }
 
     public deleteUser(uid: string){
