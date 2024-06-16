@@ -1,6 +1,6 @@
 import get from "axios"
 import { RequestHandler } from "express"
-import { BASE_URL, LANGUAGE_QUERY, MOVIE_API_HEADERS, POSTER_URL_PREFIX } from "../consts"
+import { BASE_URL, MOVIE_API_HEADERS, POSTER_URL_PREFIX } from "../consts"
 import { Actor } from "../models/actor/actor"
 import { ActorProfile, genderToString } from "../models/actor/actorProfile"
 import { MoviePoster } from "../models/movie/moviePoster"
@@ -11,7 +11,7 @@ export const getCasting: RequestHandler = (req, res) => {
         res.status(400).send({message: 'Bad request. Movie identifier needed'})
 
     const MOVIE_ID: string = req.query.movie_id as string
-    const URL = BASE_URL + '/3/movie/' + MOVIE_ID + '/credits' + LANGUAGE_QUERY
+    const URL = BASE_URL + '/3/movie/' + MOVIE_ID + '/credits'
 
     get(URL, {
         headers: MOVIE_API_HEADERS
@@ -31,7 +31,7 @@ export const getCasting: RequestHandler = (req, res) => {
         }));
         res.status(200).send(shortResponse)
     }).catch((error) => {
-        res.status(500).send(error)
+        res.status(500).send({message: 'Error getting casting from API server', error})
     })
 }
 
@@ -40,7 +40,7 @@ export const getActor: RequestHandler = (req, res) => {
         res.status(400).send({message: 'Bad request. Actor identifier needed'})
 
     const ACTOR_ID: string = req.query.actor_id as string
-    const URL = BASE_URL + '/3/person/' + ACTOR_ID + LANGUAGE_QUERY
+    const URL = BASE_URL + '/3/person/' + ACTOR_ID
 
     get(URL, {
         headers: MOVIE_API_HEADERS
@@ -63,7 +63,7 @@ export const getActor: RequestHandler = (req, res) => {
         };
         res.status(200).send(actor)
     }).catch((error) => {
-        res.status(500).send(error)
+        res.status(500).send({message: 'Error getting actor data from API server', error})
     })
 }
 
@@ -74,7 +74,7 @@ export const getMoviesByActor: RequestHandler = (req, res) => {
     }
 
     const ACTOR_ID: string = req.query.actor_id as string;
-    const URL = BASE_URL + '/3/person/' + ACTOR_ID + '/movie_credits' + LANGUAGE_QUERY;
+    const URL = BASE_URL + '/3/person/' + ACTOR_ID + '/movie_credits';
 
     get(URL, {
         headers: MOVIE_API_HEADERS
@@ -92,6 +92,6 @@ export const getMoviesByActor: RequestHandler = (req, res) => {
 
         res.status(200).send(movies);
     }).catch((error) => {
-        res.status(500).send(error);
+        res.status(500).send({message: 'Error getting movies from API server', error});
     });
 };

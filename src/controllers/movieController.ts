@@ -1,6 +1,6 @@
 import get from "axios"
 import { RequestHandler } from "express"
-import { MOVIE_API_HEADERS, MOVIE_URL, DEFAULT_MOVIE_REQUEST, BASE_URL, LANGUAGE_QUERY, BACKDROP_URL_PREFIX, POSTER_URL_PREFIX } from '../consts'
+import { MOVIE_API_HEADERS, MOVIE_URL, DEFAULT_MOVIE_REQUEST, BASE_URL, BACKDROP_URL_PREFIX, POSTER_URL_PREFIX } from '../consts'
 import { CarouselMovie } from "../models/movie/carouselMovie"
 import { MoviePoster } from "../models/movie/moviePoster"
 
@@ -26,7 +26,7 @@ export const searchMovie: RequestHandler = (req, res) => {
         }))
         res.json(MOVIES)
     }).catch((error) => {
-        res.status(500).send(error)
+        res.status(500).send({message: 'Error getting query from API server', error})
     })
 }
 
@@ -35,19 +35,19 @@ export const getMovie: RequestHandler = (req, res) => {
         res.status(400).send({message: 'Bad request. Movie identifier needed'})
 
     const MOVIE_ID: string = req.query.movie_id as string
-    const URL = BASE_URL + '/3/movie/' + MOVIE_ID + LANGUAGE_QUERY
+    const URL = BASE_URL + '/3/movie/' + MOVIE_ID
 
     get(URL, {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
         res.send(response.data)
     }).catch((error) => {
-        res.status(500).send(error)
+        res.status(500).send({message: 'Error getting movie from API server', error})
     }) 
 }
 
 export const getCarousel: RequestHandler = (_req, res) => {
-    const URL = BASE_URL + '/3/discover/movie' + LANGUAGE_QUERY
+    const URL = BASE_URL + '/3/discover/movie'
 
     get(URL, {
         headers: MOVIE_API_HEADERS
@@ -64,12 +64,12 @@ export const getCarousel: RequestHandler = (_req, res) => {
         }))
         res.json(MOVIES)
     }).catch((error) => {
-        res.status(500).send(error)
+        res.status(500).send({message: 'Error getting movies from API server', error})
     })
 }
 
 export const getHomeList: RequestHandler = (_req, res) => {
-    const URL = BASE_URL + '/3/discover/movie' + LANGUAGE_QUERY
+    const URL = BASE_URL + '/3/discover/movie'
 
     get(URL, {
         headers: MOVIE_API_HEADERS
@@ -85,6 +85,6 @@ export const getHomeList: RequestHandler = (_req, res) => {
         }))
         res.json(MOVIES)
     }).catch((error) => {
-        res.status(500).send(error)
+        res.status(500).send({message: 'Error getting movie list from API server', error})
     })
 }
