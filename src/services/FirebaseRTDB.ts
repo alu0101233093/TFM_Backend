@@ -128,4 +128,17 @@ export class FirebaseRTDB {
                 throw new Error('Error adding review: ' + error.message);
             });
     }
+
+    public async updateVerificationRequestStatus(requestID: string, newStatus: string): Promise<string> {
+        const reference = this.database.ref('verificationRequests/' + requestID);
+    
+        return reference.update({ status: newStatus })
+            .then(() => {
+                return `Request ${requestID} updated successfully.`;
+            })
+            .catch((error) => {
+                throw new Error('Error updating request: ' + error.message);
+            });
+    }
+    
 }

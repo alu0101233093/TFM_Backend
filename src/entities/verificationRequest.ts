@@ -3,9 +3,9 @@ export interface VerificationRequest {
     uid: string
     status: string
     user: {
-        email: string | undefined
+        email: string
         emailVerified: boolean
-        photoURL: string | undefined
+        photoURL: string
     }
     text: string
 }

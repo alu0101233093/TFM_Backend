@@ -88,8 +88,8 @@ export const saveVerificationRequest: RequestHandler = (req, res) => {
                 status: 'Pending',
                 user: {
                     emailVerified: decodedIdToken.email_verified == true,
-                    email: decodedIdToken.email,
-                    photoURL: decodedIdToken.picture
+                    email: decodedIdToken.email || '',
+                    photoURL: decodedIdToken.picture || ''
                 },
                 text: req.body.text
             }
