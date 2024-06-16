@@ -1,5 +1,5 @@
 import { RequestHandler } from "express"
-import { AllReviews, Review } from "../entities/review"
+import { AllReviews, Review } from "../models/review/review"
 import { FirebaseRTDB } from "../services/FirebaseRTDB"
 import { FirebaseAuth } from "../services/FirebaseAuth"
 

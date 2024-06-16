@@ -1,9 +1,9 @@
 import { RequestHandler, Response } from "express"
 import { FirebaseAuth } from '../services/FirebaseAuth'
 import { FB_IMAGE_DEFAULT, FirebaseStr } from '../services/FirebaseStr'
-import { UserFirebaseAuth } from '../entities/userFirebaseAuth'
+import { UserFirebaseAuth } from '../models/user/userFirebaseAuth'
 import { FirebaseRTDB } from "../services/FirebaseRTDB"
-import { VerificationRequest } from "../entities/verificationRequest"
+import { VerificationRequest } from "../models/verificationRequest"
 
 const auth = new FirebaseAuth
 const storage = new FirebaseStr

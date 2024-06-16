@@ -1,6 +1,6 @@
 import { firebaseAdminApp } from "..";
-import { isValidEmail } from "../entities/userFirebaseAuth";
-import { UserFirebaseAuth } from "../entities/userFirebaseAuth";
+import { isValidEmail } from "../models/user/userFirebaseAuth";
+import { UserFirebaseAuth } from "../models/user/userFirebaseAuth";
 import { UserRecord } from "firebase-admin/lib/auth/user-record";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 

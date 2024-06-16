@@ -1,10 +1,10 @@
 import get from "axios"
 import { RequestHandler } from "express"
 import { MOVIE_API_HEADERS, MOVIE_URL, DEFAULT_MOVIE_REQUEST, BASE_URL, LANGUAGE_QUERY, BACKDROP_URL_PREFIX, POSTER_URL_PREFIX } from '../consts'
-import { CarouselMovie } from "../entities/carouselMovie"
-import { MoviePoster } from "../entities/moviePoster"
-import { Actor } from "../entities/actor"
-import { ActorProfile, genderToString } from "../entities/actorProfile"
+import { CarouselMovie } from "../models/movie/carouselMovie"
+import { MoviePoster } from "../models/movie/moviePoster"
+import { Actor } from "../models/actor/actor"
+import { ActorProfile, genderToString } from "../models/actor/actorProfile"
 
 export const searchMovie: RequestHandler = (req, res) => {
     const request = {

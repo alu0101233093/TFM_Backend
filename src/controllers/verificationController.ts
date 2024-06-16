@@ -2,7 +2,7 @@ import { RequestHandler } from "express";
 import { FirebaseAuth } from "../services/FirebaseAuth";
 import { ADMIN_UID } from "../consts";
 import { FirebaseRTDB } from "../services/FirebaseRTDB";
-import { VerificationRequest } from "../entities/verificationRequest";
+import { VerificationRequest } from "../models/verificationRequest";
 
 const auth = new FirebaseAuth
 const database = new FirebaseRTDB

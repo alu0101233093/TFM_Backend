@@ -1,8 +1,9 @@
 import { Database } from "firebase-admin/lib/database/database";
 import * as admin from 'firebase-admin';
 import { firebaseAdminApp } from ".."
-import { AllReviews, MovieReviews, Review } from "../entities/review"
-import { VerificationRequest } from "../entities/verificationRequest";
+import { Review } from "../models/review/review"
+import { AllReviews } from "../models/review/allReviews";
+import { VerificationRequest } from "../models/verificationRequest";
 
 export class FirebaseRTDB {
 
@@ -75,7 +76,7 @@ export class FirebaseRTDB {
     
             const updates: { [key: string]: null } = {};
             snapshot.forEach((movieSnapshot: admin.database.DataSnapshot) => {
-                const movieReviews: MovieReviews = movieSnapshot.val();
+                const movieReviews: Record<string, Review> = movieSnapshot.val();
                 for (const reviewId in movieReviews) {
                     const review = movieReviews[reviewId];
                     if (review.uid === uid) {
