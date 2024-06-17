@@ -1,6 +1,6 @@
 import { Database } from "firebase-admin/lib/database/database";
 import * as admin from 'firebase-admin';
-import { firebaseAdminApp } from ".."
+import { firebaseAdminApp } from "../app";
 import { Review } from "../models/review/review"
 import { AllReviews } from "../models/review/allReviews";
 import { VerificationRequest } from "../models/verificationRequest";

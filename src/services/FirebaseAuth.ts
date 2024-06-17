@@ -1,14 +1,10 @@
-import { firebaseAdminApp } from "..";
+import { firebaseAdminApp } from "../app";
 import { isValidEmail } from "../models/user/userFirebaseAuth";
 import { UserFirebaseAuth } from "../models/user/userFirebaseAuth";
 import { UserRecord } from "firebase-admin/lib/auth/user-record";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 
 export class FirebaseAuth {
-
-    constructor(){
-    }
-
     public async createUser(user: UserFirebaseAuth): Promise<UserRecord> {
         if(!isValidEmail(user.email))
             return Promise.reject({message: 'The provided email has an invalid format'})

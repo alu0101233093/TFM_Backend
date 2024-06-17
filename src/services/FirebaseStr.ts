@@ -1,4 +1,4 @@
-import { firebaseAdminApp } from ".."
+import { firebaseAdminApp } from "../app";
 import sharp from "sharp"
 import { FB_BUCKET_URL, FB_IMAGE_URL_PREFIX, FB_IMAGE_URL_SUFIX } from "../consts"
 
@@ -6,7 +6,11 @@ export const FB_IMAGE_DEFAULT = FB_IMAGE_URL_PREFIX + 'default' + FB_IMAGE_URL_S
 
 export class FirebaseStr {
 
-    constructor(){}
+    private storageBucket
+
+    constructor(){
+        this.storageBucket = firebaseAdminApp.storage().bucket(FB_BUCKET_URL)
+    }
 
     public async savePicture(picture: Express.Multer.File | undefined, userId: string): Promise<string> {
         return new Promise<string>((resolve, reject) => {
@@ -15,9 +19,7 @@ export class FirebaseStr {
             } else {
                 this.formatImage(picture)
                 .then(async (processedImageBuffer) => {
-                    const fileRef = firebaseAdminApp.storage()
-                    .bucket(FB_BUCKET_URL)
-                    .file(`users/${userId}.png`)
+                    const fileRef = this.storageBucket.file(`users/${userId}.png`)
 
                     const stream = fileRef.createWriteStream({ metadata: { contentType: 'image/png' } })
                     stream.on('error', (error) => {reject({message: "Error saving photo. ", error})})
@@ -37,18 +39,14 @@ export class FirebaseStr {
     }
 
     public hasProfilePic(uid: string): Promise<[boolean]> {
-        return firebaseAdminApp
-        .storage()
-        .bucket(FB_BUCKET_URL)
+        return this.storageBucket
         .file('users/' + uid + '.png')
         .exists()
     }
 
     public deleteProfilePic(uid: string) {
         return new Promise<void>(async (resolve,reject) => {
-            return firebaseAdminApp
-            .storage()
-            .bucket(FB_BUCKET_URL)
+            return this.storageBucket
             .file('users/' + uid + '.png')
             .delete()
             .then(() => resolve())
