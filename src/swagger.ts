@@ -2,7 +2,6 @@
 import swaggerJSDoc, { Options } from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { Application, Request, Response } from 'express';
-import { URL } from './consts';
 
 // Basic Meta Informations about our API
 const options: Options = {
@@ -38,7 +37,7 @@ const swaggerDocs = (app: Application, port: number): void => {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
   });
-  console.log(`Version 1 Docs are available on ${URL}:${port}/docs`);
+  console.log(`Version 1 Docs are available on http://localhost:${port}/docs`);
 };
 
 export { swaggerDocs };

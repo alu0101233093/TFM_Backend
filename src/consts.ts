@@ -2,7 +2,6 @@ import dotenv from 'dotenv'
 import { ServiceAccount } from 'firebase-admin'
 dotenv.config()
 
-export const URL = process.env.URL || 'https://localhost'
 export const PORT = parseInt(process.env.PORT || '3000', 10)
 export const BASE_URL = process.env.BASE_URL || 'https://api.themoviedb.org'
 export const MOVIE_URL = process.env.MOVIE_URL || `${BASE_URL}/3/search/movie`

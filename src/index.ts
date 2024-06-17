@@ -19,7 +19,6 @@ import actor_router from './routes/actors'
 const expressApp = express()
 
 expressApp.use(cors({ origin: FRONTEND_URL }))
-expressApp.use(cors({ origin: 'https://localhost:4200' }))
 
 expressApp.use('/movies', movie_router)
 expressApp.use('/actors', actor_router)
