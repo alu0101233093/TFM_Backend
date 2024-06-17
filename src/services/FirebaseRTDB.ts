@@ -112,10 +112,10 @@ export class FirebaseRTDB {
                 });
                 return requests;
             } else {
-                return Promise.reject('No requests found.')
+                return Promise.reject({message:'No requests found.'})
             }
         }).catch((error) => {
-            return Promise.reject('Error getting critic reviews: ' + error.message);
+            return Promise.reject({message:'Error getting critic reviews ', error});
         });
     }
 
@@ -146,7 +146,7 @@ export class FirebaseRTDB {
             .then(async (snapshot) => {
                 const request = snapshot.val();
                 if (!request) {
-                    return Promise.reject(`Request ${requestID} not found.`);
+                    return Promise.reject({message:`Request ${requestID} not found.`});
                 }
 
                 const uid = request.uid;
@@ -161,14 +161,14 @@ export class FirebaseRTDB {
                             .then(() => {return Promise.resolve(request.uid)});
                     })
                     .catch((error) => {
-                        return Promise.reject(`Error moving reviews from ${sourcePath} to ${destinationPath}: ${error.message}`);
+                        return Promise.reject({message:`Error moving reviews from ${sourcePath} to ${destinationPath}`, error});
                     });
                 } else {
                     return Promise.resolve(request.uid);
                 }
             })
             .catch((error) => {
-                return Promise.reject(`Error updating request: ${error.message}`);
+                return Promise.reject({message:'Error updating request.', error})
             });
     }
 
