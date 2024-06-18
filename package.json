@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "start": "node build/index.js",
     "tscstart": "tsc && node build/index.js",
-    "test": "tsc && set NODE_OPTIONS=--experimental-vm-modules && jest"
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && set CI=true && jest --coverage --testResultsProcessor=jest-sonar-reporter"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
     "jest": "^29.7.0",
+    "jest-sonar-reporter": "^2.0.0",
     "supertest": "^7.0.0",
     "ts-jest": "^29.1.5",
     "typescript": "^5.4.5"
