@@ -26,8 +26,7 @@ export class FirebaseRTDB {
             }
         })
         .catch((error) => {
-            const e: CustomError = new CustomError('Error saving the new review.', error);
-            return Promise.reject(e);
+            return Promise.reject(new CustomError('Error saving the new review.', error));
         });
     }
 
@@ -48,12 +47,10 @@ export class FirebaseRTDB {
                 }
                 return Promise.resolve(result)
             }).catch((error) => {
-                const e: CustomError = new CustomError('Error getting critic reviews.', error);
-                return Promise.reject(e);
+                return Promise.reject(new CustomError('Error getting critic reviews.', error));
             });
         }).catch((error) => {
-            const e: CustomError = new CustomError('Error getting spectator reviews.', error);
-            return Promise.reject(e);
+            return Promise.reject(new CustomError('Error getting spectator reviews.', error));
         });
     }
 
@@ -61,8 +58,7 @@ export class FirebaseRTDB {
         const reviewURL = critic ? 'criticReviews' : 'reviews'
         const reference = this.database.ref(reviewURL + '/' + movie_id + '/' + review_id);
         return reference.remove().catch((error) => {
-            const e: CustomError = new CustomError('Error deleting review.', error);
-            return Promise.reject(e);
+            return Promise.reject(new CustomError('Error deleting review.', error));
         })
     }
 
@@ -99,12 +95,10 @@ export class FirebaseRTDB {
             });
     
             return this.database.ref().update(updates).catch((error) => {
-                const e: CustomError = new CustomError('Error deleting user review.', error);
-                return Promise.reject(e);
+                return Promise.reject(new CustomError('Error deleting user review.', error));
             })
         }).catch((error) => {
-            const e: CustomError = new CustomError('Error finding user reviews.', error);
-            return Promise.reject(e);
+            return Promise.reject(new CustomError('Error finding user reviews.', error));
         });
     }
 
@@ -125,8 +119,7 @@ export class FirebaseRTDB {
                 return Promise.reject('No requests found.');
             }
         }).catch((error) => {
-            const e: CustomError = new CustomError('Error getting verification requests.', error);
-            return Promise.reject(e);
+            return Promise.reject(new CustomError('Error getting verification requests.', error));
         });
     }
 
@@ -143,8 +136,7 @@ export class FirebaseRTDB {
             }
         })
         .catch((error) => {
-            const e: CustomError = new CustomError('Error saving verification request.', error);
-            return Promise.reject(e);
+            return Promise.reject(new CustomError('Error saving verification request.', error));
         });
     }
 
@@ -177,8 +169,7 @@ export class FirebaseRTDB {
                 }
             })
             .catch((error) => {
-                const e: CustomError = new CustomError('Error updating request.', error);
-                return Promise.reject(e);
+                return Promise.reject(new CustomError('Error updating request.', error));
             });
     }
 
@@ -214,11 +205,10 @@ export class FirebaseRTDB {
             }
         })
         .catch((error) => {
-            const e: CustomError = new CustomError(
+            return Promise.reject(new CustomError(
                 `Error moving reviews from ${sourcePath} to ${destinationPath}: ${error.message}`, 
                 error
-            );
-            return Promise.reject(e);
+            ));
         });
     }
     

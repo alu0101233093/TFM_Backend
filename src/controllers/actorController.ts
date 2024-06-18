@@ -32,8 +32,7 @@ export const getCasting: RequestHandler = (req, res) => {
         }));
         return res.status(200).send(shortResponse)
     }).catch((error) => {
-        const e: CustomError = new CustomError('Error getting casting from API server', error);
-        return res.status(500).send(e);
+        return res.status(500).send(new CustomError('Error getting casting from API server', error));
     })
 }
 
@@ -65,8 +64,7 @@ export const getActor: RequestHandler = (req, res) => {
         };
         return res.status(200).send(actor)
     }).catch((error) => {
-        const e: CustomError = new CustomError('Error getting actor data from API server', error);
-        return res.status(500).send(e);
+        return res.status(500).send(new CustomError('Error getting actor data from API server', error));
     })
 }
 
@@ -94,7 +92,6 @@ export const getMoviesByActor: RequestHandler = (req, res) => {
 
         return res.status(200).send(movies);
     }).catch((error) => {
-        const e: CustomError = new CustomError('Error getting movies from API server', error);
-        return res.status(500).send(e);
+        return res.status(500).send(new CustomError('Error getting movies from API server', error));
     });
 };

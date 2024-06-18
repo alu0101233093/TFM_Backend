@@ -10,21 +10,22 @@ export class FirebaseAuth {
     
         return firebaseAdminApp.auth().createUser(user)
         .catch((error) => {
-            const e: CustomError = new CustomError('Error creating user.', error);
-            return Promise.reject(e);
+            return Promise.reject(new CustomError('Error creating user.', error));
         })
     }
 
     public async verifyIdToken(idToken: string): Promise<DecodedIdToken>{
         return firebaseAdminApp.auth().verifyIdToken(idToken)
         .catch((error) => {
-            const e: CustomError = new CustomError('Session expired. LogIn again.', error);
-            return Promise.reject(e);
+            return Promise.reject(new CustomError('Session expired. LogIn again.', error));
         })
     }
 
     public async updateUser(uid: string, user: UserFirebaseAuth){
         return firebaseAdminApp.auth().updateUser(uid, user)
+        .catch((error) => {
+            return Promise.reject(new CustomError('Error updating user.', error));
+        })
     }
 
     public async changeUserRole(uid: string, newRol: boolean) {
@@ -33,16 +34,14 @@ export class FirebaseAuth {
             Promise.resolve(`User rol updated successfully.`);
         })
         .catch((error) => {
-            const e: CustomError = new CustomError('Error changing user role.', error);
-            return Promise.reject(e);
+            return Promise.reject(new CustomError('Error changing user role.', error));
         });
     }
 
     public async deleteUser(uid: string){
         return firebaseAdminApp.auth().deleteUser(uid)
         .catch((error) => {
-            const e: CustomError = new CustomError('Error deleting user.', error);
-            return Promise.reject(e);
+            return Promise.reject(new CustomError('Error deleting user.', error));
         })
     }
 }

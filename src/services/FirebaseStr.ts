@@ -23,14 +23,12 @@ export class FirebaseStr {
                     const stream = fileRef.createWriteStream({ metadata: { contentType: 'image/png' } })
 
                     stream.on('error', (error) => {
-                        const e: CustomError = new CustomError('Error saving photo.', error);
-                        return reject(e);
+                        return reject(new CustomError('Error saving photo.', error));
                     })
                     stream.on('finish', () => {resolve(FB_IMAGE_URL_PREFIX + userId + FB_IMAGE_URL_SUFIX)})
                     stream.end(processedImageBuffer)
                 }).catch((error) => {
-                    const e: CustomError = new CustomError('Error formating photo.', error);
-                    return reject(e);
+                    return reject(new CustomError('Error formating photo.', error));
                 })
             }
         })

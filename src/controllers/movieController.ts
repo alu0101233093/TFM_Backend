@@ -26,6 +26,7 @@ export const searchMovie: RequestHandler = (req, res) => {
         }))
         res.json(MOVIES)
     }).catch((error) => {
+        const e: CustomError = new CustomError('Error getting actor data from API server', error);
         res.status(500).send({message: 'Error getting query from API server', error})
     })
 }
