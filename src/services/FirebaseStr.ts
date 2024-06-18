@@ -1,6 +1,7 @@
 import { firebaseAdminApp } from "../app";
 import sharp from "sharp"
 import { FB_BUCKET_URL, FB_IMAGE_URL_PREFIX, FB_IMAGE_URL_SUFIX } from "../consts"
+import { CustomError } from "../models/customError";
 
 export const FB_IMAGE_DEFAULT = FB_IMAGE_URL_PREFIX + 'default' + FB_IMAGE_URL_SUFIX
 

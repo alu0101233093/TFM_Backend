@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">23.52% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/15</span>
+                <span class='fraction'>4/17</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">23.52% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/15</span>
+                <span class='fraction'>4/17</span>
             </div>
         
             
@@ -107,11 +107,14 @@
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -133,6 +136,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -152,47 +158,50 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { firebaseAdminApp } from "../app";
-import { isValidEmail } from "../models/user/userFirebaseAuth";
-import { UserFirebaseAuth } from "../models/user/userFirebaseAuth";
+import { isValidEmail, UserFirebaseAuth } from "../models/user/userFirebaseAuth";
 import { UserRecord } from "firebase-admin/lib/auth/user-record";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
+import { CustomError } from "../models/customError";
 &nbsp;
 export class FirebaseAuth {
     public async <span class="fstat-no" title="function not covered" >createUser(</span>user: UserFirebaseAuth): Promise&lt;UserRecord&gt; {
 <span class="cstat-no" title="statement not covered" >        <span class="missing-if-branch" title="if path not taken" >I</span>if(!isValidEmail(user.email))</span>
-<span class="cstat-no" title="statement not covered" >            return Promise.reject({message: 'The provided email has an invalid format'})</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new Error('The provided email has an invalid format'))</span>
     
 <span class="cstat-no" title="statement not covered" >        return firebaseAdminApp.auth().createUser(user)</span>
         .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            return Promise.reject({message: "Error creating user. ", error})</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new CustomError('Error creating user.', error));</span>
         })
     }
 &nbsp;
     public async <span class="fstat-no" title="function not covered" >verifyIdToken(</span>idToken: string): Promise&lt;DecodedIdToken&gt;{
 <span class="cstat-no" title="statement not covered" >        return firebaseAdminApp.auth().verifyIdToken(idToken)</span>
         .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            return Promise.reject({message: "Session expired. LogIn again. ", error})</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new CustomError('Session expired. LogIn again.', error));</span>
         })
     }
 &nbsp;
     public async <span class="fstat-no" title="function not covered" >updateUser(</span>uid: string, user: UserFirebaseAuth){
 <span class="cstat-no" title="statement not covered" >        return firebaseAdminApp.auth().updateUser(uid, user)</span>
+        .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new CustomError('Error updating user.', error));</span>
+        })
     }
 &nbsp;
-    public async <span class="fstat-no" title="function not covered" >changeUserRol(</span>uid: string, newRol: boolean) {
+    public async <span class="fstat-no" title="function not covered" >changeUserRole(</span>uid: string, newRol: boolean) {
 <span class="cstat-no" title="statement not covered" >        return firebaseAdminApp.auth().updateUser(uid, { emailVerified: newRol })</span>
         .then(<span class="fstat-no" title="function not covered" >() =</span>&gt; {
 <span class="cstat-no" title="statement not covered" >            Promise.resolve(`User rol updated successfully.`);</span>
         })
         .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            Promise.reject(error);</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new CustomError('Error changing user role.', error));</span>
         });
     }
 &nbsp;
     public async <span class="fstat-no" title="function not covered" >deleteUser(</span>uid: string){
 <span class="cstat-no" title="statement not covered" >        return firebaseAdminApp.auth().deleteUser(uid)</span>
         .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            return Promise.reject({message: "Error deleting user. ", error})</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new CustomError('Error deleting user.', error));</span>
         })
     }
 }</pre></td></tr></table></pre>
@@ -202,7 +211,7 @@ export class FirebaseAuth {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-18T02:25:06.288Z
+                at 2024-06-18T18:04:43.268Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

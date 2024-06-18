@@ -4,6 +4,7 @@ import { firebaseAdminApp } from "../app";
 import { Review } from "../models/review/review"
 import { AllReviews } from "../models/review/allReviews";
 import { VerificationRequest } from "../models/verificationRequest";
+import { CustomError } from "../models/customError";
 
 export class FirebaseRTDB {
 

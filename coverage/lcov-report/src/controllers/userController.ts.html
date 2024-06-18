@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">26.22% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/60</span>
+                <span class='fraction'>16/61</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/24</span>
+                <span class='fraction'>0/36</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">21.42% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/55</span>
+                <span class='fraction'>12/56</span>
             </div>
         
             
@@ -197,12 +197,14 @@
 <a name='L132'></a><a href='#L132'>132</a>
 <a name='L133'></a><a href='#L133'>133</a>
 <a name='L134'></a><a href='#L134'>134</a>
-<a name='L135'></a><a href='#L135'>135</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L135'></a><a href='#L135'>135</a>
+<a name='L136'></a><a href='#L136'>136</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -337,6 +339,7 @@ import { FB_IMAGE_DEFAULT, FirebaseStr } from '../services/FirebaseStr'
 import { UserFirebaseAuth } from '../models/user/userFirebaseAuth'
 import { FirebaseRTDB } from "../services/FirebaseRTDB"
 import { VerificationRequest } from "../models/verificationRequest"
+import { CustomError } from "../models/customError"
 &nbsp;
 const auth = new FirebaseAuth
 const storage = new FirebaseStr
@@ -345,7 +348,7 @@ const database = new FirebaseRTDB
 export const signUp: RequestHandler = <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
     let user_request<span class="cstat-no" title="statement not covered" >: UserFirebaseAuth = {</span>
         ...req.body,
-        emailVerified: req.body.emailVerified === 'true',
+        emailVerified: req.body.emailVerified ?? false,
         photoURL: FB_IMAGE_DEFAULT
     }
 &nbsp;
@@ -360,7 +363,7 @@ export const signUp: RequestHandler = <span class="fstat-no" title="function not
             }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >                auth.deleteUser(user_record.uid)</span>
 <span class="cstat-no" title="statement not covered" >                storage.deleteProfilePic(user_record.uid)</span>
-<span class="cstat-no" title="statement not covered" >                res.status(500).send({message: "Error saving user information. ", error})</span>
+<span class="cstat-no" title="statement not covered" >                res.status(500).send(new CustomError('Error saving user information.', error))</span>
             })
         }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >            auth.deleteUser(user_record.uid)</span>
@@ -379,7 +382,7 @@ export const updateData: RequestHandler = <span class="fstat-no" title="function
         .then(<span class="fstat-no" title="function not covered" >(d</span>ecodedIdToken) =&gt; {
             let user_request<span class="cstat-no" title="statement not covered" >: UserFirebaseAuth = {</span>
                 ...req.body,
-                emailVerified: decodedIdToken.email_verified == true,
+                emailVerified: decodedIdToken.email_verified ?? false,
                 photoURL: decodedIdToken.picture
             }
 <span class="cstat-no" title="statement not covered" >            if(req.file){</span>
@@ -397,7 +400,7 @@ export const updateData: RequestHandler = <span class="fstat-no" title="function
 <span class="cstat-no" title="statement not covered" >            res.status(401).send(error)</span>
         })
     } else {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send({message: 'IdToken not found on request'})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('IdToken not found on request'))</span>
     }
 }
 &nbsp;
@@ -406,7 +409,7 @@ const updateUser = <span class="fstat-no" title="function not covered" >async (u
     .then(<span class="fstat-no" title="function not covered" >(_</span>user_record) =&gt; {
 <span class="cstat-no" title="statement not covered" >        res.status(201).send({message: 'User updated'})</span>
     }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send({message: "Error saving user information. ", error})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('Error saving user information.', error))</span>
     })
 }
 &nbsp;
@@ -420,7 +423,7 @@ export const saveVerificationRequest: RequestHandler = <span class="fstat-no" ti
                 uid: decodedIdToken.uid,
                 status: 'Pending',
                 user: {
-                    emailVerified: decodedIdToken.email_verified == true,
+                    emailVerified: decodedIdToken.email_verified ?? false,
                     email: decodedIdToken.email || '',
                     photoURL: decodedIdToken.picture || ''
                 },
@@ -436,7 +439,7 @@ export const saveVerificationRequest: RequestHandler = <span class="fstat-no" ti
 <span class="cstat-no" title="statement not covered" >            res.status(401).send(error)</span>
         })
     } else {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send({message: 'IdToken not found on request'})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('IdToken not found on request'))</span>
     }
 }
 &nbsp;
@@ -462,7 +465,7 @@ export const deleteUser: RequestHandler = <span class="fstat-no" title="function
 <span class="cstat-no" title="statement not covered" >            res.status(401).send(error)</span>
         });
     } else {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send({ message: 'IdToken not found on request' })</span>
+<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('IdToken not found on request'))</span>
     }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -472,7 +475,7 @@ export const deleteUser: RequestHandler = <span class="fstat-no" title="function
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-18T02:25:06.288Z
+                at 2024-06-18T18:04:43.268Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

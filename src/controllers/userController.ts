@@ -4,6 +4,7 @@ import { FB_IMAGE_DEFAULT, FirebaseStr } from '../services/FirebaseStr'
 import { UserFirebaseAuth } from '../models/user/userFirebaseAuth'
 import { FirebaseRTDB } from "../services/FirebaseRTDB"
 import { VerificationRequest } from "../models/verificationRequest"
+import { CustomError } from "../models/customError"
 
 const auth = new FirebaseAuth
 const storage = new FirebaseStr

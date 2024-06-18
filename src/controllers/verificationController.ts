@@ -3,6 +3,7 @@ import { FirebaseAuth } from "../services/FirebaseAuth";
 import { ADMIN_UID } from "../consts";
 import { FirebaseRTDB } from "../services/FirebaseRTDB";
 import { VerificationRequest } from "../models/verificationRequest";
+import { CustomError } from "../models/customError";
 
 const auth = new FirebaseAuth
 const database = new FirebaseRTDB

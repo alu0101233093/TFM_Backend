@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.29% </span>
+                <span class="strong">97.36% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>36/37</span>
+                <span class='fraction'>37/38</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.96% </span>
+                <span class="strong">97.05% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>32/33</span>
+                <span class='fraction'>33/34</span>
             </div>
         
             
@@ -158,17 +158,21 @@
 <a name='L93'></a><a href='#L93'>93</a>
 <a name='L94'></a><a href='#L94'>94</a>
 <a name='L95'></a><a href='#L95'>95</a>
-<a name='L96'></a><a href='#L96'>96</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -259,11 +263,13 @@ import { BASE_URL, MOVIE_API_HEADERS, POSTER_URL_PREFIX } from "../consts"
 import { Actor } from "../models/actor/actor"
 import { ActorProfile, genderToString } from "../models/actor/actorProfile"
 import { MoviePoster } from "../models/movie/moviePoster"
+import { CustomError } from "../models/customError"
 &nbsp;
 &nbsp;
 export const getCasting: RequestHandler = (req, res) =&gt; {
-    <span class="missing-if-branch" title="if path not taken" >I</span>if(!req.query.movie_id)
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send({message: 'Bad request. Movie identifier needed'})</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if(!req.query.movie_id){
+<span class="cstat-no" title="statement not covered" >        return Promise.reject(new CustomError('Bad request. Movie identifier needed'));</span>
+    }
 &nbsp;
     const MOVIE_ID: string = req.query.movie_id as string
     const URL = BASE_URL + '/3/movie/' + MOVIE_ID + '/credits'
@@ -286,13 +292,13 @@ export const getCasting: RequestHandler = (req, res) =&gt; {
         }));
         return res.status(200).send(shortResponse)
     }).catch((error) =&gt; {
-        return res.status(500).send({message: 'Error getting casting from API server', error})
+        return res.status(500).send(new CustomError('Error getting casting from API server', error));
     })
 }
 &nbsp;
 export const getActor: RequestHandler = (req, res) =&gt; {
     if(!req.query.actor_id)
-        return res.status(400).send({message: 'Bad request. Actor identifier needed'})
+        return res.status(400).send(new CustomError('Bad request. Actor identifier needed'))
 &nbsp;
     const ACTOR_ID: string = req.query.actor_id as string
     const URL = BASE_URL + '/3/person/' + ACTOR_ID
@@ -318,13 +324,13 @@ export const getActor: RequestHandler = (req, res) =&gt; {
         };
         return res.status(200).send(actor)
     }).catch((error) =&gt; {
-        return res.status(500).send({message: 'Error getting actor data from API server', error})
+        return res.status(500).send(new CustomError('Error getting actor data from API server', error));
     })
 }
 &nbsp;
 export const getMoviesByActor: RequestHandler = (req, res) =&gt; {
     if (!req.query.actor_id) {
-        return res.status(400).send({ message: 'Bad request. Actor identifier needed' });
+        return res.status(400).send(new CustomError('Bad request. Actor identifier needed'));
     }
 &nbsp;
     const ACTOR_ID: string = req.query.actor_id as string;
@@ -346,7 +352,7 @@ export const getMoviesByActor: RequestHandler = (req, res) =&gt; {
 &nbsp;
         return res.status(200).send(movies);
     }).catch((error) =&gt; {
-        return res.status(500).send({message: 'Error getting movies from API server', error});
+        return res.status(500).send(new CustomError('Error getting movies from API server', error));
     });
 };</pre></td></tr></table></pre>
 
@@ -355,7 +361,7 @@ export const getMoviesByActor: RequestHandler = (req, res) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-18T02:25:06.288Z
+                at 2024-06-18T18:04:43.268Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

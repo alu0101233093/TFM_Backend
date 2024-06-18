@@ -2,6 +2,7 @@ import { firebaseAdminApp } from "../app";
 import { isValidEmail, UserFirebaseAuth } from "../models/user/userFirebaseAuth";
 import { UserRecord } from "firebase-admin/lib/auth/user-record";
 import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
+import { CustomError } from "../models/customError";
 
 export class FirebaseAuth {
     public async createUser(user: UserFirebaseAuth): Promise<UserRecord> {

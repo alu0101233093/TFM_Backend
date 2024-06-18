@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3% </span>
+                <span class="strong">3.84% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>3/100</span>
+                <span class='fraction'>4/104</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">2.43% </span>
+                <span class="strong">2.27% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/41</span>
+                <span class='fraction'>1/44</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">3.06% </span>
+                <span class="strong">3.96% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>3/98</span>
+                <span class='fraction'>4/101</span>
             </div>
         
             
@@ -273,12 +273,18 @@
 <a name='L208'></a><a href='#L208'>208</a>
 <a name='L209'></a><a href='#L209'>209</a>
 <a name='L210'></a><a href='#L210'>210</a>
-<a name='L211'></a><a href='#L211'>211</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L211'></a><a href='#L211'>211</a>
+<a name='L212'></a><a href='#L212'>212</a>
+<a name='L213'></a><a href='#L213'>213</a>
+<a name='L214'></a><a href='#L214'>214</a>
+<a name='L215'></a><a href='#L215'>215</a>
+<a name='L216'></a><a href='#L216'>216</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -333,6 +339,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -368,7 +376,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -404,12 +414,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -480,6 +487,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -489,6 +499,7 @@ import { firebaseAdminApp } from "../app";
 import { Review } from "../models/review/review"
 import { AllReviews } from "../models/review/allReviews";
 import { VerificationRequest } from "../models/verificationRequest";
+import { CustomError } from "../models/customError";
 &nbsp;
 export class FirebaseRTDB {
 &nbsp;
@@ -502,17 +513,17 @@ export class FirebaseRTDB {
         const reference = <span class="cstat-no" title="statement not covered" >this.database.ref(critic ? 'criticReviews/' + movie_id : 'reviews/' + movie_id);</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        return reference.push(review)</span>
-            .then(<span class="fstat-no" title="function not covered" >(s</span>napshot) =&gt; {
-                const key = <span class="cstat-no" title="statement not covered" >snapshot.key;</span>
-<span class="cstat-no" title="statement not covered" >                if (key) {</span>
-<span class="cstat-no" title="statement not covered" >                    return key;</span>
-                } else {
-<span class="cstat-no" title="statement not covered" >                    return Promise.reject('Failed to get key for the new review.');</span>
-                }
-            })
-            .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >                return Promise.reject(error);</span>
-            });
+        .then(<span class="fstat-no" title="function not covered" >(s</span>napshot) =&gt; {
+            const key = <span class="cstat-no" title="statement not covered" >snapshot.key;</span>
+<span class="cstat-no" title="statement not covered" >            if (key) {</span>
+<span class="cstat-no" title="statement not covered" >                return key;</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                return Promise.reject('Failed to get key for the new review.');</span>
+            }
+        })
+        .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new CustomError('Error saving the new review.', error));</span>
+        });
     }
 &nbsp;
     public async <span class="fstat-no" title="function not covered" >getReviews(</span>movie_id: string): Promise&lt;AllReviews&gt; {
@@ -530,40 +541,42 @@ export class FirebaseRTDB {
                     const criticsReviews: Record&lt;string, Review&gt; = <span class="cstat-no" title="statement not covered" >criticsSnapshot.val();</span>
 <span class="cstat-no" title="statement not covered" >                    result.critics = criticsReviews</span>
                 }
-<span class="cstat-no" title="statement not covered" >                return result </span>
+<span class="cstat-no" title="statement not covered" >                return Promise.resolve(result)</span>
             }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >                return Promise.reject({message: "Error getting critic reviews. ", error});</span>
+<span class="cstat-no" title="statement not covered" >                return Promise.reject(new CustomError('Error getting critic reviews.', error));</span>
             });
         }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            return Promise.reject({message: "Error getting critic reviews. ", error});</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new CustomError('Error getting spectator reviews.', error));</span>
         });
     }
 &nbsp;
-    public <span class="fstat-no" title="function not covered" >removeReview(</span>movie_id: string, review_id: string, critic: boolean): Promise&lt;void&gt; {
+    public async <span class="fstat-no" title="function not covered" >removeReview(</span>movie_id: string, review_id: string, critic: boolean): Promise&lt;void&gt; {
         const reviewURL = <span class="cstat-no" title="statement not covered" >critic ? 'criticReviews' : 'reviews'</span>
         const reference = <span class="cstat-no" title="statement not covered" >this.database.ref(reviewURL + '/' + movie_id + '/' + review_id);</span>
-<span class="cstat-no" title="statement not covered" >        return reference.remove()</span>
+<span class="cstat-no" title="statement not covered" >        return reference.remove().catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new CustomError('Error deleting review.', error));</span>
+        })
     }
 &nbsp;
     public async <span class="fstat-no" title="function not covered" >deleteUserReviews(</span>uid: string): Promise&lt;void&gt; {
 <span class="cstat-no" title="statement not covered" >        this.deleteReviews('criticReviews', uid)</span>
         .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            return Promise.reject({message: "Error deleting user reviews. ", error})</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(error);</span>
         })
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        this.deleteReviews('reviews', uid)</span>
         .then(<span class="fstat-no" title="function not covered" >() =</span>&gt; {<span class="cstat-no" title="statement not covered" >return Promise.resolve()})</span>
         .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            return Promise.reject({message: "Error deleting user reviews. ", error})</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(error);</span>
         })
     }
     
     private async <span class="fstat-no" title="function not covered" >deleteReviews(</span>reviewsURL: string, uid: string): Promise&lt;void&gt; {
         const reviewsRef = <span class="cstat-no" title="statement not covered" >this.database.ref(reviewsURL);</span>
     
-<span class="cstat-no" title="statement not covered" >        return reviewsRef.once('value').then(<span class="fstat-no" title="function not covered" >(s</span>napshot) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        return reviewsRef.once('value').then(<span class="fstat-no" title="function not covered" >async (s</span>napshot) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span></span>
 <span class="cstat-no" title="statement not covered" >            <span class="missing-if-branch" title="if path not taken" >I</span>if (!snapshot.exists()) {</span>
-<span class="cstat-no" title="statement not covered" >                return;</span>
+<span class="cstat-no" title="statement not covered" >                return Promise.resolve()</span>
             }
     
             const updates: { [key: string]: null } = <span class="cstat-no" title="statement not covered" >{};</span>
@@ -577,9 +590,11 @@ export class FirebaseRTDB {
                 }
             });
     
-<span class="cstat-no" title="statement not covered" >            return this.database.ref().update(updates);</span>
+<span class="cstat-no" title="statement not covered" >            return this.database.ref().update(updates).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                return Promise.reject(new CustomError('Error deleting user review.', error));</span>
+            })
         }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            return Promise.reject(error);</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new CustomError('Error finding user reviews.', error));</span>
         });
     }
 &nbsp;
@@ -597,10 +612,10 @@ export class FirebaseRTDB {
                 });
 <span class="cstat-no" title="statement not covered" >                return requests;</span>
             } else {
-<span class="cstat-no" title="statement not covered" >                return Promise.reject({message:'No requests found.'})</span>
+<span class="cstat-no" title="statement not covered" >                return Promise.reject('No requests found.');</span>
             }
         }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            return Promise.reject({message:'Error getting critic reviews ', error});</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new CustomError('Error getting verification requests.', error));</span>
         });
     }
 &nbsp;
@@ -613,14 +628,11 @@ export class FirebaseRTDB {
 <span class="cstat-no" title="statement not covered" >            if (key) {</span>
 <span class="cstat-no" title="statement not covered" >                return key;</span>
             } else {
-<span class="cstat-no" title="statement not covered" >                return Promise.reject({</span>
-                    message: 'Error saving request.', 
-                    error: 'Failed to get key for the new request.'
-                });
+<span class="cstat-no" title="statement not covered" >                return Promise.reject(new CustomError('Failed to get key for the new request.'));</span>
             }
         })
         .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            return Promise.reject({message:'Error saving request.', error});</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new CustomError('Error saving verification request.', error));</span>
         });
     }
 &nbsp;
@@ -631,7 +643,7 @@ export class FirebaseRTDB {
             .then(<span class="fstat-no" title="function not covered" >async (s</span>napshot) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
                 const request = <span class="cstat-no" title="statement not covered" >snapshot.val();</span>
 <span class="cstat-no" title="statement not covered" >                <span class="missing-if-branch" title="if path not taken" >I</span>if (!request) {</span>
-<span class="cstat-no" title="statement not covered" >                    return Promise.reject({message:`Request ${requestID} not found.`});</span>
+<span class="cstat-no" title="statement not covered" >                    return Promise.reject(new CustomError(`Request ${requestID} not found.`));</span>
                 }
 &nbsp;
                 const uid = <span class="cstat-no" title="statement not covered" >request.uid;</span>
@@ -646,14 +658,14 @@ export class FirebaseRTDB {
                             .then(<span class="fstat-no" title="function not covered" >() =</span>&gt; {<span class="cstat-no" title="statement not covered" >return Promise.resolve(request.uid)})</span>;
                     })
                     .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >                        return Promise.reject({message:`Error moving reviews from ${sourcePath} to ${destinationPath}`, error});</span>
+<span class="cstat-no" title="statement not covered" >                        return Promise.reject(error);</span>
                     });
                 } else {
 <span class="cstat-no" title="statement not covered" >                    return Promise.resolve(request.uid);</span>
                 }
             })
             .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >                return Promise.reject({message:'Error updating request.', error})</span>
+<span class="cstat-no" title="statement not covered" >                return Promise.reject(new CustomError('Error updating request.', error));</span>
             });
     }
 &nbsp;
@@ -689,7 +701,10 @@ export class FirebaseRTDB {
             }
         })
         .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            return Promise.reject(`Error moving reviews from ${sourcePath} to ${destinationPath}: ${error.message}`);</span>
+<span class="cstat-no" title="statement not covered" >            return Promise.reject(new CustomError(</span>
+                `Error moving reviews from ${sourcePath} to ${destinationPath}: ${error.message}`, 
+                error
+            ));
         });
     }
     
@@ -700,7 +715,7 @@ export class FirebaseRTDB {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-18T02:25:06.288Z
+                at 2024-06-18T18:04:43.268Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

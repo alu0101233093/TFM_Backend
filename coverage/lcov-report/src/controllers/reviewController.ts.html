@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">26.82% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/40</span>
+                <span class='fraction'>11/41</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>0/23</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">18.91% </span>
+                <span class="strong">21.05% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/37</span>
+                <span class='fraction'>8/38</span>
             </div>
         
             
@@ -140,17 +140,17 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -166,7 +166,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -178,7 +177,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -224,13 +222,14 @@ import { AllReviews } from "../models/review/allReviews"
 import { Review } from "../models/review/review"
 import { FirebaseRTDB } from "../services/FirebaseRTDB"
 import { FirebaseAuth } from "../services/FirebaseAuth"
+import { CustomError } from "../models/customError"
 &nbsp;
 const database = new FirebaseRTDB
 const auth = new FirebaseAuth
 &nbsp;
 export const postReview: RequestHandler = <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!req.query.movie_id)</span>
-<span class="cstat-no" title="statement not covered" >        res.status(400).send({ message: 'Bad request. Movie identifier needed' })</span>
+<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('Bad request. Movie identifier needed'))</span>
 &nbsp;
     const idToken = <span class="cstat-no" title="statement not covered" >req.headers.authorization?.split(' ')[1]</span>
 &nbsp;
@@ -244,25 +243,23 @@ export const postReview: RequestHandler = <span class="fstat-no" title="function
                 uid: decodedIdToken.uid,
                 photoURL: decodedIdToken.picture
             }
-            
-<span class="cstat-no" title="statement not covered" >            database.setReview(REVIEW, MOVIE_ID, decodedIdToken.email_verified == true)</span>
+<span class="cstat-no" title="statement not covered" >            database.setReview(REVIEW, MOVIE_ID, decodedIdToken.email_verified ?? false)</span>
             .then(<span class="fstat-no" title="function not covered" >(r</span>eview_id) =&gt; {
 <span class="cstat-no" title="statement not covered" >                res.status(201).send({message: 'Review published successfuly.', reviewId: review_id})</span>
             }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >                res.status(500).send({message: "Error saving review. ", error})</span>
+<span class="cstat-no" title="statement not covered" >                res.status(500).send(error)</span>
             })
         }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >            res.status(401).send(error)</span>
         })
     } else {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send({message: 'IdToken not found on request'})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('IdToken not found on request'))</span>
     }
-&nbsp;
 }
 &nbsp;
 export const getReviews: RequestHandler = <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!req.query.movie_id)</span>
-<span class="cstat-no" title="statement not covered" >        res.status(400).send({message: 'Bad request. Movie identifier needed'})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('Bad request. Movie identifier needed'))</span>
 &nbsp;
     const MOVIE_ID: string = <span class="cstat-no" title="statement not covered" >req.query.movie_id as string</span>
 <span class="cstat-no" title="statement not covered" >    database.getReviews(MOVIE_ID)</span>
@@ -275,7 +272,7 @@ export const getReviews: RequestHandler = <span class="fstat-no" title="function
 &nbsp;
 export const deleteReview: RequestHandler = <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
 <span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!req.query.movie_id)</span>
-<span class="cstat-no" title="statement not covered" >        res.status(400).send({ message: 'Bad request. Movie identifier needed' })</span>
+<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('Bad request. Movie identifier needed'))</span>
 &nbsp;
     const MOVIE_ID: string = <span class="cstat-no" title="statement not covered" >req.query.movie_id as string</span>
     const REVIEW_ID: string = <span class="cstat-no" title="statement not covered" >req.query.review_id as string</span>
@@ -285,17 +282,17 @@ export const deleteReview: RequestHandler = <span class="fstat-no" title="functi
 <span class="cstat-no" title="statement not covered" >    if (idToken) {</span>
 <span class="cstat-no" title="statement not covered" >        auth.verifyIdToken(idToken)</span>
         .then(<span class="fstat-no" title="function not covered" >(d</span>ecodedIdToken) =&gt; {
-<span class="cstat-no" title="statement not covered" >            database.removeReview(MOVIE_ID, REVIEW_ID, decodedIdToken.email_verified == true)</span>
+<span class="cstat-no" title="statement not covered" >            database.removeReview(MOVIE_ID, REVIEW_ID, decodedIdToken.email_verified ?? false)</span>
             .then(<span class="fstat-no" title="function not covered" >() =</span>&gt; {
 <span class="cstat-no" title="statement not covered" >                res.status(200).send({message: 'Review with ID ' + REVIEW_ID + ' removed successfuly'})</span>
             }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >                res.status(500).send({message: "Error deleting review. ", error})</span>
+<span class="cstat-no" title="statement not covered" >                res.status(500).send(error)</span>
             })
         }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >            res.status(401).send(error)</span>
         })
     } else {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send({message: 'IdToken not found on request'})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('IdToken not found on request'))</span>
     }
 }</pre></td></tr></table></pre>
 
@@ -304,7 +301,7 @@ export const deleteReview: RequestHandler = <span class="fstat-no" title="functi
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-18T02:25:06.288Z
+                at 2024-06-18T18:04:43.268Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

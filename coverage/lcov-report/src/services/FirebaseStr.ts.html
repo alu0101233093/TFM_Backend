@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20.68% </span>
+                <span class="strong">24.13% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/29</span>
+                <span class='fraction'>7/29</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">6.66% </span>
+                <span class="strong">7.14% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/15</span>
+                <span class='fraction'>1/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">23.07% </span>
+                <span class="strong">25% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/26</span>
+                <span class='fraction'>7/28</span>
             </div>
         
             
@@ -124,24 +124,24 @@
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
-<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -149,6 +149,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -188,6 +194,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { firebaseAdminApp } from "../app";
 import sharp from "sharp"
 import { FB_BUCKET_URL, FB_IMAGE_URL_PREFIX, FB_IMAGE_URL_SUFIX } from "../consts"
+import { CustomError } from "../models/customError";
 &nbsp;
 export const FB_IMAGE_DEFAULT = FB_IMAGE_URL_PREFIX + 'default' + FB_IMAGE_URL_SUFIX
 &nbsp;
@@ -207,19 +214,21 @@ export class FirebaseStr {
 <span class="cstat-no" title="statement not covered" >                this.formatImage(picture)</span>
                 .then(<span class="fstat-no" title="function not covered" >async (p</span>rocessedImageBuffer) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
                     const fileRef = <span class="cstat-no" title="statement not covered" >this.storageBucket.file(`users/${userId}.png`)</span>
-&nbsp;
                     const stream = <span class="cstat-no" title="statement not covered" >fileRef.createWriteStream({ metadata: { contentType: 'image/png' } })</span>
-<span class="cstat-no" title="statement not covered" >                    stream.on('error', <span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {<span class="cstat-no" title="statement not covered" >reject({message: "Error saving photo. ", error})})</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    stream.on('error', <span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                        return reject(new CustomError('Error saving photo.', error));</span>
+                    })
 <span class="cstat-no" title="statement not covered" >                    stream.on('finish', <span class="fstat-no" title="function not covered" >() =</span>&gt; {<span class="cstat-no" title="statement not covered" >resolve(FB_IMAGE_URL_PREFIX + userId + FB_IMAGE_URL_SUFIX)})</span></span>
 <span class="cstat-no" title="statement not covered" >                    stream.end(processedImageBuffer)</span>
                 }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >                    reject({message: "Error formating photo. ", error})</span>
+<span class="cstat-no" title="statement not covered" >                    return reject(new CustomError('Error formating photo.', error));</span>
                 })
             }
         })
     }
 &nbsp;
-    private <span class="fstat-no" title="function not covered" >formatImage(</span>picture: Express.Multer.File){
+    private <span class="fstat-no" title="function not covered" >formatImage(</span>picture: Express.Multer.File): Promise&lt;Buffer&gt;{
         const sharpImage = <span class="cstat-no" title="statement not covered" >sharp(picture.buffer)</span>
 <span class="cstat-no" title="statement not covered" >        return sharpImage.resize({ width: 300, height: 300, fit: 'cover', position: 'center' })</span>
         .toFormat('png').toBuffer()
@@ -231,17 +240,17 @@ export class FirebaseStr {
         .exists()
     }
 &nbsp;
-    public <span class="fstat-no" title="function not covered" >deleteProfilePic(</span>uid: string) {
-<span class="cstat-no" title="statement not covered" >        return new Promise&lt;void&gt;(<span class="fstat-no" title="function not covered" >async (r</span>esolve,reject) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span></span>
-<span class="cstat-no" title="statement not covered" >            return this.storageBucket</span>
+    public <span class="fstat-no" title="function not covered" >deleteProfilePic(</span>uid: string): Promise&lt;void&gt; {
+<span class="cstat-no" title="statement not covered" >        return new Promise&lt;void&gt;(<span class="fstat-no" title="function not covered" >(r</span>esolve, reject) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >            this.storageBucket</span>
             .file('users/' + uid + '.png')
             .delete()
-            .then(<span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >resolve())</span>
+            .then(<span class="fstat-no" title="function not covered" >() =</span>&gt; {<span class="cstat-no" title="statement not covered" >return resolve()})</span>
             .catch(<span class="fstat-no" title="function not covered" >(e</span>rror: any) =&gt; {
 <span class="cstat-no" title="statement not covered" >                if(error.code == 404) {</span>
-<span class="cstat-no" title="statement not covered" >                    resolve()</span>
+<span class="cstat-no" title="statement not covered" >                    return resolve()</span>
                 } else {
-<span class="cstat-no" title="statement not covered" >                    reject({message: "Error deleting profile picture. ", error})</span>
+<span class="cstat-no" title="statement not covered" >                    return reject(new CustomError('Error deleting profile picture.'));</span>
                 }
             })
         })
@@ -253,7 +262,7 @@ export class FirebaseStr {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-18T02:25:06.288Z
+                at 2024-06-18T18:04:43.268Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

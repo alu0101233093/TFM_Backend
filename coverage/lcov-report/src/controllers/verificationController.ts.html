@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">27.02% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>9/36</span>
+                <span class='fraction'>10/37</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20.58% </span>
+                <span class="strong">22.85% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/34</span>
+                <span class='fraction'>8/35</span>
             </div>
         
             
@@ -127,11 +127,13 @@
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a>
-<a name='L65'></a><a href='#L65'>65</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -196,6 +198,7 @@ import { FirebaseAuth } from "../services/FirebaseAuth";
 import { ADMIN_UID } from "../consts";
 import { FirebaseRTDB } from "../services/FirebaseRTDB";
 import { VerificationRequest } from "../models/verificationRequest";
+import { CustomError } from "../models/customError";
 &nbsp;
 const auth = new FirebaseAuth
 const database = new FirebaseRTDB
@@ -207,7 +210,7 @@ export const getRequests: RequestHandler = <span class="fstat-no" title="functio
 <span class="cstat-no" title="statement not covered" >        auth.verifyIdToken(idToken)</span>
         .then(<span class="fstat-no" title="function not covered" >(d</span>ecodedIdToken) =&gt; {
 <span class="cstat-no" title="statement not covered" >            if(decodedIdToken.uid != ADMIN_UID) {</span>
-<span class="cstat-no" title="statement not covered" >                return res.status(401).send({message: "User logged in is not an administrator."})</span>
+<span class="cstat-no" title="statement not covered" >                return res.status(401).send(new CustomError('User logged is not an administrator.'))</span>
             } else {
 <span class="cstat-no" title="statement not covered" >                database.getVerificationRequests().then(<span class="fstat-no" title="function not covered" >(r</span>equests: VerificationRequest[]) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                    res.status(200).send(requests)</span>
@@ -219,7 +222,7 @@ export const getRequests: RequestHandler = <span class="fstat-no" title="functio
 <span class="cstat-no" title="statement not covered" >            res.status(401).send(error)</span>
         })
     } else {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send({message: 'IdToken not found on request'})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('IdToken not found on request'))</span>
     }
 }
 &nbsp;
@@ -230,7 +233,7 @@ export const updateRequestStatus: RequestHandler = <span class="fstat-no" title=
 <span class="cstat-no" title="statement not covered" >        auth.verifyIdToken(idToken)</span>
         .then(<span class="fstat-no" title="function not covered" >(d</span>ecodedIdToken) =&gt; {
 <span class="cstat-no" title="statement not covered" >            if(decodedIdToken.uid != ADMIN_UID) {</span>
-<span class="cstat-no" title="statement not covered" >                return res.status(401).send({message: "User logged in is not an administrator."})</span>
+<span class="cstat-no" title="statement not covered" >                return res.status(401).send(new CustomError('User logged is not an administrator.'))</span>
             } else {
                 const requestID = <span class="cstat-no" title="statement not covered" >req.body.requestID</span>
                 const newStatus = <span class="cstat-no" title="statement not covered" >req.body.newStatus</span>
@@ -240,7 +243,7 @@ export const updateRequestStatus: RequestHandler = <span class="fstat-no" title=
 <span class="cstat-no" title="statement not covered" >                database.updateRequestStatus(requestID, newStatus)</span>
                 .then(<span class="fstat-no" title="function not covered" >(u</span>id) =&gt; {
                     const newRol = <span class="cstat-no" title="statement not covered" >newStatus == 'Approved'</span>
-<span class="cstat-no" title="statement not covered" >                    auth.changeUserRol(uid, newRol).then(<span class="fstat-no" title="function not covered" >() =</span>&gt; {</span>
+<span class="cstat-no" title="statement not covered" >                    auth.changeUserRole(uid, newRol).then(<span class="fstat-no" title="function not covered" >() =</span>&gt; {</span>
 <span class="cstat-no" title="statement not covered" >                        res.status(200).send({message: 'User rol changed successfuly'})</span>
                     }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >                        res.status(500).send(error)</span>
@@ -253,7 +256,7 @@ export const updateRequestStatus: RequestHandler = <span class="fstat-no" title=
 <span class="cstat-no" title="statement not covered" >            res.status(401).send(error)</span>
         })
     } else {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send({message: 'IdToken not found on request.'})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('IdToken not found on request'))</span>
     }
 }</pre></td></tr></table></pre>
 
@@ -262,7 +265,7 @@ export const updateRequestStatus: RequestHandler = <span class="fstat-no" title=
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-18T02:25:06.288Z
+                at 2024-06-18T18:04:43.268Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

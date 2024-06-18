@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\actors.spec.ts">
-    <testCase name="GET /actors/casting Should return code 500" duration="391"/>
-    <testCase name="GET /actors/casting Should return code 200" duration="66"/>
-    <testCase name="GET /actors/casting Should return Actor[]" duration="34"/>
-    <testCase name="GET /actors Should return code 400" duration="10"/>
-    <testCase name="GET /actors Should return code 500" duration="143"/>
-    <testCase name="GET /actors Should return code 200" duration="55"/>
-    <testCase name="GET /actors Should return ActorProfile" duration="25"/>
-    <testCase name="GET /actors/movies Should return code 400" duration="5"/>
-    <testCase name="GET /actors/movies Should return code 500" duration="138"/>
-    <testCase name="GET /actors/movies Should return code 200" duration="107"/>
-    <testCase name="GET /actors/movies Should return Movies[]" duration="49"/>
+    <testCase name="GET /actors/casting Should return code 500" duration="567"/>
+    <testCase name="GET /actors/casting Should return code 200" duration="62"/>
+    <testCase name="GET /actors/casting Should return Actor[]" duration="61"/>
+    <testCase name="GET /actors Should return code 400" duration="22"/>
+    <testCase name="GET /actors Should return code 500" duration="180"/>
+    <testCase name="GET /actors Should return code 200" duration="58"/>
+    <testCase name="GET /actors Should return ActorProfile" duration="60"/>
+    <testCase name="GET /actors/movies Should return code 400" duration="19"/>
+    <testCase name="GET /actors/movies Should return code 500" duration="164"/>
+    <testCase name="GET /actors/movies Should return code 200" duration="60"/>
+    <testCase name="GET /actors/movies Should return Movies[]" duration="67"/>
   </file>
 </testExecutions>

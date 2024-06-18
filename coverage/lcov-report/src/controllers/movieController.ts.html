@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">28.57% </span>
+                <span class="strong">30.55% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/35</span>
+                <span class='fraction'>11/36</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.42% </span>
+                <span class="strong">24.13% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/28</span>
+                <span class='fraction'>7/29</span>
             </div>
         
             
@@ -152,11 +152,13 @@
 <a name='L87'></a><a href='#L87'>87</a>
 <a name='L88'></a><a href='#L88'>88</a>
 <a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -246,6 +248,7 @@ import { RequestHandler } from "express"
 import { MOVIE_API_HEADERS, MOVIE_URL, DEFAULT_MOVIE_REQUEST, BASE_URL, BACKDROP_URL_PREFIX, POSTER_URL_PREFIX } from '../consts'
 import { CarouselMovie } from "../models/movie/carouselMovie"
 import { MoviePoster } from "../models/movie/moviePoster"
+import { CustomError } from "../models/customError"
 &nbsp;
 export const searchMovie: RequestHandler = <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
     const request<span class="cstat-no" title="statement not covered" > = {</span>
@@ -269,7 +272,7 @@ export const searchMovie: RequestHandler = <span class="fstat-no" title="functio
         }))
 <span class="cstat-no" title="statement not covered" >        res.json(MOVIES)</span>
     }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >        res.status(500).send({message: 'Error getting query from API server', error})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(500).send(new CustomError('Error getting actor data from API server', error))</span>
     })
 }
 &nbsp;
@@ -285,7 +288,7 @@ export const getMovie: RequestHandler = <span class="fstat-no" title="function n
     }).then(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {
 <span class="cstat-no" title="statement not covered" >        res.send(response.data)</span>
     }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >        res.status(500).send({message: 'Error getting movie from API server', error})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(500).send(new CustomError('Error getting movie from API server', error))</span>
     }) 
 }
 &nbsp;
@@ -307,7 +310,7 @@ export const getCarousel: RequestHandler = <span class="fstat-no" title="functio
         }))
 <span class="cstat-no" title="statement not covered" >        res.json(MOVIES)</span>
     }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >        res.status(500).send({message: 'Error getting movies from API server', error})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(500).send(new CustomError('Error getting movies from API server', error))</span>
     })
 }
 &nbsp;
@@ -328,7 +331,7 @@ export const getHomeList: RequestHandler = <span class="fstat-no" title="functio
         }))
 <span class="cstat-no" title="statement not covered" >        res.json(MOVIES)</span>
     }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >        res.status(500).send({message: 'Error getting movie list from API server', error})</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(500).send(new CustomError('Error getting movie list from API server', error));</span>
     })
 }</pre></td></tr></table></pre>
 
@@ -337,7 +340,7 @@ export const getHomeList: RequestHandler = <span class="fstat-no" title="functio
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-18T02:25:06.288Z
+                at 2024-06-18T18:04:43.268Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

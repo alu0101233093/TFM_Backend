@@ -3,6 +3,7 @@ import { RequestHandler } from "express"
 import { MOVIE_API_HEADERS, MOVIE_URL, DEFAULT_MOVIE_REQUEST, BASE_URL, BACKDROP_URL_PREFIX, POSTER_URL_PREFIX } from '../consts'
 import { CarouselMovie } from "../models/movie/carouselMovie"
 import { MoviePoster } from "../models/movie/moviePoster"
+import { CustomError } from "../models/customError"
 
 export const searchMovie: RequestHandler = (req, res) => {
     const request = {

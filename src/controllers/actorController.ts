@@ -4,6 +4,7 @@ import { BASE_URL, MOVIE_API_HEADERS, POSTER_URL_PREFIX } from "../consts"
 import { Actor } from "../models/actor/actor"
 import { ActorProfile, genderToString } from "../models/actor/actorProfile"
 import { MoviePoster } from "../models/movie/moviePoster"
+import { CustomError } from "../models/customError"
 
 
 export const getCasting: RequestHandler = (req, res) => {
