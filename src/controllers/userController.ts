@@ -12,7 +12,7 @@ const database = new FirebaseRTDB
 export const signUp: RequestHandler = (req, res) => {
     let user_request: UserFirebaseAuth = {
         ...req.body,
-        emailVerified: req.body.emailVerified === 'true',
+        emailVerified: req.body.emailVerified ?? false,
         photoURL: FB_IMAGE_DEFAULT
     }
 
@@ -46,7 +46,7 @@ export const updateData: RequestHandler = (req, res) => {
         .then((decodedIdToken) => {
             let user_request: UserFirebaseAuth = {
                 ...req.body,
-                emailVerified: decodedIdToken.email_verified == true,
+                emailVerified: decodedIdToken.email_verified ?? false,
                 photoURL: decodedIdToken.picture
             }
             if(req.file){
@@ -87,7 +87,7 @@ export const saveVerificationRequest: RequestHandler = (req, res) => {
                 uid: decodedIdToken.uid,
                 status: 'Pending',
                 user: {
-                    emailVerified: decodedIdToken.email_verified == true,
+                    emailVerified: decodedIdToken.email_verified ?? false,
                     email: decodedIdToken.email || '',
                     photoURL: decodedIdToken.picture || ''
                 },

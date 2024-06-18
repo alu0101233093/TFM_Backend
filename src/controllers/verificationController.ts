@@ -47,7 +47,7 @@ export const updateRequestStatus: RequestHandler = (req, res) => {
                 database.updateRequestStatus(requestID, newStatus)
                 .then((uid) => {
                     const newRol = newStatus == 'Approved'
-                    auth.changeUserRol(uid, newRol).then(() => {
+                    auth.changeUserRole(uid, newRol).then(() => {
                         res.status(200).send({message: 'User rol changed successfuly'})
                     }).catch((error) => {
                         res.status(500).send(error)

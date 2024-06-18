@@ -23,8 +23,7 @@ export const postReview: RequestHandler = (req, res) => {
                 uid: decodedIdToken.uid,
                 photoURL: decodedIdToken.picture
             }
-            
-            database.setReview(REVIEW, MOVIE_ID, decodedIdToken.email_verified == true)
+            database.setReview(REVIEW, MOVIE_ID, decodedIdToken.email_verified ?? false)
             .then((review_id) => {
                 res.status(201).send({message: 'Review published successfuly.', reviewId: review_id})
             }).catch((error) => {
@@ -64,7 +63,7 @@ export const deleteReview: RequestHandler = (req, res) => {
     if (idToken) {
         auth.verifyIdToken(idToken)
         .then((decodedIdToken) => {
-            database.removeReview(MOVIE_ID, REVIEW_ID, decodedIdToken.email_verified == true)
+            database.removeReview(MOVIE_ID, REVIEW_ID, decodedIdToken.email_verified ?? false)
             .then(() => {
                 res.status(200).send({message: 'Review with ID ' + REVIEW_ID + ' removed successfuly'})
             }).catch((error) => {

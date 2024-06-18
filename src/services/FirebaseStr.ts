@@ -20,19 +20,25 @@ export class FirebaseStr {
                 this.formatImage(picture)
                 .then(async (processedImageBuffer) => {
                     const fileRef = this.storageBucket.file(`users/${userId}.png`)
-
                     const stream = fileRef.createWriteStream({ metadata: { contentType: 'image/png' } })
-                    stream.on('error', (error) => {reject({message: "Error saving photo. ", error})})
+
+                    stream.on('error', (error) => {
+                        const e: CustomError = new Error('Error saving photo.');
+                        e.originalError = error;
+                        return reject(e);
+                    })
                     stream.on('finish', () => {resolve(FB_IMAGE_URL_PREFIX + userId + FB_IMAGE_URL_SUFIX)})
                     stream.end(processedImageBuffer)
                 }).catch((error) => {
-                    reject({message: "Error formating photo. ", error})
+                    const e: CustomError = new Error('Error formating photo.');
+                    e.originalError = error;
+                    return reject(e);
                 })
             }
         })
     }
 
-    private formatImage(picture: Express.Multer.File){
+    private formatImage(picture: Express.Multer.File): Promise<Buffer>{
         const sharpImage = sharp(picture.buffer)
         return sharpImage.resize({ width: 300, height: 300, fit: 'cover', position: 'center' })
         .toFormat('png').toBuffer()
@@ -44,17 +50,17 @@ export class FirebaseStr {
         .exists()
     }
 
-    public deleteProfilePic(uid: string) {
-        return new Promise<void>(async (resolve,reject) => {
-            return this.storageBucket
+    public deleteProfilePic(uid: string): Promise<void> {
+        return new Promise<void>((resolve, reject) => {
+            this.storageBucket
             .file('users/' + uid + '.png')
             .delete()
-            .then(() => resolve())
+            .then(() => {return resolve()})
             .catch((error: any) => {
                 if(error.code == 404) {
-                    resolve()
+                    return resolve()
                 } else {
-                    reject({message: "Error deleting profile picture. ", error})
+                    return reject(new Error('Error deleting profile picture.'));
                 }
             })
         })

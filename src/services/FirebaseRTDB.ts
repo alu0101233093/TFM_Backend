@@ -17,17 +17,19 @@ export class FirebaseRTDB {
         const reference = this.database.ref(critic ? 'criticReviews/' + movie_id : 'reviews/' + movie_id);
 
         return reference.push(review)
-            .then((snapshot) => {
-                const key = snapshot.key;
-                if (key) {
-                    return key;
-                } else {
-                    return Promise.reject('Failed to get key for the new review.');
-                }
-            })
-            .catch((error) => {
-                return Promise.reject(error);
-            });
+        .then((snapshot) => {
+            const key = snapshot.key;
+            if (key) {
+                return key;
+            } else {
+                return Promise.reject('Failed to get key for the new review.');
+            }
+        })
+        .catch((error) => {
+            const e: CustomError = new Error('Error saving the new review.');
+            e.originalError = error;
+            return Promise.reject(e);
+        });
     }
 
     public async getReviews(movie_id: string): Promise<AllReviews> {
@@ -45,40 +47,48 @@ export class FirebaseRTDB {
                     const criticsReviews: Record<string, Review> = criticsSnapshot.val();
                     result.critics = criticsReviews
                 }
-                return result 
+                return Promise.resolve(result)
             }).catch((error) => {
-                return Promise.reject({message: "Error getting critic reviews. ", error});
+                const e: CustomError = new Error('Error getting critic reviews.');
+                e.originalError = error;
+                return Promise.reject(e);
             });
         }).catch((error) => {
-            return Promise.reject({message: "Error getting critic reviews. ", error});
+            const e: CustomError = new Error('Error getting spectator reviews.');
+            e.originalError = error;
+            return Promise.reject(e);
         });
     }
 
-    public removeReview(movie_id: string, review_id: string, critic: boolean): Promise<void> {
+    public async removeReview(movie_id: string, review_id: string, critic: boolean): Promise<void> {
         const reviewURL = critic ? 'criticReviews' : 'reviews'
         const reference = this.database.ref(reviewURL + '/' + movie_id + '/' + review_id);
-        return reference.remove()
+        return reference.remove().catch((error) => {
+            const e: CustomError = new Error('Error deleting review.');
+            e.originalError = error;
+            return Promise.reject(e);
+        })
     }
 
     public async deleteUserReviews(uid: string): Promise<void> {
         this.deleteReviews('criticReviews', uid)
         .catch((error) => {
-            return Promise.reject({message: "Error deleting user reviews. ", error})
+            return Promise.reject(error);
         })
 
         this.deleteReviews('reviews', uid)
         .then(() => {return Promise.resolve()})
         .catch((error) => {
-            return Promise.reject({message: "Error deleting user reviews. ", error})
+            return Promise.reject(error);
         })
     }
     
     private async deleteReviews(reviewsURL: string, uid: string): Promise<void> {
         const reviewsRef = this.database.ref(reviewsURL);
     
-        return reviewsRef.once('value').then((snapshot) => {
+        return reviewsRef.once('value').then(async (snapshot) => {
             if (!snapshot.exists()) {
-                return;
+                return Promise.resolve()
             }
     
             const updates: { [key: string]: null } = {};
@@ -92,9 +102,15 @@ export class FirebaseRTDB {
                 }
             });
     
-            return this.database.ref().update(updates);
+            return this.database.ref().update(updates).catch((error) => {
+                const e: CustomError = new Error('Error deleting user review.');
+                e.originalError = error;
+                return Promise.reject(e);
+            })
         }).catch((error) => {
-            return Promise.reject(error);
+            const e: CustomError = new Error('Error finding user reviews.');
+            e.originalError = error;
+            return Promise.reject(e);
         });
     }
 
@@ -112,10 +128,12 @@ export class FirebaseRTDB {
                 });
                 return requests;
             } else {
-                return Promise.reject({message:'No requests found.'})
+                return Promise.reject('No requests found.');
             }
         }).catch((error) => {
-            return Promise.reject({message:'Error getting critic reviews ', error});
+            const e: CustomError = new Error('Error getting verification requests.');
+            e.originalError = error;
+            return Promise.reject(e);
         });
     }
 
@@ -128,14 +146,13 @@ export class FirebaseRTDB {
             if (key) {
                 return key;
             } else {
-                return Promise.reject({
-                    message: 'Error saving request.', 
-                    error: 'Failed to get key for the new request.'
-                });
+                return Promise.reject(new Error('Failed to get key for the new request.'));
             }
         })
         .catch((error) => {
-            return Promise.reject({message:'Error saving request.', error});
+            const e: CustomError = new Error('Error saving verification request.');
+            e.originalError = error;
+            return Promise.reject(e);
         });
     }
 
@@ -146,7 +163,7 @@ export class FirebaseRTDB {
             .then(async (snapshot) => {
                 const request = snapshot.val();
                 if (!request) {
-                    return Promise.reject({message:`Request ${requestID} not found.`});
+                    return Promise.reject(new Error(`Request ${requestID} not found.`));
                 }
 
                 const uid = request.uid;
@@ -161,14 +178,16 @@ export class FirebaseRTDB {
                             .then(() => {return Promise.resolve(request.uid)});
                     })
                     .catch((error) => {
-                        return Promise.reject({message:`Error moving reviews from ${sourcePath} to ${destinationPath}`, error});
+                        return Promise.reject(error);
                     });
                 } else {
                     return Promise.resolve(request.uid);
                 }
             })
             .catch((error) => {
-                return Promise.reject({message:'Error updating request.', error})
+                const e: CustomError = new Error('Error updating request.');
+                e.originalError = error;
+                return Promise.reject(e);
             });
     }
 
@@ -204,7 +223,9 @@ export class FirebaseRTDB {
             }
         })
         .catch((error) => {
-            return Promise.reject(`Error moving reviews from ${sourcePath} to ${destinationPath}: ${error.message}`);
+            const e: CustomError = new Error(`Error moving reviews from ${sourcePath} to ${destinationPath}: ${error.message}`);
+            e.originalError = error;
+            return Promise.reject(e);
         });
     }
     

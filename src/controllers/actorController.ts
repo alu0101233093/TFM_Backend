@@ -7,8 +7,9 @@ import { MoviePoster } from "../models/movie/moviePoster"
 
 
 export const getCasting: RequestHandler = (req, res) => {
-    if(!req.query.movie_id)
-        return res.status(400).send({message: 'Bad request. Movie identifier needed'})
+    if(!req.query.movie_id){
+        return Promise.reject(new Error('Bad request. Movie identifier needed'));
+    }
 
     const MOVIE_ID: string = req.query.movie_id as string
     const URL = BASE_URL + '/3/movie/' + MOVIE_ID + '/credits'
@@ -31,13 +32,15 @@ export const getCasting: RequestHandler = (req, res) => {
         }));
         return res.status(200).send(shortResponse)
     }).catch((error) => {
-        return res.status(500).send({message: 'Error getting casting from API server', error})
+        const e: CustomError = new Error('Error getting casting from API server');
+        e.originalError = error;
+        return res.status(500).send(e);
     })
 }
 
 export const getActor: RequestHandler = (req, res) => {
     if(!req.query.actor_id)
-        return res.status(400).send({message: 'Bad request. Actor identifier needed'})
+        return res.status(400).send(new Error('Bad request. Actor identifier needed'))
 
     const ACTOR_ID: string = req.query.actor_id as string
     const URL = BASE_URL + '/3/person/' + ACTOR_ID
@@ -63,13 +66,15 @@ export const getActor: RequestHandler = (req, res) => {
         };
         return res.status(200).send(actor)
     }).catch((error) => {
-        return res.status(500).send({message: 'Error getting actor data from API server', error})
+        const e: CustomError = new Error('Error getting actor data from API server');
+        e.originalError = error;
+        return res.status(500).send(e);
     })
 }
 
 export const getMoviesByActor: RequestHandler = (req, res) => {
     if (!req.query.actor_id) {
-        return res.status(400).send({ message: 'Bad request. Actor identifier needed' });
+        return res.status(400).send(new Error('Bad request. Actor identifier needed'));
     }
 
     const ACTOR_ID: string = req.query.actor_id as string;
@@ -91,6 +96,8 @@ export const getMoviesByActor: RequestHandler = (req, res) => {
 
         return res.status(200).send(movies);
     }).catch((error) => {
-        return res.status(500).send({message: 'Error getting movies from API server', error});
+        const e: CustomError = new Error('Error getting movies from API server');
+        e.originalError = error;
+        return res.status(500).send(e);
     });
 };
