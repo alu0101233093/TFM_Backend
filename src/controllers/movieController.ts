@@ -26,8 +26,7 @@ export const searchMovie: RequestHandler = (req, res) => {
         }))
         res.json(MOVIES)
     }).catch((error) => {
-        const e: CustomError = new CustomError('Error getting actor data from API server', error);
-        res.status(500).send({message: 'Error getting query from API server', error})
+        res.status(500).send(new CustomError('Error getting actor data from API server', error))
     })
 }
 
@@ -43,7 +42,7 @@ export const getMovie: RequestHandler = (req, res) => {
     }).then((response) => {
         res.send(response.data)
     }).catch((error) => {
-        res.status(500).send({message: 'Error getting movie from API server', error})
+        res.status(500).send(new CustomError('Error getting movie from API server', error))
     }) 
 }
 
@@ -65,7 +64,7 @@ export const getCarousel: RequestHandler = (_req, res) => {
         }))
         res.json(MOVIES)
     }).catch((error) => {
-        res.status(500).send({message: 'Error getting movies from API server', error})
+        res.status(500).send(new CustomError('Error getting movies from API server', error))
     })
 }
 
@@ -86,8 +85,6 @@ export const getHomeList: RequestHandler = (_req, res) => {
         }))
         res.json(MOVIES)
     }).catch((error) => {
-        const e: CustomError = new Error('Error getting movie list from API server');
-        e.originalError = error;
-        return res.status(500).send(e);
+        return res.status(500).send(new CustomError('Error getting movie list from API server', error));
     })
 }

@@ -14,7 +14,7 @@ export const getRequests: RequestHandler = (req, res) => {
         auth.verifyIdToken(idToken)
         .then((decodedIdToken) => {
             if(decodedIdToken.uid != ADMIN_UID) {
-                return res.status(401).send({message: "User logged in is not an administrator."})
+                return res.status(401).send(new CustomError('User logged is not an administrator.'))
             } else {
                 database.getVerificationRequests().then((requests: VerificationRequest[]) => {
                     res.status(200).send(requests)
@@ -26,7 +26,7 @@ export const getRequests: RequestHandler = (req, res) => {
             res.status(401).send(error)
         })
     } else {
-        res.status(400).send({message: 'IdToken not found on request'})
+        res.status(400).send(new CustomError('IdToken not found on request'))
     }
 }
 
@@ -37,7 +37,7 @@ export const updateRequestStatus: RequestHandler = (req, res) => {
         auth.verifyIdToken(idToken)
         .then((decodedIdToken) => {
             if(decodedIdToken.uid != ADMIN_UID) {
-                return res.status(401).send({message: "User logged in is not an administrator."})
+                return res.status(401).send(new CustomError('User logged is not an administrator.'))
             } else {
                 const requestID = req.body.requestID
                 const newStatus = req.body.newStatus
@@ -60,6 +60,6 @@ export const updateRequestStatus: RequestHandler = (req, res) => {
             res.status(401).send(error)
         })
     } else {
-        res.status(400).send({message: 'IdToken not found on request.'})
+        res.status(400).send(new CustomError('IdToken not found on request'))
     }
 }

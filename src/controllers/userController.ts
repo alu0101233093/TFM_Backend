@@ -27,7 +27,7 @@ export const signUp: RequestHandler = (req, res) => {
             }).catch((error) => {
                 auth.deleteUser(user_record.uid)
                 storage.deleteProfilePic(user_record.uid)
-                res.status(500).send({message: "Error saving user information. ", error})
+                res.status(500).send(new CustomError('Error saving user information.', error))
             })
         }).catch((error) => {
             auth.deleteUser(user_record.uid)
@@ -64,7 +64,7 @@ export const updateData: RequestHandler = (req, res) => {
             res.status(401).send(error)
         })
     } else {
-        res.status(400).send({message: 'IdToken not found on request'})
+        res.status(400).send(new CustomError('IdToken not found on request'))
     }
 }
 
@@ -73,7 +73,7 @@ const updateUser = async (uid: string, user: UserFirebaseAuth, res: Response) =>
     .then((_user_record) => {
         res.status(201).send({message: 'User updated'})
     }).catch((error) => {
-        res.status(400).send({message: "Error saving user information. ", error})
+        res.status(400).send(new CustomError('Error saving user information.', error))
     })
 }
 
@@ -103,7 +103,7 @@ export const saveVerificationRequest: RequestHandler = (req, res) => {
             res.status(401).send(error)
         })
     } else {
-        res.status(400).send({message: 'IdToken not found on request'})
+        res.status(400).send(new CustomError('IdToken not found on request'))
     }
 }
 
@@ -129,6 +129,6 @@ export const deleteUser: RequestHandler = (req, res) => {
             res.status(401).send(error)
         });
     } else {
-        res.status(400).send({ message: 'IdToken not found on request' })
+        res.status(400).send(new CustomError('IdToken not found on request'))
     }
 }
