@@ -23,15 +23,13 @@ export class FirebaseStr {
                     const stream = fileRef.createWriteStream({ metadata: { contentType: 'image/png' } })
 
                     stream.on('error', (error) => {
-                        const e: CustomError = new Error('Error saving photo.');
-                        e.originalError = error;
+                        const e: CustomError = new CustomError('Error saving photo.', error);
                         return reject(e);
                     })
                     stream.on('finish', () => {resolve(FB_IMAGE_URL_PREFIX + userId + FB_IMAGE_URL_SUFIX)})
                     stream.end(processedImageBuffer)
                 }).catch((error) => {
-                    const e: CustomError = new Error('Error formating photo.');
-                    e.originalError = error;
+                    const e: CustomError = new CustomError('Error formating photo.', error);
                     return reject(e);
                 })
             }
@@ -60,7 +58,7 @@ export class FirebaseStr {
                 if(error.code == 404) {
                     return resolve()
                 } else {
-                    return reject(new Error('Error deleting profile picture.'));
+                    return reject(new CustomError('Error deleting profile picture.'));
                 }
             })
         })

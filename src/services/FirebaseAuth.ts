@@ -10,8 +10,7 @@ export class FirebaseAuth {
     
         return firebaseAdminApp.auth().createUser(user)
         .catch((error) => {
-            const e: CustomError = new Error('Error creating user.');
-            e.originalError = error;
+            const e: CustomError = new CustomError('Error creating user.', error);
             return Promise.reject(e);
         })
     }
@@ -19,8 +18,7 @@ export class FirebaseAuth {
     public async verifyIdToken(idToken: string): Promise<DecodedIdToken>{
         return firebaseAdminApp.auth().verifyIdToken(idToken)
         .catch((error) => {
-            const e: CustomError = new Error('Session expired. LogIn again.');
-            e.originalError = error;
+            const e: CustomError = new CustomError('Session expired. LogIn again.', error);
             return Promise.reject(e);
         })
     }
@@ -35,8 +33,7 @@ export class FirebaseAuth {
             Promise.resolve(`User rol updated successfully.`);
         })
         .catch((error) => {
-            const e: CustomError = new Error('Error changing user role.');
-            e.originalError = error;
+            const e: CustomError = new CustomError('Error changing user role.', error);
             return Promise.reject(e);
         });
     }
@@ -44,8 +41,7 @@ export class FirebaseAuth {
     public async deleteUser(uid: string){
         return firebaseAdminApp.auth().deleteUser(uid)
         .catch((error) => {
-            const e: CustomError = new Error('Error deleting user.');
-            e.originalError = error;
+            const e: CustomError = new CustomError('Error deleting user.', error);
             return Promise.reject(e);
         })
     }

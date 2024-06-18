@@ -85,6 +85,8 @@ export const getHomeList: RequestHandler = (_req, res) => {
         }))
         res.json(MOVIES)
     }).catch((error) => {
-        res.status(500).send({message: 'Error getting movie list from API server', error})
+        const e: CustomError = new Error('Error getting movie list from API server');
+        e.originalError = error;
+        return res.status(500).send(e);
     })
 }
