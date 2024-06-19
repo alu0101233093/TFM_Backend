@@ -4,7 +4,7 @@ import { MoviePoster } from "../../src/models/movie/moviePoster";
 import { Movie } from "../../src/models/movie/movie";
 import { CarouselMovie } from "../../src/models/movie/carouselMovie";
 
-describe('GET /search', () => {
+describe('GET /movies/search', () => {
     test('Should return code 400', async () => {
         const response = await request(expressApp).get('/movies/search').send()
         expect(response.status).toBe(400)
@@ -34,7 +34,7 @@ describe('GET /search', () => {
     })
 })
 
-describe('GET /', () => {
+describe('GET /movies', () => {
     test('Should return code 400', async () => {
         const response = await request(expressApp).get('/movies').send()
         expect(response.status).toBe(400)
@@ -74,7 +74,7 @@ describe('GET /', () => {
     })
 })
 
-describe('GET /carousel', () => {
+describe('GET /movies/carousel', () => {
     test('Should return code 200', async () => {
         const response = await request(expressApp).get('/movies/carousel').send()
         expect(response.status).toBe(200)
@@ -97,7 +97,7 @@ describe('GET /carousel', () => {
     })
 })
 
-describe('GET /home-list', () => {
+describe('GET /movies/home-list', () => {
     test('Should return code 200', async () => {
         const response = await request(expressApp).get('/movies/home-list').send()
         expect(response.status).toBe(200)

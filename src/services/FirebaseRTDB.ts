@@ -23,7 +23,7 @@ export class FirebaseRTDB {
             if (key) {
                 return key;
             } else {
-                return Promise.reject('Failed to get key for the new review.');
+                return Promise.reject(new CustomError('Failed to get key for the new review.'));
             }
         })
         .catch((error) => {
@@ -65,13 +65,13 @@ export class FirebaseRTDB {
 
     public async deleteUserReviews(uid: string): Promise<void> {
         this.deleteReviews('criticReviews', uid)
-        .catch((error) => {
+        .catch((error: CustomError) => {
             return Promise.reject(error);
         })
 
         this.deleteReviews('reviews', uid)
         .then(() => {return Promise.resolve()})
-        .catch((error) => {
+        .catch((error: CustomError) => {
             return Promise.reject(error);
         })
     }
@@ -117,7 +117,7 @@ export class FirebaseRTDB {
                 });
                 return requests;
             } else {
-                return Promise.reject('No requests found.');
+                return Promise.reject(new CustomError('No requests found.'));
             }
         }).catch((error) => {
             return Promise.reject(new CustomError('Error getting verification requests.', error));
@@ -162,7 +162,7 @@ export class FirebaseRTDB {
                         return reference.update({ status: newStatus })
                             .then(() => {return Promise.resolve(request.uid)});
                     })
-                    .catch((error) => {
+                    .catch((error: CustomError) => {
                         return Promise.reject(error);
                     });
                 } else {

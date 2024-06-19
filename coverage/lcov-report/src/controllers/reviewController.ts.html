@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">26.82% </span>
+                <span class="strong">39.02% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/41</span>
+                <span class='fraction'>16/41</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">21.73% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/23</span>
+                <span class='fraction'>5/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">7.69% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>1/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">21.05% </span>
+                <span class="strong">34.21% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/38</span>
+                <span class='fraction'>13/38</span>
             </div>
         
             
@@ -143,20 +143,20 @@
 <a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -176,24 +176,24 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -227,13 +227,13 @@ import { CustomError } from "../models/customError"
 const database = new FirebaseRTDB
 const auth = new FirebaseAuth
 &nbsp;
-export const postReview: RequestHandler = <span class="fstat-no" title="function not covered" >(r</span>eq, res) =&gt; {
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!req.query.movie_id)</span>
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send(new CustomError('Bad request. Movie identifier needed'))</span>
+export const postReview: RequestHandler = (req, res) =&gt; {
+    if (!req.query.movie_id)
+        return res.status(400).send(new CustomError('Bad request. Movie identifier needed'))
 &nbsp;
-    const idToken = <span class="cstat-no" title="statement not covered" >req.headers.authorization?.split(' ')[1]</span>
+    const idToken = req.headers.authorization<span class="branch-1 cbranch-no" title="branch not covered" >?.split(' ')[1]</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    if (idToken) {</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (idToken) {
 <span class="cstat-no" title="statement not covered" >        auth.verifyIdToken(idToken)</span>
         .then(<span class="fstat-no" title="function not covered" >(d</span>ecodedIdToken) =&gt; {
             const MOVIE_ID: string = <span class="cstat-no" title="statement not covered" >req.query.movie_id as string</span>
@@ -253,7 +253,7 @@ export const postReview: RequestHandler = <span class="fstat-no" title="function
 <span class="cstat-no" title="statement not covered" >            return res.status(401).send(error)</span>
         })
     } else {
-<span class="cstat-no" title="statement not covered" >        return res.status(400).send(new CustomError('IdToken not found on request'))</span>
+        return res.status(400).send(new CustomError('IdToken not found on request'))
     }
 }
 &nbsp;
@@ -301,7 +301,7 @@ export const deleteReview: RequestHandler = <span class="fstat-no" title="functi
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-19T02:52:03.885Z
+                at 2024-06-19T03:48:16.367Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
