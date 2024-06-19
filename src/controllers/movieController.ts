@@ -4,6 +4,7 @@ import { MOVIE_API_HEADERS, MOVIE_URL, DEFAULT_MOVIE_REQUEST, BASE_URL, BACKDROP
 import { CarouselMovie } from "../models/movie/carouselMovie"
 import { MoviePoster } from "../models/movie/moviePoster"
 import { CustomError } from "../models/customError"
+import { Movie } from "../models/movie/movie"
 
 export const searchMovie: RequestHandler = (req, res) => {
     if(!req.query.q){
@@ -46,7 +47,8 @@ export const getMovie: RequestHandler = (req, res) => {
     get(URL, {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
-        res.send(response.data)
+        const movie: Movie = response.data
+        res.send(movie)
     }).catch((error) => {
         return res.status(500).send(new CustomError('Error getting movie from API server', error))
     }) 
