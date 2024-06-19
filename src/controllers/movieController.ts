@@ -6,6 +6,10 @@ import { MoviePoster } from "../models/movie/moviePoster"
 import { CustomError } from "../models/customError"
 
 export const searchMovie: RequestHandler = (req, res) => {
+    if(!req.query.q){
+        return res.status(400).send(new CustomError('Bad request. Movie identifier needed'))
+    }
+
     const request = {
         ...DEFAULT_MOVIE_REQUEST,
         query: req.query.q,
@@ -27,13 +31,14 @@ export const searchMovie: RequestHandler = (req, res) => {
         }))
         res.json(MOVIES)
     }).catch((error) => {
-        res.status(500).send(new CustomError('Error getting actor data from API server', error))
+        return res.status(500).send(new CustomError('Error getting actor data from API server', error))
     })
 }
 
 export const getMovie: RequestHandler = (req, res) => {
-    if(!req.query.movie_id)
-        res.status(400).send({message: 'Bad request. Movie identifier needed'})
+    if(!req.query.movie_id){
+        return res.status(400).send(new CustomError('Bad request. Movie identifier needed'))
+    }
 
     const MOVIE_ID: string = req.query.movie_id as string
     const URL = BASE_URL + '/3/movie/' + MOVIE_ID
@@ -43,7 +48,7 @@ export const getMovie: RequestHandler = (req, res) => {
     }).then((response) => {
         res.send(response.data)
     }).catch((error) => {
-        res.status(500).send(new CustomError('Error getting movie from API server', error))
+        return res.status(500).send(new CustomError('Error getting movie from API server', error))
     }) 
 }
 
@@ -65,7 +70,7 @@ export const getCarousel: RequestHandler = (_req, res) => {
         }))
         res.json(MOVIES)
     }).catch((error) => {
-        res.status(500).send(new CustomError('Error getting movies from API server', error))
+        return res.status(500).send(new CustomError('Error getting movies from API server', error))
     })
 }
 

@@ -2,7 +2,8 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testMatch: [
-    '**/tests/**/*.spec.ts',
-  ]
+  testResultsProcessor: 'jest-sonar-reporter',
+  detectOpenHandles: true,
+  testMatch: ['**/tests/**/*.spec.ts'],
+  collectCoverage: true,
 };

@@ -10,7 +10,7 @@ const auth = new FirebaseAuth
 
 export const postReview: RequestHandler = (req, res) => {
     if (!req.query.movie_id)
-        res.status(400).send(new CustomError('Bad request. Movie identifier needed'))
+        return res.status(400).send(new CustomError('Bad request. Movie identifier needed'))
 
     const idToken = req.headers.authorization?.split(' ')[1]
 
@@ -26,34 +26,34 @@ export const postReview: RequestHandler = (req, res) => {
             }
             database.setReview(REVIEW, MOVIE_ID, decodedIdToken.email_verified ?? false)
             .then((review_id) => {
-                res.status(201).send({message: 'Review published successfuly.', reviewId: review_id})
+                return res.status(201).send({message: 'Review published successfuly.', reviewId: review_id})
             }).catch((error) => {
-                res.status(500).send(error)
+                return res.status(500).send(error)
             })
         }).catch((error) => {
-            res.status(401).send(error)
+            return res.status(401).send(error)
         })
     } else {
-        res.status(400).send(new CustomError('IdToken not found on request'))
+        return res.status(400).send(new CustomError('IdToken not found on request'))
     }
 }
 
 export const getReviews: RequestHandler = (req, res) => {
     if (!req.query.movie_id)
-        res.status(400).send(new CustomError('Bad request. Movie identifier needed'))
+        return res.status(400).send(new CustomError('Bad request. Movie identifier needed'))
 
     const MOVIE_ID: string = req.query.movie_id as string
     database.getReviews(MOVIE_ID)
     .then((reviews: AllReviews) => {
-        res.status(200).json(reviews)
+        return res.status(200).json(reviews)
     }).catch((error) => {
-        res.status(500).send(error)
+        return res.status(500).send(error)
     })
 }
 
 export const deleteReview: RequestHandler = (req, res) => {
     if (!req.query.movie_id)
-        res.status(400).send(new CustomError('Bad request. Movie identifier needed'))
+        return res.status(400).send(new CustomError('Bad request. Movie identifier needed'))
 
     const MOVIE_ID: string = req.query.movie_id as string
     const REVIEW_ID: string = req.query.review_id as string
@@ -65,14 +65,14 @@ export const deleteReview: RequestHandler = (req, res) => {
         .then((decodedIdToken) => {
             database.removeReview(MOVIE_ID, REVIEW_ID, decodedIdToken.email_verified ?? false)
             .then(() => {
-                res.status(200).send({message: 'Review with ID ' + REVIEW_ID + ' removed successfuly'})
+                return res.status(200).send({message: 'Review with ID ' + REVIEW_ID + ' removed successfuly'})
             }).catch((error) => {
-                res.status(500).send(error)
+                return res.status(500).send(error)
             })
         }).catch((error) => {
-            res.status(401).send(error)
+            return res.status(401).send(error)
         })
     } else {
-        res.status(400).send(new CustomError('IdToken not found on request'))
+        return res.status(400).send(new CustomError('IdToken not found on request'))
     }
 }

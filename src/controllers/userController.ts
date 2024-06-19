@@ -24,18 +24,18 @@ export const signUp: RequestHandler = (req, res) => {
             user_request.photoURL = image_url
             auth.updateUser(user_record.uid, user_request)
             .then(() => {
-                res.status(201).send({message: 'User signed up'})
+                return res.status(201).send({message: 'User signed up'})
             }).catch((error) => {
                 auth.deleteUser(user_record.uid)
                 storage.deleteProfilePic(user_record.uid)
-                res.status(500).send(new CustomError('Error saving user information.', error))
+                return res.status(500).send(new CustomError('Error saving user information.', error))
             })
         }).catch((error) => {
             auth.deleteUser(user_record.uid)
-            res.status(400).send(error)
+            return res.status(400).send(error)
         })
     }).catch((error) => {
-        res.status(400).send(error)
+        return res.status(400).send(error)
     })
 }
 
@@ -56,25 +56,25 @@ export const updateData: RequestHandler = (req, res) => {
                     user_request.photoURL = url
                     updateUser(decodedIdToken.uid, user_request, res)
                 }).catch((error) => {
-                    res.status(500).send(error)
+                    return res.status(500).send(error)
                 })
             } else {
                 updateUser(decodedIdToken.uid, user_request, res)
             }
         }).catch((error) => {
-            res.status(401).send(error)
+            return res.status(401).send(error)
         })
     } else {
-        res.status(400).send(new CustomError('IdToken not found on request'))
+        return res.status(400).send(new CustomError('IdToken not found on request'))
     }
 }
 
 const updateUser = async (uid: string, user: UserFirebaseAuth, res: Response) => {
     return auth.updateUser(uid, user)
     .then((_user_record) => {
-        res.status(201).send({message: 'User updated'})
+        return res.status(201).send({message: 'User updated'})
     }).catch((error) => {
-        res.status(400).send(new CustomError('Error saving user information.', error))
+        return res.status(400).send(new CustomError('Error saving user information.', error))
     })
 }
 
@@ -96,15 +96,15 @@ export const saveVerificationRequest: RequestHandler = (req, res) => {
             }
             database.setVerificationRequest(newRequest)
             .then((requestID) => {
-                res.status(201).send({message: 'Saved request with ID: ' + requestID})
+                return res.status(201).send({message: 'Saved request with ID: ' + requestID})
             }).catch((error) => {
-                res.status(500).send(error)
+                return res.status(500).send(error)
             })
         }).catch((error) => {
-            res.status(401).send(error)
+            return res.status(401).send(error)
         })
     } else {
-        res.status(400).send(new CustomError('IdToken not found on request'))
+        return res.status(400).send(new CustomError('IdToken not found on request'))
     }
 }
 
@@ -120,16 +120,16 @@ export const deleteUser: RequestHandler = (req, res) => {
                 database.deleteUserReviews(decodedIdToken.uid)
             ])
             .then(() => {
-                res.status(200).send({message: 'User deleted successfuly'})
+                return res.status(200).send({message: 'User deleted successfuly'})
             })
             .catch((error) => {
-                res.status(500).send(error)
+                return res.status(500).send(error)
             });
         })
         .catch((error) => {
-            res.status(401).send(error)
+            return res.status(401).send(error)
         });
     } else {
-        res.status(400).send(new CustomError('IdToken not found on request'))
+        return res.status(400).send(new CustomError('IdToken not found on request'))
     }
 }

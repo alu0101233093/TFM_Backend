@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "start": "node build/index.js",
     "tscstart": "tsc && node build/index.js",
-    "test": "set NODE_OPTIONS=--experimental-vm-modules && set CI=true && jest --coverage --testResultsProcessor=jest-sonar-reporter --detectOpenHandles"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",

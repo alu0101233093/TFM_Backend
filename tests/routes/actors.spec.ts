@@ -5,12 +5,18 @@ import { ActorProfile } from "../../src/models/actor/actorProfile";
 import { MoviePoster } from "../../src/models/movie/moviePoster";
 
 describe('GET /actors/casting', () => {
+    test('Should return code 400', async () => {
+        const response = await request(expressApp).get('/actors/casting').send()
+    
+        expect(response.status).toBe(400)
+    })
+    
     test('Should return code 500', async () => {
         const response = await request(expressApp).get('/actors/casting')
         .query({movie_id: -1}).send()
 
         expect(response.status).toBe(500)
-    })
+    })    
 
     test('Should return code 200', async () => {
         const response = await request(expressApp).get('/actors/casting')
