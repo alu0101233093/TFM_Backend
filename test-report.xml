@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\actors.spec.ts">
-    <testCase name="GET /actors/casting Should return code 500" duration="990"/>
-    <testCase name="GET /actors/casting Should return code 200" duration="207"/>
-    <testCase name="GET /actors/casting Should return Actor[]" duration="103"/>
-    <testCase name="GET /actors Should return code 400" duration="39"/>
-    <testCase name="GET /actors Should return code 500" duration="196"/>
-    <testCase name="GET /actors Should return code 200" duration="108"/>
-    <testCase name="GET /actors Should return ActorProfile" duration="87"/>
-    <testCase name="GET /actors/movies Should return code 400" duration="33"/>
-    <testCase name="GET /actors/movies Should return code 500" duration="196"/>
-    <testCase name="GET /actors/movies Should return code 200" duration="207"/>
-    <testCase name="GET /actors/movies Should return Movies[]" duration="143"/>
+    <testCase name="GET /actors/casting Should return code 400" duration="159"/>
+    <testCase name="GET /actors/casting Should return code 500" duration="474"/>
+    <testCase name="GET /actors/casting Should return code 200" duration="82"/>
+    <testCase name="GET /actors/casting Should return Actor[]" duration="94"/>
+    <testCase name="GET /actors Should return code 400" duration="45"/>
+    <testCase name="GET /actors Should return code 500" duration="287"/>
+    <testCase name="GET /actors Should return code 200" duration="62"/>
+    <testCase name="GET /actors Should return ActorProfile" duration="66"/>
+    <testCase name="GET /actors/movies Should return code 400" duration="28"/>
+    <testCase name="GET /actors/movies Should return code 500" duration="180"/>
+    <testCase name="GET /actors/movies Should return code 200" duration="69"/>
+    <testCase name="GET /actors/movies Should return Movies[]" duration="95"/>
+  </file>
+  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\movies.spec.ts">
+    <testCase name="GET /search Should return code 400" duration="42"/>
+    <testCase name="GET /search Should return code 200" duration="89"/>
+    <testCase name="GET /search Should return MoviePoster[]" duration="81"/>
   </file>
 </testExecutions>

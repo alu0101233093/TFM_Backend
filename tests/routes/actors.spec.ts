@@ -7,7 +7,6 @@ import { MoviePoster } from "../../src/models/movie/moviePoster";
 describe('GET /actors/casting', () => {
     test('Should return code 400', async () => {
         const response = await request(expressApp).get('/actors/casting').send()
-    
         expect(response.status).toBe(400)
     })
     
@@ -37,9 +36,10 @@ describe('GET /actors/casting', () => {
                 id: expect.any(Number),
                 known_for_department: expect.any(String),
                 name: expect.any(String),
-                profile_path: expect.any(String),
                 character: expect.any(String)
             });
+
+            actor.profile_path ? expect(actor.profile_path).toEqual(expect.any(String)) : expect(actor.profile_path).toEqual(null)
         });
     })
 })
@@ -73,12 +73,13 @@ describe('GET /actors', () => {
             name: expect.any(String),
             biography: expect.any(String),
             birthday: expect.any(String),
-            deathday: expect.any(String),
             gender: expect.any(String),
             known_for_department: expect.any(String),
-            place_of_birth: expect.any(String),
-            profile_path: expect.any(String)
+            place_of_birth: expect.any(String)
         });
+
+        actor.deathday ? expect(actor.deathday).toEqual(expect.any(String)) : expect(actor.deathday).toEqual(null)
+        actor.profile_path ? expect(actor.profile_path).toEqual(expect.any(String)) : expect(actor.profile_path).toEqual(null)
     })
 })
 

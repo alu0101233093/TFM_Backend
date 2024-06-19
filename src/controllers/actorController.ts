@@ -9,7 +9,7 @@ import { CustomError } from "../models/customError"
 
 export const getCasting: RequestHandler = (req, res) => {
     if(!req.query.movie_id){
-        return Promise.reject(new CustomError('Bad request. Movie identifier needed'));
+        return res.status(400).send(new CustomError('Bad request. Movie identifier needed'));
     }
 
     const MOVIE_ID: string = req.query.movie_id as string

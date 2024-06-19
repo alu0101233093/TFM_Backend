@@ -199,18 +199,18 @@
 <a name='L134'></a><a href='#L134'>134</a>
 <a name='L135'></a><a href='#L135'>135</a>
 <a name='L136'></a><a href='#L136'>136</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -239,7 +239,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -269,7 +269,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -278,7 +278,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -308,7 +308,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -359,18 +359,18 @@ export const signUp: RequestHandler = <span class="fstat-no" title="function not
 <span class="cstat-no" title="statement not covered" >            user_request.photoURL = image_url</span>
 <span class="cstat-no" title="statement not covered" >            auth.updateUser(user_record.uid, user_request)</span>
             .then(<span class="fstat-no" title="function not covered" >() =</span>&gt; {
-<span class="cstat-no" title="statement not covered" >                res.status(201).send({message: 'User signed up'})</span>
+<span class="cstat-no" title="statement not covered" >                return res.status(201).send({message: 'User signed up'})</span>
             }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >                auth.deleteUser(user_record.uid)</span>
 <span class="cstat-no" title="statement not covered" >                storage.deleteProfilePic(user_record.uid)</span>
-<span class="cstat-no" title="statement not covered" >                res.status(500).send(new CustomError('Error saving user information.', error))</span>
+<span class="cstat-no" title="statement not covered" >                return res.status(500).send(new CustomError('Error saving user information.', error))</span>
             })
         }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
 <span class="cstat-no" title="statement not covered" >            auth.deleteUser(user_record.uid)</span>
-<span class="cstat-no" title="statement not covered" >            res.status(400).send(error)</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(400).send(error)</span>
         })
     }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send(error)</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(400).send(error)</span>
     })
 }
 &nbsp;
@@ -391,25 +391,25 @@ export const updateData: RequestHandler = <span class="fstat-no" title="function
 <span class="cstat-no" title="statement not covered" >                    user_request.photoURL = url</span>
 <span class="cstat-no" title="statement not covered" >                    updateUser(decodedIdToken.uid, user_request, res)</span>
                 }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >                    res.status(500).send(error)</span>
+<span class="cstat-no" title="statement not covered" >                    return res.status(500).send(error)</span>
                 })
             } else {
 <span class="cstat-no" title="statement not covered" >                updateUser(decodedIdToken.uid, user_request, res)</span>
             }
         }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            res.status(401).send(error)</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(401).send(error)</span>
         })
     } else {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('IdToken not found on request'))</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(400).send(new CustomError('IdToken not found on request'))</span>
     }
 }
 &nbsp;
 const updateUser = <span class="fstat-no" title="function not covered" >async (u</span>id: string, user: UserFirebaseAuth, res: Response) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span>
 <span class="cstat-no" title="statement not covered" >    return auth.updateUser(uid, user)</span>
     .then(<span class="fstat-no" title="function not covered" >(_</span>user_record) =&gt; {
-<span class="cstat-no" title="statement not covered" >        res.status(201).send({message: 'User updated'})</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(201).send({message: 'User updated'})</span>
     }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('Error saving user information.', error))</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(400).send(new CustomError('Error saving user information.', error))</span>
     })
 }
 &nbsp;
@@ -431,15 +431,15 @@ export const saveVerificationRequest: RequestHandler = <span class="fstat-no" ti
             }
 <span class="cstat-no" title="statement not covered" >            database.setVerificationRequest(newRequest)</span>
             .then(<span class="fstat-no" title="function not covered" >(r</span>equestID) =&gt; {
-<span class="cstat-no" title="statement not covered" >                res.status(201).send({message: 'Saved request with ID: ' + requestID})</span>
+<span class="cstat-no" title="statement not covered" >                return res.status(201).send({message: 'Saved request with ID: ' + requestID})</span>
             }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >                res.status(500).send(error)</span>
+<span class="cstat-no" title="statement not covered" >                return res.status(500).send(error)</span>
             })
         }).catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            res.status(401).send(error)</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(401).send(error)</span>
         })
     } else {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('IdToken not found on request'))</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(400).send(new CustomError('IdToken not found on request'))</span>
     }
 }
 &nbsp;
@@ -455,17 +455,17 @@ export const deleteUser: RequestHandler = <span class="fstat-no" title="function
                 database.deleteUserReviews(decodedIdToken.uid)
             ])
             .then(<span class="fstat-no" title="function not covered" >() =</span>&gt; {
-<span class="cstat-no" title="statement not covered" >                res.status(200).send({message: 'User deleted successfuly'})</span>
+<span class="cstat-no" title="statement not covered" >                return res.status(200).send({message: 'User deleted successfuly'})</span>
             })
             .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >                res.status(500).send(error)</span>
+<span class="cstat-no" title="statement not covered" >                return res.status(500).send(error)</span>
             });
         })
         .catch(<span class="fstat-no" title="function not covered" >(e</span>rror) =&gt; {
-<span class="cstat-no" title="statement not covered" >            res.status(401).send(error)</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(401).send(error)</span>
         });
     } else {
-<span class="cstat-no" title="statement not covered" >        res.status(400).send(new CustomError('IdToken not found on request'))</span>
+<span class="cstat-no" title="statement not covered" >        return res.status(400).send(new CustomError('IdToken not found on request'))</span>
     }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -475,7 +475,7 @@ export const deleteUser: RequestHandler = <span class="fstat-no" title="function
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-06-18T23:52:44.473Z
+                at 2024-06-19T02:34:14.042Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
