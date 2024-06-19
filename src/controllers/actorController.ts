@@ -14,7 +14,7 @@ export const getCasting: RequestHandler = (req, res) => {
 
     const MOVIE_ID: string = req.query.movie_id as string
     const URL = BASE_URL + '/3/movie/' + MOVIE_ID + '/credits'
-
+    
     get(URL, {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
@@ -29,7 +29,7 @@ export const getCasting: RequestHandler = (req, res) => {
             POSTER_URL_PREFIX + actor.profile_path :
             actor.profile_path
         ),
-          character: actor.character,
+          character: actor.character
         }));
         return res.status(200).send(shortResponse)
     }).catch((error) => {

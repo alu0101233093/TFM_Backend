@@ -2,8 +2,8 @@ export class CustomError extends Error {
     originalError?: any;
 
     constructor(message: string, originalError?: any) {
-        super(message);
-        this.name = 'CustomError';
+        super()
+        this.name = message;
         this.originalError = originalError;
         
         if (Error.captureStackTrace) {

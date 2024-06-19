@@ -3,32 +3,56 @@ import request from 'supertest'
 import { Actor } from "../../src/models/actor/actor";
 import { ActorProfile } from "../../src/models/actor/actorProfile";
 import { MoviePoster } from "../../src/models/movie/moviePoster";
+import MockAdapter from "axios-mock-adapter";
+import axios from "axios";
+import { BASE_URL } from "../../src/consts";
+import { ActorArrayResponse, ActorProfilesResponse } from "../mockResponses/mockAxiosResponses";
 
 describe('GET /actors/casting', () => {
+    let mock: MockAdapter;
+
+    beforeAll(() => {
+        mock = new MockAdapter(axios);
+    });
+
+    afterEach(() => {
+        mock.reset();
+    });
+
+    afterAll(() => {
+        mock.restore();
+    });
+
     test('Should return code 400', async () => {
-        const response = await request(expressApp).get('/actors/casting').send()
+        const response = await request(expressApp).get('/actors/casting')
         expect(response.status).toBe(400)
     })
     
     test('Should return code 500', async () => {
+        mock.onGet(BASE_URL + '/3/movie/558/credits').reply(500, 'API server not working')
         const response = await request(expressApp).get('/actors/casting')
-        .query({movie_id: -1}).send()
+        .query({movie_id: 558})
 
         expect(response.status).toBe(500)
     })    
 
     test('Should return code 200', async () => {
+        let axiosResponse = ActorArrayResponse
+        mock.onGet(BASE_URL + '/3/movie/558/credits').reply(200, axiosResponse)
         const response = await request(expressApp).get('/actors/casting')
-        .query({movie_id: 558}).send()
+        .query({movie_id: 558})
 
         expect(response.status).toBe(200)
     })
 
     test('Should return Actor[]', async () => {
+        let axiosResponse = ActorArrayResponse
+        
+        mock.onGet(BASE_URL + '/3/movie/558/credits').reply(200, axiosResponse)
         const response = await request(expressApp).get('/actors/casting')
-        .query({movie_id: 558}).send()
+        .query({movie_id: 558})
 
-        const actors: Actor[] = JSON.parse(response.text);
+        const actors: Actor[] = response.body;
         expect(Array.isArray(actors)).toBe(true);
 
         actors.forEach(actor => {
@@ -45,26 +69,46 @@ describe('GET /actors/casting', () => {
 })
 
 describe('GET /actors', () => {
+    let mock: MockAdapter;
+
+    beforeAll(() => {
+        mock = new MockAdapter(axios);
+    });
+
+    afterEach(() => {
+        mock.reset();
+    });
+
+    afterAll(() => {
+        mock.restore();
+    });
+
     test('Should return code 400', async () => {
-        const response = await request(expressApp).get('/actors').send()
+        const response = await request(expressApp).get('/actors')
         expect(response.status).toBe(400)
     })
 
     test('Should return code 500', async () => {
+        mock.onGet(BASE_URL + '/3/person/194').reply(500, 'API server not working')
         const response = await request(expressApp).get('/actors')
-        .query({actor_id: -1}).send()
+        .query({actor_id: 194})
         expect(response.status).toBe(500)
     })
 
     test('Should return code 200', async () => {
+        let axiosResponse = ActorProfilesResponse
+        mock.onGet(BASE_URL + '/3/person/194').reply(200, axiosResponse)
         const response = await request(expressApp).get('/actors')
-        .query({actor_id: 194}).send()
+        .query({actor_id: 194})
         expect(response.status).toBe(200)
     })
 
     test('Should return ActorProfile', async () => {
+        let axiosResponse = ActorProfilesResponse
+        mock.onGet(BASE_URL + '/3/person/194').reply(200, axiosResponse)
+
         const response = await request(expressApp).get('/actors')
-        .query({actor_id: 194}).send()
+        .query({actor_id: 194})
 
         const actor: ActorProfile = JSON.parse(response.text);
 
@@ -85,25 +129,25 @@ describe('GET /actors', () => {
 
 describe('GET /actors/movies', () => {
     test('Should return code 400', async () => {
-        const response = await request(expressApp).get('/actors/movies').send()
+        const response = await request(expressApp).get('/actors/movies')
         expect(response.status).toBe(400)
     })
 
     test('Should return code 500', async () => {
         const response = await request(expressApp).get('/actors/movies')
-        .query({actor_id: -1}).send()
+        .query({actor_id: -1})
         expect(response.status).toBe(500)
     })
 
     test('Should return code 200', async () => {
         const response = await request(expressApp).get('/actors/movies')
-        .query({actor_id: 194}).send()
+        .query({actor_id: 194})
         expect(response.status).toBe(200)
     })
 
     test('Should return Movies[]', async () => {
         const response = await request(expressApp).get('/actors/movies')
-        .query({actor_id: 194}).send()
+        .query({actor_id: 194})
 
         const movies: MoviePoster[] = JSON.parse(response.text);
         expect(Array.isArray(movies)).toBe(true);

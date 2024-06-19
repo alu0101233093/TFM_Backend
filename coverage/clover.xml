@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1718768896580" clover="3.2.0">
-  <project timestamp="1718768896580" name="All files">
-    <metrics statements="430" coveredstatements="193" conditionals="163" coveredconditionals="37" methods="149" coveredmethods="27" elements="742" coveredelements="257" complexity="0" loc="430" ncloc="430" packages="7" files="18" classes="18"/>
+<coverage generated="1718834327252" clover="3.2.0">
+  <project timestamp="1718834327252" name="All files">
+    <metrics statements="432" coveredstatements="195" conditionals="163" coveredconditionals="37" methods="149" coveredmethods="27" elements="744" coveredelements="259" complexity="0" loc="432" ncloc="432" packages="8" files="19" classes="19"/>
     <package name="src">
       <metrics statements="35" coveredstatements="35" conditionals="30" coveredconditionals="16" methods="0" coveredmethods="0"/>
       <file name="app.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\app.ts">
@@ -61,7 +61,7 @@
         <line num="16" count="3" type="stmt"/>
         <line num="18" count="3" type="stmt"/>
         <line num="21" count="2" type="stmt"/>
-        <line num="23" count="60" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
         <line num="34" count="2" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
         <line num="40" count="3" type="stmt"/>
@@ -277,9 +277,9 @@
         <metrics statements="7" coveredstatements="3" conditionals="5" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="13" count="3" type="stmt"/>
         <line num="14" count="2" type="cond" truecount="1" falsecount="4"/>
-        <line num="15" count="0" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
-        <line num="17" count="2" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
       </file>
@@ -505,6 +505,14 @@
         <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="58" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="tests.mockResponses">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="mockAxiosResponses.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\mockResponses\mockAxiosResponses.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
       </file>
     </package>
   </project>
