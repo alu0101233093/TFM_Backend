@@ -13,8 +13,7 @@ export const FB_IMAGE_URL_PREFIX = process.env.FB_IMAGE_URL_PREFIX || 'https://f
 export const FB_IMAGE_URL_SUFIX = process.env.FB_IMAGE_URL_SUFIX || '.png?alt=media'
 
 export const DEFAULT_MOVIE_REQUEST = {
-    include_adult: process.env.DEFAULT_MOVIE_REQUEST_INCLUDE_ADULT === 'true',
-    language: process.env.DEFAULT_MOVIE_REQUEST_LANGUAGE || 'es-ES'
+    include_adult: process.env.DEFAULT_MOVIE_REQUEST_INCLUDE_ADULT === 'true'
 }
 
 export const MOVIE_API_HEADERS = {

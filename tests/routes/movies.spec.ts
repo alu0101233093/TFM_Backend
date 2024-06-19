@@ -3,22 +3,50 @@ import request from 'supertest'
 import { MoviePoster } from "../../src/models/movie/moviePoster";
 import { Movie } from "../../src/models/movie/movie";
 import { CarouselMovie } from "../../src/models/movie/carouselMovie";
+import MockAdapter from "axios-mock-adapter";
+import axios from "axios";
+import { BASE_URL, MOVIE_URL } from "../../src/consts";
+import { GetCarouselResponse, GetMovieResponse, SearchMovieResponse } from "../mockResponses/mockAxiosResponses";
+
+let mock: MockAdapter;
 
 describe('GET /movies/search', () => {
+    beforeAll(() => {
+        mock = new MockAdapter(axios);
+    });
+
+    afterEach(() => {
+        mock.reset();
+    });
+
+    afterAll(() => {
+        mock.restore();
+    });
+
     test('Should return code 400', async () => {
-        const response = await request(expressApp).get('/movies/search').send()
+        const response = await request(expressApp).get('/movies/search')
         expect(response.status).toBe(400)
     })
 
-    test('Should return code 200', async () => {
+    test('Should return code 500', async () => {
+        mock.onGet(MOVIE_URL).reply(500, 'API server not working')
         const response = await request(expressApp).get('/movies/search')
-        .query({q: 'Inception'}).send()
+        .query({q: 'Inception'})
+        expect(response.status).toBe(500)
+    })
+
+    test('Should return code 200', async () => {
+        mock.onGet(MOVIE_URL).reply(200, SearchMovieResponse)
+        const response = await request(expressApp).get('/movies/search')
+        .query({q: 'Inception'})
         expect(response.status).toBe(200)
     })
 
     test('Should return MoviePoster[]', async () => {
+        mock.onGet(MOVIE_URL).reply(200, SearchMovieResponse)
+
         const response = await request(expressApp).get('/movies/search')
-        .query({q: 'Inception'}).send()
+        .query({q: 'Inception'})
 
         const movies: MoviePoster[] = JSON.parse(response.text);
         expect(Array.isArray(movies)).toBe(true);
@@ -35,20 +63,41 @@ describe('GET /movies/search', () => {
 })
 
 describe('GET /movies', () => {
+    beforeAll(() => {
+        mock = new MockAdapter(axios);
+    });
+
+    afterEach(() => {
+        mock.reset();
+    });
+
+    afterAll(() => {
+        mock.restore();
+    });
+
     test('Should return code 400', async () => {
-        const response = await request(expressApp).get('/movies').send()
+        const response = await request(expressApp).get('/movies')
         expect(response.status).toBe(400)
     })
 
-    test('Should return code 200', async () => {
+    test('Should return code 500', async () => {
+        mock.onGet(BASE_URL + '/3/movie/558').reply(500, 'API server not working')
         const response = await request(expressApp).get('/movies')
-        .query({movie_id: 558}).send()
+        .query({movie_id: 558})
+        expect(response.status).toBe(500)
+    })
+
+    test('Should return code 200', async () => {
+        mock.onGet(BASE_URL + '/3/movie/558').reply(200, GetMovieResponse)
+        const response = await request(expressApp).get('/movies')
+        .query({movie_id: 558})
         expect(response.status).toBe(200)
     })
 
     test('Should return Movie', async () => {
+        mock.onGet(BASE_URL + '/3/movie/558').reply(200, GetMovieResponse)
         const response = await request(expressApp).get('/movies')
-        .query({movie_id: 558}).send()
+        .query({movie_id: 558})
 
         const movie: Movie = JSON.parse(response.text);
 
@@ -75,13 +124,34 @@ describe('GET /movies', () => {
 })
 
 describe('GET /movies/carousel', () => {
+    beforeAll(() => {
+        mock = new MockAdapter(axios);
+    });
+
+    afterEach(() => {
+        mock.reset();
+    });
+
+    afterAll(() => {
+        mock.restore();
+    });
+
+    test('Should return code 500', async () => {
+        mock.onGet(BASE_URL + '/3/discover/movie').reply(500, 'API server not working')
+        const response = await request(expressApp).get('/movies/carousel')
+        .query({movie_id: 558})
+        expect(response.status).toBe(500)
+    })
+
     test('Should return code 200', async () => {
-        const response = await request(expressApp).get('/movies/carousel').send()
+        mock.onGet(BASE_URL + '/3/discover/movie').reply(200, GetCarouselResponse)
+        const response = await request(expressApp).get('/movies/carousel')
         expect(response.status).toBe(200)
     })
 
     test('Should return MoviePoster[]', async () => {
-        const response = await request(expressApp).get('/movies/carousel').send()
+        mock.onGet(BASE_URL + '/3/discover/movie').reply(200, GetCarouselResponse)
+        const response = await request(expressApp).get('/movies/carousel')
 
         const movies: CarouselMovie[] = JSON.parse(response.text);
         expect(Array.isArray(movies)).toBe(true);
@@ -98,13 +168,34 @@ describe('GET /movies/carousel', () => {
 })
 
 describe('GET /movies/home-list', () => {
+    beforeAll(() => {
+        mock = new MockAdapter(axios);
+    });
+
+    afterEach(() => {
+        mock.reset();
+    });
+
+    afterAll(() => {
+        mock.restore();
+    });
+
+    test('Should return code 500', async () => {
+        mock.onGet(BASE_URL + '/3/discover/movie').reply(500, 'API server not working')
+        const response = await request(expressApp).get('/movies/home-list')
+        .query({movie_id: 558})
+        expect(response.status).toBe(500)
+    })
+
     test('Should return code 200', async () => {
-        const response = await request(expressApp).get('/movies/home-list').send()
+        mock.onGet(BASE_URL + '/3/discover/movie').reply(200, SearchMovieResponse)
+        const response = await request(expressApp).get('/movies/home-list')
         expect(response.status).toBe(200)
     })
 
     test('Should return MoviePoster[]', async () => {
-        const response = await request(expressApp).get('/movies/home-list').send()
+        mock.onGet(BASE_URL + '/3/discover/movie').reply(200, SearchMovieResponse)
+        const response = await request(expressApp).get('/movies/home-list')
 
         const movies: MoviePoster[] = JSON.parse(response.text);
         expect(Array.isArray(movies)).toBe(true);

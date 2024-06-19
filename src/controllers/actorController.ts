@@ -6,7 +6,6 @@ import { ActorProfile, genderToString } from "../models/actor/actorProfile"
 import { MoviePoster } from "../models/movie/moviePoster"
 import { CustomError } from "../models/customError"
 
-
 export const getCasting: RequestHandler = (req, res) => {
     if(!req.query.movie_id){
         return res.status(400).send(new CustomError('Bad request. Movie identifier needed'));
@@ -24,11 +23,7 @@ export const getCasting: RequestHandler = (req, res) => {
           id: actor.id,
           known_for_department: actor.known_for_department,
           name: actor.name,
-          profile_path: (
-            actor.profile_path ?
-            POSTER_URL_PREFIX + actor.profile_path :
-            actor.profile_path
-        ),
+          profile_path: actor.profile_path ? POSTER_URL_PREFIX + actor.profile_path : actor.profile_path,
           character: actor.character
         }));
         return res.status(200).send(shortResponse)
@@ -57,11 +52,7 @@ export const getActor: RequestHandler = (req, res) => {
             known_for_department: data.known_for_department,
             name: data.name,
             place_of_birth: data.place_of_birth,
-            profile_path: (
-                data.profile_path ?
-                POSTER_URL_PREFIX + data.profile_path :
-                data.profile_path
-            )
+            profile_path: data.profile_path ? POSTER_URL_PREFIX + data.profile_path : data.profile_path
         };
         return res.status(200).send(actor)
     }).catch((error) => {
@@ -82,11 +73,7 @@ export const getMoviesByActor: RequestHandler = (req, res) => {
     }).then((response) => {
         const data = response.data;
         const movies: MoviePoster[] = data.cast.map((movie: any) => ({
-            poster_path: (
-                movie.poster_path ?
-                POSTER_URL_PREFIX + movie.poster_path :
-                movie.poster_path
-            ),
+            poster_path: movie.poster_path ? POSTER_URL_PREFIX + movie.poster_path : movie.poster_path,
             id: movie.id,
             title: movie.title
         }));

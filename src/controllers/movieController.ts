@@ -22,15 +22,11 @@ export const searchMovie: RequestHandler = (req, res) => {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
         const MOVIES: MoviePoster[] = response.data.results.map((movie: any) => ({
-            poster_path: (
-                movie.poster_path ?
-                POSTER_URL_PREFIX + movie.poster_path :
-                movie.poster_path
-            ),
+            poster_path: movie.poster_path ? POSTER_URL_PREFIX + movie.poster_path : movie.poster_path,
             id: movie.id,
             title: movie.title,
         }))
-        res.json(MOVIES)
+        return res.status(200).send(MOVIES)
     }).catch((error) => {
         return res.status(500).send(new CustomError('Error getting actor data from API server', error))
     })
@@ -48,7 +44,7 @@ export const getMovie: RequestHandler = (req, res) => {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
         const movie: Movie = response.data
-        res.send(movie)
+        return res.status(200).send(movie)
     }).catch((error) => {
         return res.status(500).send(new CustomError('Error getting movie from API server', error))
     }) 
@@ -61,16 +57,12 @@ export const getCarousel: RequestHandler = (_req, res) => {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
         const MOVIES: CarouselMovie[] = response.data.results.map((movie: any) => ({
-            backdrop_path: (
-                movie.backdrop_path ? 
-                BACKDROP_URL_PREFIX + movie.backdrop_path : 
-                movie.backdrop_path
-            ),
+            backdrop_path: movie.backdrop_path ? BACKDROP_URL_PREFIX + movie.backdrop_path : movie.backdrop_path,
             id: movie.id,
             title: movie.title,
             overview: movie.overview,
         }))
-        res.json(MOVIES)
+        return res.status(200).send(MOVIES)
     }).catch((error) => {
         return res.status(500).send(new CustomError('Error getting movies from API server', error))
     })
@@ -83,15 +75,11 @@ export const getHomeList: RequestHandler = (_req, res) => {
         headers: MOVIE_API_HEADERS
     }).then((response) => {
         const MOVIES: MoviePoster[] = response.data.results.map((movie: any) => ({
-            poster_path: (
-                movie.poster_path ?
-                POSTER_URL_PREFIX + movie.poster_path :
-                movie.poster_path
-            ),
+            poster_path: movie.poster_path ? POSTER_URL_PREFIX + movie.poster_path : movie.poster_path,
             id: movie.id,
             title: movie.title,
         }))
-        res.json(MOVIES)
+        return res.status(200).send(MOVIES)
     }).catch((error) => {
         return res.status(500).send(new CustomError('Error getting movie list from API server', error));
     })

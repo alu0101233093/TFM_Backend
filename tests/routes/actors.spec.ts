@@ -6,7 +6,7 @@ import { MoviePoster } from "../../src/models/movie/moviePoster";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import { BASE_URL } from "../../src/consts";
-import { ActorArrayResponse, ActorProfilesResponse, MoviePosterArrayResponse } from "../mockResponses/mockAxiosResponses";
+import { GetCastingResponse, GetActorProfileResponse, GetMoviesByActorResponse } from "../mockResponses/mockAxiosResponses";
 
 let mock: MockAdapter;
 
@@ -37,8 +37,7 @@ describe('GET /actors/casting', () => {
     })    
 
     test('Should return code 200', async () => {
-        let axiosResponse = ActorArrayResponse
-        mock.onGet(BASE_URL + '/3/movie/558/credits').reply(200, axiosResponse)
+        mock.onGet(BASE_URL + '/3/movie/558/credits').reply(200, GetCastingResponse)
         const response = await request(expressApp).get('/actors/casting')
         .query({movie_id: 558})
 
@@ -46,9 +45,7 @@ describe('GET /actors/casting', () => {
     })
 
     test('Should return Actor[]', async () => {
-        let axiosResponse = ActorArrayResponse
-        
-        mock.onGet(BASE_URL + '/3/movie/558/credits').reply(200, axiosResponse)
+        mock.onGet(BASE_URL + '/3/movie/558/credits').reply(200, GetCastingResponse)
         const response = await request(expressApp).get('/actors/casting')
         .query({movie_id: 558})
 
@@ -94,16 +91,14 @@ describe('GET /actors', () => {
     })
 
     test('Should return code 200', async () => {
-        let axiosResponse = ActorProfilesResponse
-        mock.onGet(BASE_URL + '/3/person/194').reply(200, axiosResponse)
+        mock.onGet(BASE_URL + '/3/person/194').reply(200, GetActorProfileResponse)
         const response = await request(expressApp).get('/actors')
         .query({actor_id: 194})
         expect(response.status).toBe(200)
     })
 
     test('Should return ActorProfile', async () => {
-        let axiosResponse = ActorProfilesResponse
-        mock.onGet(BASE_URL + '/3/person/194').reply(200, axiosResponse)
+        mock.onGet(BASE_URL + '/3/person/194').reply(200, GetActorProfileResponse)
 
         const response = await request(expressApp).get('/actors')
         .query({actor_id: 194})
@@ -152,16 +147,14 @@ describe('GET /actors/movies', () => {
     })
 
     test('Should return code 200', async () => {
-        let axiosResponse = MoviePosterArrayResponse;
-        mock.onGet(BASE_URL + '/3/person/194/movie_credits').reply(200, axiosResponse)
+        mock.onGet(BASE_URL + '/3/person/194/movie_credits').reply(200, GetMoviesByActorResponse)
         const response = await request(expressApp).get('/actors/movies')
         .query({actor_id: 194})
         expect(response.status).toBe(200)
     })
 
     test('Should return Movies[]', async () => {
-        let axiosResponse = MoviePosterArrayResponse;
-        mock.onGet(BASE_URL + '/3/person/194/movie_credits').reply(200, axiosResponse)
+        mock.onGet(BASE_URL + '/3/person/194/movie_credits').reply(200, GetMoviesByActorResponse)
         
         const response = await request(expressApp).get('/actors/movies')
         .query({actor_id: 194})
