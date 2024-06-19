@@ -24,3 +24,29 @@ export const ActorProfilesResponse = {
     place_of_birth: 'Los Angeles, USA',
     profile_path: '/profiles/actor_1.jpg'
 }
+
+
+export const MoviePosterArrayResponse = {
+    cast: [
+        {
+            poster_path: '/path/to/movie1.jpg',
+            id: 1,
+            title: 'Movie Title 1'
+        },
+        {
+            poster_path: '/path/to/movie2.jpg',
+            id: 2,
+            title: 'Movie Title 2'
+        },
+        {
+            poster_path: '/path/to/movie3.jpg',
+            id: 3,
+            title: 'Movie Title 3'
+        },
+        {
+            poster_path: '/path/to/movie4.jpg',
+            id: 4,
+            title: 'Movie Title 4'
+        }
+    ]
+};

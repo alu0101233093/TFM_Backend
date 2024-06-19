@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1718834327252" clover="3.2.0">
-  <project timestamp="1718834327252" name="All files">
-    <metrics statements="432" coveredstatements="195" conditionals="163" coveredconditionals="37" methods="149" coveredmethods="27" elements="744" coveredelements="259" complexity="0" loc="432" ncloc="432" packages="8" files="19" classes="19"/>
+<coverage generated="1718835427391" clover="3.2.0">
+  <project timestamp="1718835427391" name="All files">
+    <metrics statements="433" coveredstatements="196" conditionals="163" coveredconditionals="36" methods="149" coveredmethods="27" elements="745" coveredelements="259" complexity="0" loc="433" ncloc="433" packages="8" files="19" classes="19"/>
     <package name="src">
       <metrics statements="35" coveredstatements="35" conditionals="30" coveredconditionals="16" methods="0" coveredmethods="0"/>
       <file name="app.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\app.ts">
@@ -47,9 +47,9 @@
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="195" coveredstatements="95" conditionals="97" coveredconditionals="19" methods="77" coveredmethods="23"/>
+      <metrics statements="195" coveredstatements="95" conditionals="97" coveredconditionals="18" methods="77" coveredmethods="23"/>
       <file name="actorController.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\controllers\actorController.ts">
-        <metrics statements="34" coveredstatements="34" conditionals="9" coveredconditionals="7" methods="11" coveredmethods="11"/>
+        <metrics statements="34" coveredstatements="34" conditionals="9" coveredconditionals="6" methods="11" coveredmethods="11"/>
         <line num="1" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
@@ -81,7 +81,7 @@
         <line num="78" count="3" type="stmt"/>
         <line num="80" count="3" type="stmt"/>
         <line num="83" count="2" type="stmt"/>
-        <line num="84" count="166" type="stmt"/>
+        <line num="84" count="8" type="stmt"/>
         <line num="94" count="2" type="stmt"/>
         <line num="96" count="1" type="stmt"/>
       </file>
@@ -508,11 +508,12 @@
       </file>
     </package>
     <package name="tests.mockResponses">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="mockAxiosResponses.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\mockResponses\mockAxiosResponses.ts">
-        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
       </file>
     </package>
   </project>

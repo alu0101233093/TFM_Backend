@@ -6,11 +6,11 @@ import { MoviePoster } from "../../src/models/movie/moviePoster";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import { BASE_URL } from "../../src/consts";
-import { ActorArrayResponse, ActorProfilesResponse } from "../mockResponses/mockAxiosResponses";
+import { ActorArrayResponse, ActorProfilesResponse, MoviePosterArrayResponse } from "../mockResponses/mockAxiosResponses";
+
+let mock: MockAdapter;
 
 describe('GET /actors/casting', () => {
-    let mock: MockAdapter;
-
     beforeAll(() => {
         mock = new MockAdapter(axios);
     });
@@ -69,8 +69,6 @@ describe('GET /actors/casting', () => {
 })
 
 describe('GET /actors', () => {
-    let mock: MockAdapter;
-
     beforeAll(() => {
         mock = new MockAdapter(axios);
     });
@@ -128,24 +126,43 @@ describe('GET /actors', () => {
 })
 
 describe('GET /actors/movies', () => {
+
+    beforeAll(() => {
+        mock = new MockAdapter(axios);
+    });
+
+    afterEach(() => {
+        mock.reset();
+    });
+
+    afterAll(() => {
+        mock.restore();
+    });
+
     test('Should return code 400', async () => {
         const response = await request(expressApp).get('/actors/movies')
         expect(response.status).toBe(400)
     })
 
     test('Should return code 500', async () => {
+        mock.onGet(BASE_URL + '/3/person/194/movie_credits').reply(500, 'API server not working')
         const response = await request(expressApp).get('/actors/movies')
-        .query({actor_id: -1})
+        .query({actor_id: 194})
         expect(response.status).toBe(500)
     })
 
     test('Should return code 200', async () => {
+        let axiosResponse = MoviePosterArrayResponse;
+        mock.onGet(BASE_URL + '/3/person/194/movie_credits').reply(200, axiosResponse)
         const response = await request(expressApp).get('/actors/movies')
         .query({actor_id: 194})
         expect(response.status).toBe(200)
     })
 
     test('Should return Movies[]', async () => {
+        let axiosResponse = MoviePosterArrayResponse;
+        mock.onGet(BASE_URL + '/3/person/194/movie_credits').reply(200, axiosResponse)
+        
         const response = await request(expressApp).get('/actors/movies')
         .query({actor_id: 194})
 

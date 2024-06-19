@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
   <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\actors.spec.ts">
-    <testCase name="GET /actors/casting Should return code 400" duration="262"/>
-    <testCase name="GET /actors/casting Should return code 500" duration="167"/>
-    <testCase name="GET /actors/casting Should return code 200" duration="26"/>
-    <testCase name="GET /actors/casting Should return Actor[]" duration="31"/>
-    <testCase name="GET /actors Should return code 400" duration="32"/>
-    <testCase name="GET /actors Should return code 500" duration="26"/>
-    <testCase name="GET /actors Should return code 200" duration="28"/>
-    <testCase name="GET /actors Should return ActorProfile" duration="43"/>
-    <testCase name="GET /actors/movies Should return code 400" duration="30"/>
-    <testCase name="GET /actors/movies Should return code 500" duration="303"/>
-    <testCase name="GET /actors/movies Should return code 200" duration="67"/>
-    <testCase name="GET /actors/movies Should return Movies[]" duration="99"/>
+    <testCase name="GET /actors/casting Should return code 400" duration="141"/>
+    <testCase name="GET /actors/casting Should return code 500" duration="166"/>
+    <testCase name="GET /actors/casting Should return code 200" duration="91"/>
+    <testCase name="GET /actors/casting Should return Actor[]" duration="21"/>
+    <testCase name="GET /actors Should return code 400" duration="19"/>
+    <testCase name="GET /actors Should return code 500" duration="29"/>
+    <testCase name="GET /actors Should return code 200" duration="27"/>
+    <testCase name="GET /actors Should return ActorProfile" duration="33"/>
+    <testCase name="GET /actors/movies Should return code 400" duration="33"/>
+    <testCase name="GET /actors/movies Should return code 500" duration="31"/>
+    <testCase name="GET /actors/movies Should return code 200" duration="28"/>
+    <testCase name="GET /actors/movies Should return Movies[]" duration="31"/>
   </file>
   <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\movies.spec.ts">
-    <testCase name="GET /movies/search Should return code 400" duration="39"/>
-    <testCase name="GET /movies/search Should return code 200" duration="87"/>
-    <testCase name="GET /movies/search Should return MoviePoster[]" duration="57"/>
-    <testCase name="GET /movies Should return code 400" duration="32"/>
-    <testCase name="GET /movies Should return code 200" duration="69"/>
-    <testCase name="GET /movies Should return Movie" duration="61"/>
-    <testCase name="GET /movies/carousel Should return code 200" duration="53"/>
-    <testCase name="GET /movies/carousel Should return MoviePoster[]" duration="67"/>
-    <testCase name="GET /movies/home-list Should return code 200" duration="66"/>
-    <testCase name="GET /movies/home-list Should return MoviePoster[]" duration="68"/>
+    <testCase name="GET /movies/search Should return code 400" duration="37"/>
+    <testCase name="GET /movies/search Should return code 200" duration="281"/>
+    <testCase name="GET /movies/search Should return MoviePoster[]" duration="87"/>
+    <testCase name="GET /movies Should return code 400" duration="19"/>
+    <testCase name="GET /movies Should return code 200" duration="188"/>
+    <testCase name="GET /movies Should return Movie" duration="57"/>
+    <testCase name="GET /movies/carousel Should return code 200" duration="67"/>
+    <testCase name="GET /movies/carousel Should return MoviePoster[]" duration="62"/>
+    <testCase name="GET /movies/home-list Should return code 200" duration="67"/>
+    <testCase name="GET /movies/home-list Should return MoviePoster[]" duration="63"/>
   </file>
   <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\reviews.spec.ts">
-    <testCase name="POST /reviews Should return code 400" duration="68"/>
-    <testCase name="POST /reviews Should return code 400" duration="18"/>
+    <testCase name="POST /reviews Should return code 400" duration="28"/>
+    <testCase name="POST /reviews Should return code 400" duration="31"/>
   </file>
 </testExecutions>
