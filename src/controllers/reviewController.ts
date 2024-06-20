@@ -48,8 +48,8 @@ export const getReviews: RequestHandler = (req, res) => {
 }
 
 export const deleteReview: RequestHandler = (req, res) => {
-    if (!req.query.movie_id)
-        return res.status(400).send(new CustomError('Bad request. Movie identifier needed'))
+    if (!req.query.movie_id || !req.query.review_id)
+        return res.status(400).send(new CustomError('Bad request. Movie and review identifiers needed'))
 
     const MOVIE_ID: string = req.query.movie_id as string
     const REVIEW_ID: string = req.query.review_id as string
