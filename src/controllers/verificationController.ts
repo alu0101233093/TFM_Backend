@@ -1,12 +1,8 @@
 import { RequestHandler } from "express";
-import { FirebaseAuth } from "../services/FirebaseAuth";
 import { ADMIN_UID } from "../consts";
-import { FirebaseRTDB } from "../services/FirebaseRTDB";
 import { VerificationRequest } from "../models/verificationRequest";
 import { CustomError } from "../models/customError";
-
-const auth = new FirebaseAuth
-const database = new FirebaseRTDB
+import { auth, database } from "../app";
 
 export const getRequests: RequestHandler = (req, res) => {
     const idToken = req.headers.authorization?.split(' ')[1]

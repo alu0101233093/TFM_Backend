@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
+  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\reviews.spec.ts">
+    <testCase name="POST /reviews Should return code 400 without Authorization header" duration="151"/>
+    <testCase name="POST /reviews Should return code 400 without movie_id" duration="42"/>
+    <testCase name="POST /reviews Should return code 401 Unauthorized" duration="30"/>
+    <testCase name="POST /reviews Should return code 201" duration="35"/>
+  </file>
   <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\movies.spec.ts">
-    <testCase name="GET /movies/search Should return code 400" duration="285"/>
-    <testCase name="GET /movies/search Should return code 500" duration="138"/>
-    <testCase name="GET /movies/search Should return code 200" duration="30"/>
-    <testCase name="GET /movies/search Should return MoviePoster[]" duration="26"/>
-    <testCase name="GET /movies Should return code 400" duration="40"/>
-    <testCase name="GET /movies Should return code 500" duration="38"/>
-    <testCase name="GET /movies Should return code 200" duration="36"/>
-    <testCase name="GET /movies Should return Movie" duration="38"/>
-    <testCase name="GET /movies/carousel Should return code 500" duration="40"/>
-    <testCase name="GET /movies/carousel Should return code 200" duration="32"/>
-    <testCase name="GET /movies/carousel Should return MoviePoster[]" duration="40"/>
-    <testCase name="GET /movies/home-list Should return code 500" duration="34"/>
-    <testCase name="GET /movies/home-list Should return code 200" duration="30"/>
-    <testCase name="GET /movies/home-list Should return MoviePoster[]" duration="42"/>
+    <testCase name="GET /movies/search Should return code 400" duration="32"/>
+    <testCase name="GET /movies/search Should return code 500" duration="185"/>
+    <testCase name="GET /movies/search Should return code 200" duration="20"/>
+    <testCase name="GET /movies/search Should return MoviePoster[]" duration="41"/>
+    <testCase name="GET /movies Should return code 400" duration="26"/>
+    <testCase name="GET /movies Should return code 500" duration="39"/>
+    <testCase name="GET /movies Should return code 200" duration="32"/>
+    <testCase name="GET /movies Should return Movie" duration="27"/>
+    <testCase name="GET /movies/carousel Should return code 500" duration="35"/>
+    <testCase name="GET /movies/carousel Should return code 200" duration="27"/>
+    <testCase name="GET /movies/carousel Should return MoviePoster[]" duration="23"/>
+    <testCase name="GET /movies/home-list Should return code 500" duration="33"/>
+    <testCase name="GET /movies/home-list Should return code 200" duration="24"/>
+    <testCase name="GET /movies/home-list Should return MoviePoster[]" duration="35"/>
   </file>
   <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\actors.spec.ts">
-    <testCase name="GET /actors/casting Should return code 400" duration="31"/>
-    <testCase name="GET /actors/casting Should return code 500" duration="162"/>
-    <testCase name="GET /actors/casting Should return code 200" duration="25"/>
-    <testCase name="GET /actors/casting Should return Actor[]" duration="38"/>
-    <testCase name="GET /actors Should return code 400" duration="34"/>
-    <testCase name="GET /actors Should return code 500" duration="31"/>
+    <testCase name="GET /actors/casting Should return code 400" duration="36"/>
+    <testCase name="GET /actors/casting Should return code 500" duration="181"/>
+    <testCase name="GET /actors/casting Should return code 200" duration="18"/>
+    <testCase name="GET /actors/casting Should return Actor[]" duration="28"/>
+    <testCase name="GET /actors Should return code 400" duration="24"/>
+    <testCase name="GET /actors Should return code 500" duration="32"/>
     <testCase name="GET /actors Should return code 200" duration="26"/>
-    <testCase name="GET /actors Should return ActorProfile" duration="29"/>
-    <testCase name="GET /actors/movies Should return code 400" duration="30"/>
-    <testCase name="GET /actors/movies Should return code 500" duration="32"/>
-    <testCase name="GET /actors/movies Should return code 200" duration="31"/>
-    <testCase name="GET /actors/movies Should return Movies[]" duration="30"/>
-  </file>
-  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\reviews.spec.ts">
-    <testCase name="POST /reviews Should return code 400" duration="39"/>
-    <testCase name="POST /reviews Should return code 400" duration="28"/>
+    <testCase name="GET /actors Should return ActorProfile" duration="26"/>
+    <testCase name="GET /actors/movies Should return code 400" duration="24"/>
+    <testCase name="GET /actors/movies Should return code 500" duration="30"/>
+    <testCase name="GET /actors/movies Should return code 200" duration="25"/>
+    <testCase name="GET /actors/movies Should return Movies[]" duration="31"/>
   </file>
 </testExecutions>

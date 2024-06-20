@@ -1,12 +1,8 @@
 import { RequestHandler } from "express"
 import { AllReviews } from "../models/review/allReviews"
 import { Review } from "../models/review/review"
-import { FirebaseRTDB } from "../services/FirebaseRTDB"
-import { FirebaseAuth } from "../services/FirebaseAuth"
 import { CustomError } from "../models/customError"
-
-const database = new FirebaseRTDB
-const auth = new FirebaseAuth
+import { auth, database } from "../app"
 
 export const postReview: RequestHandler = (req, res) => {
     if (!req.query.movie_id)

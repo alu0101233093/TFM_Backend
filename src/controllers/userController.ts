@@ -1,14 +1,9 @@
 import { RequestHandler, Response } from "express"
-import { FirebaseAuth } from '../services/FirebaseAuth'
-import { FB_IMAGE_DEFAULT, FirebaseStr } from '../services/FirebaseStr'
+import { FB_IMAGE_DEFAULT } from '../services/FirebaseStr'
 import { UserFirebaseAuth } from '../models/user/userFirebaseAuth'
-import { FirebaseRTDB } from "../services/FirebaseRTDB"
 import { VerificationRequest } from "../models/verificationRequest"
 import { CustomError } from "../models/customError"
-
-const auth = new FirebaseAuth
-const storage = new FirebaseStr
-const database = new FirebaseRTDB
+import { auth, database, storage } from "../app"
 
 export const signUp: RequestHandler = (req, res) => {
     let user_request: UserFirebaseAuth = {

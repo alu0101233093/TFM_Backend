@@ -14,10 +14,17 @@ import reviews_router from './routes/reviews'
 import user_router from './routes/users'
 import verification_router from './routes/verification'
 import actor_router from './routes/actors'
+import { FirebaseRTDB } from './services/FirebaseRTDB'
+import { FirebaseAuth } from './services/FirebaseAuth'
+import { FirebaseStr } from './services/FirebaseStr'
 
 const expressApp = express()
 
 expressApp.use(cors({ origin: FRONTEND_URL }))
+
+export const database = new FirebaseRTDB();
+export const auth = new FirebaseAuth();
+export const storage = new FirebaseStr();
 
 expressApp.use('/movies', movie_router)
 expressApp.use('/actors', actor_router)
