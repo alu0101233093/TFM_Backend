@@ -41,12 +41,6 @@ export class FirebaseStr {
         .toFormat('png').toBuffer()
     }
 
-    public hasProfilePic(uid: string): Promise<[boolean]> {
-        return this.storageBucket
-        .file('users/' + uid + '.png')
-        .exists()
-    }
-
     public deleteProfilePic(uid: string): Promise<void> {
         return new Promise<void>((resolve, reject) => {
             this.storageBucket

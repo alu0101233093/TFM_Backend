@@ -30,3 +30,28 @@ export const getReviewsResponse: AllReviews = {
         }
     }
 }
+
+export const verificationRequests = [
+    {
+        requestID: '1',
+        uid: 'user1',
+        status: 'Pending',
+        user: {
+            email: 'user1@example.com',
+            emailVerified: true,
+            photoURL: 'user1-photo-url'
+        },
+        text: 'Verification request text 1'
+    },
+    {
+        requestID: '2',
+        uid: 'user2',
+        status: 'Approved',
+        user: {
+            email: 'user2@example.com',
+            emailVerified: true,
+            photoURL: 'user2-photo-url'
+        },
+        text: 'Verification request text 2'
+    }
+];

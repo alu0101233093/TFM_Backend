@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1718855445111" clover="3.2.0">
-  <project timestamp="1718855445112" name="All files">
-    <metrics statements="434" coveredstatements="232" conditionals="163" coveredconditionals="55" methods="149" coveredmethods="44" elements="746" coveredelements="331" complexity="0" loc="434" ncloc="434" packages="8" files="21" classes="21"/>
+<coverage generated="1718930810246" clover="3.2.0">
+  <project timestamp="1718930810246" name="All files">
+    <metrics statements="445" coveredstatements="315" conditionals="174" coveredconditionals="117" methods="148" coveredmethods="82" elements="767" coveredelements="514" complexity="0" loc="445" ncloc="445" packages="8" files="21" classes="21"/>
     <package name="src">
       <metrics statements="41" coveredstatements="41" conditionals="28" coveredconditionals="14" methods="0" coveredmethods="0"/>
       <file name="app.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\app.ts">
         <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="12" count="3" type="stmt"/>
-        <line num="13" count="3" type="stmt"/>
-        <line num="14" count="3" type="stmt"/>
-        <line num="15" count="3" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
-        <line num="17" count="3" type="stmt"/>
-        <line num="18" count="3" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
-        <line num="21" count="3" type="stmt"/>
-        <line num="23" count="3" type="stmt"/>
-        <line num="25" count="3" type="stmt"/>
-        <line num="26" count="3" type="stmt"/>
-        <line num="27" count="3" type="stmt"/>
-        <line num="29" count="3" type="stmt"/>
-        <line num="30" count="3" type="stmt"/>
-        <line num="31" count="3" type="stmt"/>
-        <line num="32" count="3" type="stmt"/>
-        <line num="33" count="3" type="stmt"/>
-        <line num="35" count="3" type="stmt"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
+        <line num="15" count="5" type="stmt"/>
+        <line num="16" count="5" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="21" count="5" type="stmt"/>
+        <line num="23" count="5" type="stmt"/>
+        <line num="25" count="5" type="stmt"/>
+        <line num="26" count="5" type="stmt"/>
+        <line num="27" count="5" type="stmt"/>
+        <line num="29" count="5" type="stmt"/>
+        <line num="30" count="5" type="stmt"/>
+        <line num="31" count="5" type="stmt"/>
+        <line num="32" count="5" type="stmt"/>
+        <line num="33" count="5" type="stmt"/>
+        <line num="35" count="5" type="stmt"/>
       </file>
       <file name="consts.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\consts.ts">
         <metrics statements="16" coveredstatements="16" conditionals="28" coveredconditionals="14" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="5" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="6" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="7" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="8" count="3" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
-        <line num="11" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="12" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="13" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="15" count="3" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
-        <line num="24" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="25" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="27" count="3" type="stmt"/>
-        <line num="33" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="5" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="6" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="7" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="8" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
+        <line num="11" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="12" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="15" count="5" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="24" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="5" type="stmt"/>
+        <line num="33" count="5" type="cond" truecount="1" falsecount="1"/>
       </file>
     </package>
     <package name="src.controllers">
-      <metrics statements="185" coveredstatements="114" conditionals="99" coveredconditionals="35" methods="77" coveredmethods="39"/>
+      <metrics statements="191" coveredstatements="191" conditionals="110" coveredconditionals="97" methods="77" coveredmethods="77"/>
       <file name="actorController.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\controllers\actorController.ts">
         <metrics statements="34" coveredstatements="34" conditionals="9" coveredconditionals="6" methods="11" coveredmethods="11"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
         <line num="10" count="4" type="cond" truecount="1" falsecount="0"/>
         <line num="11" count="1" type="stmt"/>
         <line num="14" count="3" type="stmt"/>
@@ -70,7 +70,7 @@
         <line num="22" count="4" type="stmt"/>
         <line num="29" count="2" type="stmt"/>
         <line num="31" count="1" type="stmt"/>
-        <line num="35" count="3" type="stmt"/>
+        <line num="35" count="5" type="stmt"/>
         <line num="36" count="4" type="cond" truecount="1" falsecount="0"/>
         <line num="37" count="1" type="stmt"/>
         <line num="39" count="3" type="stmt"/>
@@ -80,7 +80,7 @@
         <line num="46" count="2" type="stmt"/>
         <line num="57" count="2" type="stmt"/>
         <line num="59" count="1" type="stmt"/>
-        <line num="63" count="3" type="stmt"/>
+        <line num="63" count="5" type="stmt"/>
         <line num="64" count="4" type="cond" truecount="1" falsecount="0"/>
         <line num="65" count="1" type="stmt"/>
         <line num="68" count="3" type="stmt"/>
@@ -93,44 +93,44 @@
       </file>
       <file name="movieController.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\controllers\movieController.ts">
         <metrics statements="32" coveredstatements="32" conditionals="10" coveredconditionals="6" methods="15" coveredmethods="15"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="6" count="3" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="6" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
         <line num="10" count="4" type="cond" truecount="1" falsecount="0"/>
         <line num="11" count="1" type="stmt"/>
         <line num="14" count="3" type="stmt"/>
-        <line num="20" count="3" type="stmt"/>
-        <line num="24" count="4" type="stmt"/>
-        <line num="29" count="2" type="stmt"/>
-        <line num="31" count="1" type="stmt"/>
-        <line num="35" count="3" type="stmt"/>
-        <line num="36" count="4" type="cond" truecount="1" falsecount="0"/>
-        <line num="37" count="1" type="stmt"/>
-        <line num="40" count="3" type="stmt"/>
-        <line num="41" count="3" type="stmt"/>
-        <line num="43" count="3" type="stmt"/>
-        <line num="46" count="2" type="stmt"/>
-        <line num="47" count="2" type="stmt"/>
-        <line num="49" count="1" type="stmt"/>
-        <line num="53" count="3" type="stmt"/>
-        <line num="54" count="3" type="stmt"/>
-        <line num="56" count="3" type="stmt"/>
-        <line num="59" count="4" type="stmt"/>
-        <line num="65" count="2" type="stmt"/>
-        <line num="67" count="1" type="stmt"/>
-        <line num="71" count="3" type="stmt"/>
-        <line num="72" count="3" type="stmt"/>
-        <line num="74" count="3" type="stmt"/>
-        <line num="77" count="4" type="stmt"/>
-        <line num="82" count="2" type="stmt"/>
-        <line num="84" count="1" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="31" count="5" type="stmt"/>
+        <line num="32" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="3" type="stmt"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="49" count="5" type="stmt"/>
+        <line num="50" count="3" type="stmt"/>
+        <line num="51" count="3" type="stmt"/>
+        <line num="53" count="4" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="65" count="5" type="stmt"/>
+        <line num="66" count="3" type="stmt"/>
+        <line num="68" count="3" type="stmt"/>
+        <line num="71" count="4" type="stmt"/>
+        <line num="76" count="2" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
       </file>
       <file name="reviewController.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\controllers\reviewController.ts">
         <metrics statements="35" coveredstatements="35" conditionals="25" coveredconditionals="23" methods="13" coveredmethods="13"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
         <line num="8" count="5" type="cond" truecount="1" falsecount="0"/>
         <line num="9" count="1" type="stmt"/>
         <line num="11" count="4" type="cond" truecount="4" falsecount="0"/>
@@ -143,14 +143,14 @@
         <line num="27" count="1" type="stmt"/>
         <line num="30" count="1" type="stmt"/>
         <line num="33" count="1" type="stmt"/>
-        <line num="37" count="3" type="stmt"/>
+        <line num="37" count="5" type="stmt"/>
         <line num="38" count="3" type="cond" truecount="1" falsecount="0"/>
         <line num="39" count="1" type="stmt"/>
         <line num="41" count="2" type="stmt"/>
         <line num="42" count="2" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
         <line num="46" count="1" type="stmt"/>
-        <line num="50" count="3" type="stmt"/>
+        <line num="50" count="5" type="stmt"/>
         <line num="51" count="5" type="cond" truecount="3" falsecount="0"/>
         <line num="52" count="1" type="stmt"/>
         <line num="54" count="4" type="stmt"/>
@@ -165,113 +165,119 @@
         <line num="72" count="1" type="stmt"/>
       </file>
       <file name="userController.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\controllers\userController.ts">
-        <metrics statements="52" coveredstatements="8" conditionals="36" coveredconditionals="0" methods="26" coveredmethods="0"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="6" count="3" type="stmt"/>
-        <line num="8" count="3" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="37" count="3" type="stmt"/>
-        <line num="38" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="41" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="48" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="54" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="63" count="0" type="stmt"/>
-        <line num="67" count="3" type="stmt"/>
-        <line num="68" count="0" type="stmt"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="72" count="0" type="stmt"/>
-        <line num="76" count="3" type="stmt"/>
-        <line num="77" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="79" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="80" count="0" type="stmt"/>
-        <line num="82" count="0" type="stmt"/>
-        <line num="92" count="0" type="stmt"/>
-        <line num="94" count="0" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
-        <line num="99" count="0" type="stmt"/>
-        <line num="102" count="0" type="stmt"/>
-        <line num="106" count="3" type="stmt"/>
-        <line num="107" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="109" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="110" count="0" type="stmt"/>
-        <line num="112" count="0" type="stmt"/>
-        <line num="118" count="0" type="stmt"/>
-        <line num="121" count="0" type="stmt"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="128" count="0" type="stmt"/>
+        <metrics statements="46" coveredstatements="46" conditionals="32" coveredconditionals="30" methods="21" coveredmethods="21"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="8" count="5" type="cond" truecount="5" falsecount="0"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="40" count="5" type="stmt"/>
+        <line num="41" count="8" type="cond" truecount="5" falsecount="0"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="45" count="7" type="cond" truecount="4" falsecount="0"/>
+        <line num="46" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="6" type="stmt"/>
+        <line num="49" count="5" type="stmt"/>
+        <line num="54" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="55" count="3" type="stmt"/>
+        <line num="57" count="2" type="stmt"/>
+        <line num="58" count="2" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="65" count="2" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="77" count="5" type="stmt"/>
+        <line num="78" count="6" type="cond" truecount="4" falsecount="0"/>
+        <line num="80" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="81" count="5" type="stmt"/>
+        <line num="83" count="4" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+        <line num="92" count="3" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="99" count="1" type="stmt"/>
       </file>
       <file name="verificationController.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\controllers\verificationController.ts">
-        <metrics statements="32" coveredstatements="5" conditionals="19" coveredconditionals="0" methods="12" coveredmethods="0"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="8" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="14" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="30" count="3" type="stmt"/>
-        <line num="31" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="33" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="36" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="41" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="46" count="0" type="stmt"/>
-        <line num="47" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
+        <metrics statements="44" coveredstatements="44" conditionals="34" coveredconditionals="32" methods="17" coveredmethods="17"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="8" count="5" type="cond" truecount="1" falsecount="0"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="4" type="cond" truecount="4" falsecount="0"/>
+        <line num="13" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="40" count="5" type="stmt"/>
+        <line num="41" count="5" type="cond" truecount="4" falsecount="0"/>
+        <line num="43" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="44" count="4" type="stmt"/>
+        <line num="46" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="63" count="5" type="stmt"/>
+        <line num="64" count="7" type="cond" truecount="4" falsecount="0"/>
+        <line num="66" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="67" count="6" type="stmt"/>
+        <line num="69" count="5" type="cond" truecount="2" falsecount="0"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="72" count="4" type="stmt"/>
+        <line num="73" count="4" type="stmt"/>
+        <line num="74" count="4" type="cond" truecount="3" falsecount="0"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="77" count="3" type="stmt"/>
+        <line num="79" count="2" type="stmt"/>
+        <line num="80" count="2" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="86" count="1" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.models">
       <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
       <file name="customError.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\models\customError.ts">
         <metrics statements="6" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="1" coveredmethods="1"/>
-        <line num="1" count="4" type="stmt"/>
-        <line num="5" count="20" type="stmt"/>
-        <line num="6" count="20" type="stmt"/>
-        <line num="7" count="20" type="stmt"/>
-        <line num="9" count="20" type="cond" truecount="1" falsecount="0"/>
-        <line num="10" count="20" type="stmt"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="5" count="34" type="stmt"/>
+        <line num="6" count="34" type="stmt"/>
+        <line num="7" count="34" type="stmt"/>
+        <line num="9" count="34" type="cond" truecount="1" falsecount="0"/>
+        <line num="10" count="34" type="stmt"/>
       </file>
     </package>
     <package name="src.models.actor">
       <metrics statements="7" coveredstatements="7" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
       <file name="actorProfile.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\models\actor\actorProfile.ts">
         <metrics statements="7" coveredstatements="7" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
-        <line num="13" count="4" type="stmt"/>
+        <line num="13" count="6" type="stmt"/>
         <line num="14" count="7" type="cond" truecount="5" falsecount="0"/>
         <line num="15" count="3" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
@@ -293,60 +299,60 @@
       <metrics statements="38" coveredstatements="38" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="actors.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\routes\actors.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="33" count="3" type="stmt"/>
-        <line num="93" count="3" type="stmt"/>
-        <line num="129" count="3" type="stmt"/>
-        <line num="131" count="3" type="stmt"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="33" count="5" type="stmt"/>
+        <line num="93" count="5" type="stmt"/>
+        <line num="129" count="5" type="stmt"/>
+        <line num="131" count="5" type="stmt"/>
       </file>
       <file name="movies.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\routes\movies.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="31" count="3" type="stmt"/>
-        <line num="54" count="3" type="stmt"/>
-        <line num="87" count="3" type="stmt"/>
-        <line num="117" count="3" type="stmt"/>
-        <line num="119" count="3" type="stmt"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="31" count="5" type="stmt"/>
+        <line num="54" count="5" type="stmt"/>
+        <line num="87" count="5" type="stmt"/>
+        <line num="117" count="5" type="stmt"/>
+        <line num="119" count="5" type="stmt"/>
       </file>
       <file name="reviews.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\routes\reviews.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="43" count="3" type="stmt"/>
-        <line num="68" count="3" type="stmt"/>
-        <line num="101" count="3" type="stmt"/>
-        <line num="103" count="3" type="stmt"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="43" count="5" type="stmt"/>
+        <line num="68" count="5" type="stmt"/>
+        <line num="101" count="5" type="stmt"/>
+        <line num="103" count="5" type="stmt"/>
       </file>
       <file name="users.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\routes\users.ts">
-        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="5" count="3" type="stmt"/>
-        <line num="6" count="3" type="stmt"/>
-        <line num="41" count="3" type="stmt"/>
-        <line num="70" count="3" type="stmt"/>
-        <line num="110" count="3" type="stmt"/>
-        <line num="130" count="3" type="stmt"/>
-        <line num="132" count="3" type="stmt"/>
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="3" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="6" count="5" type="stmt"/>
+        <line num="41" count="5" type="stmt"/>
+        <line num="70" count="5" type="stmt"/>
+        <line num="90" count="5" type="stmt"/>
+        <line num="92" count="5" type="stmt"/>
       </file>
       <file name="verification.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\routes\verification.ts">
-        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="46" count="3" type="stmt"/>
-        <line num="98" count="3" type="stmt"/>
-        <line num="100" count="3" type="stmt"/>
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="4" count="5" type="stmt"/>
+        <line num="44" count="5" type="stmt"/>
+        <line num="86" count="5" type="stmt"/>
+        <line num="138" count="5" type="stmt"/>
+        <line num="140" count="5" type="stmt"/>
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="146" coveredstatements="15" conditionals="30" coveredconditionals="0" methods="69" coveredmethods="2"/>
+      <metrics statements="145" coveredstatements="15" conditionals="30" coveredconditionals="0" methods="68" coveredmethods="2"/>
       <file name="FirebaseAuth.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\services\FirebaseAuth.ts">
         <metrics statements="17" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="11" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
@@ -472,14 +478,14 @@
         <line num="209" count="0" type="stmt"/>
       </file>
       <file name="FirebaseStr.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\src\services\FirebaseStr.ts">
-        <metrics statements="28" coveredstatements="7" conditionals="4" coveredconditionals="0" methods="14" coveredmethods="1"/>
-        <line num="1" count="3" type="stmt"/>
-        <line num="2" count="3" type="stmt"/>
-        <line num="3" count="3" type="stmt"/>
-        <line num="4" count="3" type="stmt"/>
-        <line num="6" count="3" type="stmt"/>
-        <line num="8" count="3" type="stmt"/>
-        <line num="13" count="3" type="stmt"/>
+        <metrics statements="27" coveredstatements="7" conditionals="4" coveredconditionals="0" methods="13" coveredmethods="1"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="19" count="0" type="stmt"/>
@@ -495,19 +501,23 @@
         <line num="39" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
         <line num="45" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="51" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="52" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="60" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
       </file>
     </package>
     <package name="tests.mockResponses">
-      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="mockAuthResponses.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\mockResponses\mockAuthResponses.ts">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="2" count="1" type="stmt"/>
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="30" count="3" type="stmt"/>
       </file>
       <file name="mockAxiosResponses.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\mockResponses\mockAxiosResponses.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -519,8 +529,9 @@
         <line num="71" count="2" type="stmt"/>
       </file>
       <file name="mockDatabaseResponse.ts" path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\mockResponses\mockDatabaseResponse.ts">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="1" type="stmt"/>
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
       </file>
     </package>
   </project>

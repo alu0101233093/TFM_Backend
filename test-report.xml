@@ -1,118 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\models\customError.spec.ts">
-    <testCase name="CustomError should create an instance of CustomError with a message and original error" duration="15"/>
-    <testCase name="CustomError should create an instance of CustomError with only a message" duration="3"/>
-    <testCase name="CustomError should capture the stack trace" duration="4">
-      <failure message="Error: expect(received).toContain(expected) // indexOf"><![CDATA[Error: expect(received).toContain(expected) // indexOf
-
-Expected substring: "CustomError"
-Received string:    "An error occurred:·
-    at Object.<anonymous> (C:\\Users\\leoso\\Documentos\\Máster\\TFM\\Backend\\tests\\models\\customError.spec.ts:31:23)
-    at Promise.then.completed (C:\\Users\\leoso\\Documentos\\Máster\\TFM\\Backend\\node_modules\\jest-circus\\build\\utils.js:298:28)
-    at new Promise (<anonymous>)
-    at callAsyncCircusFn (C:\\Users\\leoso\\Documentos\\Máster\\TFM\\Backend\\node_modules\\jest-circus\\build\\utils.js:231:10)
-    at _callCircusTest (C:\\Users\\leoso\\Documentos\\Máster\\TFM\\Backend\\node_modules\\jest-circus\\build\\run.js:316:40)
-    at processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at _runTest (C:\\Users\\leoso\\Documentos\\Máster\\TFM\\Backend\\node_modules\\jest-circus\\build\\run.js:252:3)
-    at _runTestsForDescribeBlock (C:\\Users\\leoso\\Documentos\\Máster\\TFM\\Backend\\node_modules\\jest-circus\\build\\run.js:126:9)
-    at _runTestsForDescribeBlock (C:\\Users\\leoso\\Documentos\\Máster\\TFM\\Backend\\node_modules\\jest-circus\\build\\run.js:121:9)
-    at run (C:\\Users\\leoso\\Documentos\\Máster\\TFM\\Backend\\node_modules\\jest-circus\\build\\run.js:71:3)
-    at runAndTransformResultsToJestFormat (C:\\Users\\leoso\\Documentos\\Máster\\TFM\\Backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapterInit.js:122:21)
-    at jestAdapter (C:\\Users\\leoso\\Documentos\\Máster\\TFM\\Backend\\node_modules\\jest-circus\\build\\legacy-code-todo-rewrite\\jestAdapter.js:79:19)
-    at runTestInternal (C:\\Users\\leoso\\Documentos\\Máster\\TFM\\Backend\\node_modules\\jest-runner\\build\\runTest.js:367:16)
-    at runTest (C:\\Users\\leoso\\Documentos\\Máster\\TFM\\Backend\\node_modules\\jest-runner\\build\\runTest.js:444:34)"
-    at Object.<anonymous> (C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\models\customError.spec.ts:33:29)
-    at Promise.then.completed (C:\Users\leoso\Documentos\Máster\TFM\Backend\node_modules\jest-circus\build\utils.js:298:28)
-    at new Promise (<anonymous>)
-    at callAsyncCircusFn (C:\Users\leoso\Documentos\Máster\TFM\Backend\node_modules\jest-circus\build\utils.js:231:10)
-    at _callCircusTest (C:\Users\leoso\Documentos\Máster\TFM\Backend\node_modules\jest-circus\build\run.js:316:40)
-    at processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at _runTest (C:\Users\leoso\Documentos\Máster\TFM\Backend\node_modules\jest-circus\build\run.js:252:3)
-    at _runTestsForDescribeBlock (C:\Users\leoso\Documentos\Máster\TFM\Backend\node_modules\jest-circus\build\run.js:126:9)
-    at _runTestsForDescribeBlock (C:\Users\leoso\Documentos\Máster\TFM\Backend\node_modules\jest-circus\build\run.js:121:9)
-    at run (C:\Users\leoso\Documentos\Máster\TFM\Backend\node_modules\jest-circus\build\run.js:71:3)
-    at runAndTransformResultsToJestFormat (C:\Users\leoso\Documentos\Máster\TFM\Backend\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:122:21)
-    at jestAdapter (C:\Users\leoso\Documentos\Máster\TFM\Backend\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
-    at runTestInternal (C:\Users\leoso\Documentos\Máster\TFM\Backend\node_modules\jest-runner\build\runTest.js:367:16)
-    at runTest (C:\Users\leoso\Documentos\Máster\TFM\Backend\node_modules\jest-runner\build\runTest.js:444:34)]]></failure>
-    </testCase>
-  </file>
-  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\models\verificationRequest.spec.ts">
-    <testCase name="VerificationRequest Model should create a verification request with all properties" duration="10"/>
-    <testCase name="VerificationRequest Model should create a verification request without optional properties" duration="4"/>
-  </file>
-  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\reviews.spec.ts">
-    <testCase name="POST /reviews Should return code 400 without movie_id" duration="164"/>
-    <testCase name="POST /reviews Should return code 400 without Authorization header" duration="44"/>
-    <testCase name="POST /reviews Should return code 401 Unauthorized" duration="57"/>
-    <testCase name="POST /reviews Should return code 500 database upload failed" duration="56"/>
-    <testCase name="POST /reviews Should return code 201" duration="57"/>
-    <testCase name="GET /reviews Should return code 400 without movie_id" duration="38"/>
-    <testCase name="GET /reviews Should return code 500 error fetching database" duration="46"/>
-    <testCase name="GET /reviews Should return code 200" duration="36"/>
-    <testCase name="DELETE /reviews Should return code 400 without any param" duration="52"/>
-    <testCase name="DELETE /reviews Should return code 400 without Authorization header" duration="90"/>
-    <testCase name="DELETE /reviews Should return code 401 Unauthorized" duration="98"/>
-    <testCase name="DELETE /reviews Should return code 500 database deletion failed" duration="39"/>
-    <testCase name="DELETE /reviews Should return code 200" duration="29"/>
+  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\verification.spec.ts">
+    <testCase name="POST /verification Should return code 400 Bad request. Text request required." duration="128"/>
+    <testCase name="POST /verification Should return code 400 Bad request. IdToken not found on request" duration="69"/>
+    <testCase name="POST /verification Should return code 401 Unauthorized" duration="59"/>
+    <testCase name="POST /verification Should return code 500 Error saving request" duration="22"/>
+    <testCase name="POST /verification Should return code 201 and save the request successfully" duration="23"/>
+    <testCase name="GET /verification Should return code 400 Bad request. IdToken not found on request" duration="34"/>
+    <testCase name="GET /verification Should return code 401 Unauthorized" duration="22"/>
+    <testCase name="GET /verification Should return code 403 Forbidden. User is not an administrator" duration="28"/>
+    <testCase name="GET /verification Should return code 400 Error fetching verification requests" duration="22"/>
+    <testCase name="GET /verification Should return code 200 and list of verification requests" duration="25"/>
+    <testCase name="PATCH /verification Should return code 400 Bad request. IdToken not found on request" duration="22"/>
+    <testCase name="PATCH /verification Should return code 401 Unauthorized. User is not an administrator" duration="27"/>
+    <testCase name="PATCH /verification Should return code 401 Unauthorized. Invalid admin IdToken." duration="19"/>
+    <testCase name="PATCH /verification Should return code 400 Bad request. RequestID or newStatus not provided" duration="24"/>
+    <testCase name="PATCH /verification Should return code 400 Error updating request status" duration="22"/>
+    <testCase name="PATCH /verification Should return code 500 Error changing user role" duration="27"/>
+    <testCase name="PATCH /verification Should return code 200 User role changed successfully" duration="29"/>
   </file>
   <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\movies.spec.ts">
-    <testCase name="GET /movies/search Should return code 400" duration="41"/>
-    <testCase name="GET /movies/search Should return code 500" duration="175"/>
-    <testCase name="GET /movies/search Should return code 200" duration="16"/>
-    <testCase name="GET /movies/search Should return MoviePoster[]" duration="19"/>
-    <testCase name="GET /movies Should return code 400" duration="55"/>
-    <testCase name="GET /movies Should return code 500" duration="28"/>
-    <testCase name="GET /movies Should return code 200" duration="38"/>
-    <testCase name="GET /movies Should return Movie" duration="34"/>
-    <testCase name="GET /movies/carousel Should return code 500" duration="38"/>
-    <testCase name="GET /movies/carousel Should return code 200" duration="40"/>
-    <testCase name="GET /movies/carousel Should return MoviePoster[]" duration="30"/>
-    <testCase name="GET /movies/home-list Should return code 500" duration="42"/>
-    <testCase name="GET /movies/home-list Should return code 200" duration="28"/>
-    <testCase name="GET /movies/home-list Should return MoviePoster[]" duration="28"/>
+    <testCase name="GET /movies/search Should return code 400" duration="43"/>
+    <testCase name="GET /movies/search Should return code 500" duration="157"/>
+    <testCase name="GET /movies/search Should return code 200" duration="18"/>
+    <testCase name="GET /movies/search Should return MoviePoster[]" duration="37"/>
+    <testCase name="GET /movies Should return code 400" duration="23"/>
+    <testCase name="GET /movies Should return code 500" duration="35"/>
+    <testCase name="GET /movies Should return code 200" duration="20"/>
+    <testCase name="GET /movies Should return Movie" duration="22"/>
+    <testCase name="GET /movies/carousel Should return code 500" duration="30"/>
+    <testCase name="GET /movies/carousel Should return code 200" duration="26"/>
+    <testCase name="GET /movies/carousel Should return MoviePoster[]" duration="22"/>
+    <testCase name="GET /movies/home-list Should return code 500" duration="26"/>
+    <testCase name="GET /movies/home-list Should return code 200" duration="19"/>
+    <testCase name="GET /movies/home-list Should return MoviePoster[]" duration="30"/>
   </file>
   <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\actors.spec.ts">
-    <testCase name="GET /actors/casting Should return code 400" duration="36"/>
-    <testCase name="GET /actors/casting Should return code 500" duration="210"/>
+    <testCase name="GET /actors/casting Should return code 400" duration="31"/>
+    <testCase name="GET /actors/casting Should return code 500" duration="141"/>
     <testCase name="GET /actors/casting Should return code 200" duration="17"/>
-    <testCase name="GET /actors/casting Should return Actor[]" duration="37"/>
-    <testCase name="GET /actors Should return code 400" duration="28"/>
-    <testCase name="GET /actors Should return code 500" duration="37"/>
-    <testCase name="GET /actors Should return code 200" duration="28"/>
-    <testCase name="GET /actors Should return ActorProfile" duration="21"/>
-    <testCase name="GET /actors/movies Should return code 400" duration="32"/>
-    <testCase name="GET /actors/movies Should return code 500" duration="37"/>
+    <testCase name="GET /actors/casting Should return Actor[]" duration="32"/>
+    <testCase name="GET /actors Should return code 400" duration="27"/>
+    <testCase name="GET /actors Should return code 500" duration="51"/>
+    <testCase name="GET /actors Should return code 200" duration="19"/>
+    <testCase name="GET /actors Should return ActorProfile" duration="22"/>
+    <testCase name="GET /actors/movies Should return code 400" duration="22"/>
+    <testCase name="GET /actors/movies Should return code 500" duration="25"/>
     <testCase name="GET /actors/movies Should return code 200" duration="22"/>
-    <testCase name="GET /actors/movies Should return Movies[]" duration="34"/>
+    <testCase name="GET /actors/movies Should return Movies[]" duration="22"/>
   </file>
-  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\models\user.spec.ts">
-    <testCase name="UserFirebaseAuth Model should create a user with correct properties" duration="5"/>
-    <testCase name="isValidEmail Function should return true for a valid email" duration="1"/>
-    <testCase name="isValidEmail Function should return false for an email without @ symbol" duration="1"/>
-    <testCase name="isValidEmail Function should return false for an email without domain" duration="1"/>
-    <testCase name="isValidEmail Function should return false for an email without top-level domain" duration="1"/>
-    <testCase name="isValidEmail Function should return false for an email with spaces" duration="1"/>
-    <testCase name="isValidEmail Function should return false for an empty string" duration="1"/>
+  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\users.spec.ts">
+    <testCase name="POST /users/signUp Should return code 400 Bad request" duration="54"/>
+    <testCase name="POST /users/signUp Should return code 500 Error creating user in firebase auth" duration="31"/>
+    <testCase name="POST /users/signUp Should return code 500 Error uploading image in firebase storage" duration="27"/>
+    <testCase name="POST /users/signUp Should return code 500 Error updating photo URL in firabase Auth" duration="33"/>
+    <testCase name="POST /users/signUp Should return code 201 User created" duration="31"/>
+    <testCase name="PUT /users/updateData Should return code 400 Bad request. From data not provided" duration="30"/>
+    <testCase name="PUT /users/updateData Should return code 400 Bad request. IdToken not provided" duration="37"/>
+    <testCase name="PUT /users/updateData Should return code 401 Unauthorized" duration="31"/>
+    <testCase name="PUT /users/updateData Should return code 500 Error saving new photo" duration="35"/>
+    <testCase name="PUT /users/updateData Should return code 500 Error updating user data with file given." duration="39"/>
+    <testCase name="PUT /users/updateData Should return code 200 with file given." duration="26"/>
+    <testCase name="PUT /users/updateData Should return code 500 Error updating user data without file given." duration="26"/>
+    <testCase name="PUT /users/updateData Should return code 200 without file given." duration="31"/>
+    <testCase name="DELETE /users Should return code 400 Bad request. IdToken not found on request" duration="22"/>
+    <testCase name="DELETE /users Should return code 401 Unauthorized" duration="17"/>
+    <testCase name="DELETE /users Should return code 500 Error deleting user data" duration="20"/>
+    <testCase name="DELETE /users Should return code 500 Error deleting user profile picture" duration="21"/>
+    <testCase name="DELETE /users Should return code 500 Error deleting user reviews" duration="20"/>
+    <testCase name="DELETE /users Should return code 200 User deleted successfully" duration="20"/>
   </file>
-  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\models\reviews.spec.ts">
-    <testCase name="Review Model should create a review with correct properties" duration="5"/>
-    <testCase name="AllReviews Model should create an all reviews object with correct properties" duration="2"/>
+  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\routes\reviews.spec.ts">
+    <testCase name="POST /reviews Should return code 400 without movie_id" duration="38"/>
+    <testCase name="POST /reviews Should return code 400 without Authorization header" duration="24"/>
+    <testCase name="POST /reviews Should return code 401 Unauthorized" duration="24"/>
+    <testCase name="POST /reviews Should return code 500 database upload failed" duration="23"/>
+    <testCase name="POST /reviews Should return code 201" duration="23"/>
+    <testCase name="GET /reviews Should return code 400 without movie_id" duration="27"/>
+    <testCase name="GET /reviews Should return code 500 error fetching database" duration="20"/>
+    <testCase name="GET /reviews Should return code 200" duration="20"/>
+    <testCase name="DELETE /reviews Should return code 400 without any param" duration="24"/>
+    <testCase name="DELETE /reviews Should return code 400 without Authorization header" duration="30"/>
+    <testCase name="DELETE /reviews Should return code 401 Unauthorized" duration="17"/>
+    <testCase name="DELETE /reviews Should return code 500 database deletion failed" duration="20"/>
+    <testCase name="DELETE /reviews Should return code 200" duration="21"/>
   </file>
-  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\models\movie.spec.ts">
-    <testCase name="CarouselMovie Model should create a carousel movie with correct properties" duration="5"/>
-    <testCase name="Genre Model should create a genre with correct properties" duration="1"/>
-    <testCase name="Movie Model should create a movie with correct properties" duration="3"/>
-    <testCase name="MoviePoster Model should create a movie poster with correct properties" duration="2"/>
+  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\models\customError.spec.ts">
+    <testCase name="CustomError should create an instance of CustomError with a message and original error" duration="13"/>
+    <testCase name="CustomError should create an instance of CustomError with only a message" duration="2"/>
+    <testCase name="CustomError should capture the stack trace" duration="1"/>
   </file>
   <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\models\actor.spec.ts">
     <testCase name="Actor Model should create an actor with correct properties" duration="5"/>
     <testCase name="ActorProfile Model should create an actor profile with correct properties" duration="3"/>
     <testCase name="genderToString Function should return correct string for gender 0" duration="1"/>
     <testCase name="genderToString Function should return correct string for gender 1" duration="1"/>
-    <testCase name="genderToString Function should return correct string for gender 2" duration="1"/>
-    <testCase name="genderToString Function should return correct string for gender 3" duration="1"/>
-    <testCase name="genderToString Function should return empty string for unknown gender" duration="1"/>
+    <testCase name="genderToString Function should return correct string for gender 2" duration="2"/>
+    <testCase name="genderToString Function should return correct string for gender 3" duration="2"/>
+    <testCase name="genderToString Function should return empty string for unknown gender" duration="2"/>
+  </file>
+  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\models\user.spec.ts">
+    <testCase name="UserFirebaseAuth Model should create a user with correct properties" duration="5"/>
+    <testCase name="isValidEmail Function should return true for a valid email" duration="2"/>
+    <testCase name="isValidEmail Function should return false for an email without @ symbol" duration="1"/>
+    <testCase name="isValidEmail Function should return false for an email without domain" duration="1"/>
+    <testCase name="isValidEmail Function should return false for an email without top-level domain" duration="1"/>
+    <testCase name="isValidEmail Function should return false for an email with spaces" duration="1"/>
+    <testCase name="isValidEmail Function should return false for an empty string" duration="1"/>
+  </file>
+  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\models\movie.spec.ts">
+    <testCase name="CarouselMovie Model should create a carousel movie with correct properties" duration="5"/>
+    <testCase name="Genre Model should create a genre with correct properties" duration="2"/>
+    <testCase name="Movie Model should create a movie with correct properties" duration="3"/>
+    <testCase name="MoviePoster Model should create a movie poster with correct properties" duration="1"/>
+  </file>
+  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\models\verificationRequest.spec.ts">
+    <testCase name="VerificationRequest Model should create a verification request with all properties" duration="5"/>
+    <testCase name="VerificationRequest Model should create a verification request without optional properties" duration="3"/>
+  </file>
+  <file path="C:\Users\leoso\Documentos\Máster\TFM\Backend\tests\models\reviews.spec.ts">
+    <testCase name="Review Model should create a review with correct properties" duration="5"/>
+    <testCase name="AllReviews Model should create an all reviews object with correct properties" duration="3"/>
   </file>
 </testExecutions>

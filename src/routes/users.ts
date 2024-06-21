@@ -1,6 +1,6 @@
 import express from 'express'
 import multer from 'multer'
-import { deleteUser, saveVerificationRequest, signUp, updateData } from '../controllers/userController'
+import { deleteUser, signUp, updateData } from '../controllers/userController'
 
 const user_router = express.Router()
 const upload = multer({
@@ -68,46 +68,6 @@ user_router.post('/signUp', upload.single('photo'), signUp)
  *         description: Internal server error
  */
 user_router.put('/updateData', upload.single('photo'), updateData)
-
-/**
- * @openapi
- * /users/verification:
- *   post:
- *     summary: Guardar solicitud de verificación
- *     tags: [Users]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               text:
- *                 type: string
- *                 description: Texto de la solicitud de verificación
- *             required:
- *               - text
- *     responses:
- *       '201':
- *         description: Solicitud de verificación guardada exitosamente.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Mensaje de confirmación.
- *       '400':
- *         description: Solicitud incorrecta. Se requiere un identificador de usuario.
- *       '401':
- *         description: No autorizado. Token de autorización inválido o no proporcionado.
- *       '500':
- *         description: Error interno del servidor.
- */
-user_router.post('/verification', express.json(), saveVerificationRequest)
 
 /**
  * @openapi

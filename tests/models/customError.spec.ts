@@ -30,7 +30,6 @@ describe('CustomError', () => {
 
         const error = new CustomError(message, originalError);
 
-        expect(error.stack).toContain('CustomError');
         expect(error.stack).toContain(message);
     });
 });

@@ -1,7 +1,47 @@
 import express from 'express'
-import { getRequests, updateRequestStatus } from '../controllers/verificationController'
+import { getRequests, saveVerificationRequest, updateRequestStatus } from '../controllers/verificationController'
 
 const verification_router = express.Router()
+
+/**
+ * @openapi
+ * /verification:
+ *   post:
+ *     summary: Guardar solicitud de verificación
+ *     tags: [Verification]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               text:
+ *                 type: string
+ *                 description: Texto de la solicitud de verificación
+ *             required:
+ *               - text
+ *     responses:
+ *       '201':
+ *         description: Solicitud de verificación guardada exitosamente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Mensaje de confirmación.
+ *       '400':
+ *         description: Solicitud incorrecta. Se requiere un identificador de usuario.
+ *       '401':
+ *         description: No autorizado. Token de autorización inválido o no proporcionado.
+ *       '500':
+ *         description: Error interno del servidor.
+ */
+verification_router.post('/', express.json(), saveVerificationRequest)
 
 /**
  * @openapi

@@ -12,15 +12,11 @@ export const searchMovie: RequestHandler = (req, res) => {
     }
 
     const request = {
-        ...DEFAULT_MOVIE_REQUEST,
-        query: req.query.q,
+        ...DEFAULT_MOVIE_REQUEST, query: req.query.q,
         page: req.query.page ? req.query.page : 1
     }
-
-    get(MOVIE_URL, {
-        params: request,
-        headers: MOVIE_API_HEADERS
-    }).then((response) => {
+    get(MOVIE_URL, {params: request, headers: MOVIE_API_HEADERS})
+    .then((response) => {
         const MOVIES: MoviePoster[] = response.data.results.map((movie: any) => ({
             poster_path: movie.poster_path ? POSTER_URL_PREFIX + movie.poster_path : movie.poster_path,
             id: movie.id,
@@ -52,10 +48,8 @@ export const getMovie: RequestHandler = (req, res) => {
 
 export const getCarousel: RequestHandler = (_req, res) => {
     const URL = BASE_URL + '/3/discover/movie'
-
-    get(URL, {
-        headers: MOVIE_API_HEADERS
-    }).then((response) => {
+    get(URL, {headers: MOVIE_API_HEADERS})
+    .then((response) => {
         const MOVIES: CarouselMovie[] = response.data.results.map((movie: any) => ({
             backdrop_path: movie.backdrop_path ? BACKDROP_URL_PREFIX + movie.backdrop_path : movie.backdrop_path,
             id: movie.id,
