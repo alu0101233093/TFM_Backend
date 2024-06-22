@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "start": "node build/index.js",
-    "tscstart": "tsc && node build/index.js",
+    "start": "node build/src/index.js",
+    "tscstart": "tsc && node build/src/index.js",
     "test": "jest"
   },
   "keywords": [],
