@@ -1,7 +1,7 @@
 export interface UserFirebaseAuth {
     email: string
-    emailVerified: boolean
     password: string
+    emailVerified: boolean
     displayName: string
     photoURL: string
 }

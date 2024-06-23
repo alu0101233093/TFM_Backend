@@ -239,7 +239,7 @@ describe('PATCH /verification', () => {
     test('Should return code 200 User role changed successfully', async () => {
         const authSpy = jest.spyOn(auth, 'verifyIdToken').mockResolvedValueOnce(verifyAdminIdTokenResponse);
         const databaseSpy = jest.spyOn(database, 'updateRequestStatus').mockResolvedValueOnce('user-uid');
-        const authSpy2 = jest.spyOn(auth, 'changeUserRole').mockResolvedValueOnce(undefined);
+        const authSpy2 = jest.spyOn(auth, 'changeUserRole').mockResolvedValueOnce('User role changed');
         const response = await request(expressApp)
             .patch('/verification')
             .set('Authorization', 'Bearer ValidTokenID')
