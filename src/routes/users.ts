@@ -9,7 +9,7 @@ const upload = multer({
 
 /**
  * @openapi
- * /users/signup:
+ * /users:
  *   post:
  *     summary: Signup a new user
  *     tags: [Users]
@@ -38,11 +38,11 @@ const upload = multer({
  *       500:
  *         description: Internal server error
  */
-user_router.post('/signUp', upload.single('photo'), signUp)
+user_router.post('/', upload.single('photo'), signUp)
 
 /**
  * @openapi
- * /users/updateData:
+ * /users:
  *   put:
  *     summary: Update user data
  *     tags: [Users]
@@ -67,11 +67,11 @@ user_router.post('/signUp', upload.single('photo'), signUp)
  *       500:
  *         description: Internal server error
  */
-user_router.put('/updateData', upload.single('photo'), updateData)
+user_router.put('/', upload.single('photo'), updateData)
 
 /**
  * @openapi
- * /users/deleteUser:
+ * /users:
  *   delete:
  *     summary: Delete user
  *     tags: [Users]

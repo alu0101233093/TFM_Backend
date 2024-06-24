@@ -31,7 +31,7 @@ jest.mock('../../src/services/FirebaseStr', () => {
     };
 });
 
-describe('POST /users/signUp', () => {
+describe('POST /users', () => {
 
     beforeEach(() => {
         jest.resetAllMocks()
@@ -43,7 +43,7 @@ describe('POST /users/signUp', () => {
 
     test('Should return code 400 Bad request', async () => {
         const response = await request(expressApp)
-            .post('/users/signUp')
+            .post('/users')
             .field(signUpUserBadRequest)
         
         expect(response.status).toBe(400);
@@ -52,7 +52,7 @@ describe('POST /users/signUp', () => {
     test('Should return code 500 Error creating user in firebase auth', async () => {
         const authSpy = jest.spyOn(auth, 'createUser').mockRejectedValueOnce('Error creating user in firebase auth ')
         const response = await request(expressApp)
-            .post('/users/signUp')
+            .post('/users')
             .field(signUpUserRequest);
         
         expect(authSpy).toHaveBeenCalled()
@@ -63,7 +63,7 @@ describe('POST /users/signUp', () => {
         const authSpy = jest.spyOn(auth, 'createUser').mockResolvedValueOnce({uid: 'User Identification'} as any)
         const storageSpy = jest.spyOn(storage, 'savePicture').mockRejectedValueOnce('Error uploading image in firebase storage')
         const response = await request(expressApp)
-            .post('/users/signUp')
+            .post('/users')
             .field(signUpUserRequest);
         
         expect(authSpy).toHaveBeenCalled()
@@ -77,7 +77,7 @@ describe('POST /users/signUp', () => {
         const authSpy2 = jest.spyOn(auth, 'updateUser').mockRejectedValueOnce('Error updating photo URL in firabase Auth')
         
         const response = await request(expressApp)
-            .post('/users/signUp')
+            .post('/users')
             .field(signUpUserRequest);
         
         expect(authSpy).toHaveBeenCalled()
@@ -92,7 +92,7 @@ describe('POST /users/signUp', () => {
         const authSpy2 = jest.spyOn(auth, 'updateUser').mockResolvedValueOnce({uid: 'User Identification'} as any)
         
         const response = await request(expressApp)
-            .post('/users/signUp')
+            .post('/users')
             .field(signUpUserRequest);
         
         expect(authSpy).toHaveBeenCalled()
@@ -102,7 +102,7 @@ describe('POST /users/signUp', () => {
     });
 });
 
-describe('PUT /users/updateData', () => {
+describe('PUT /users', () => {
 
     beforeEach(() => {
         jest.resetAllMocks()
@@ -114,7 +114,7 @@ describe('PUT /users/updateData', () => {
 
     test('Should return code 400 Bad request. From data not provided', async () => {
         const response = await request(expressApp)
-            .put('/users/updateData')
+            .put('/users')
             .field(signUpUserBadRequest)
         
         expect(response.status).toBe(400);
@@ -123,7 +123,7 @@ describe('PUT /users/updateData', () => {
     test('Should return code 400 Bad request. IdToken not provided', async () => {
         const fileContent = Buffer.from('This is a test file');
         const response = await request(expressApp)
-            .put('/users/updateData')
+            .put('/users')
             .field(signUpUserRequest)
             .attach('photo', fileContent, 'test file');
         
@@ -134,7 +134,7 @@ describe('PUT /users/updateData', () => {
         const authSpy = jest.spyOn(auth,'verifyIdToken').mockRejectedValueOnce('Invalid IdToken');
         const fileContent = Buffer.from('This is a test file');
         const response = await request(expressApp)
-            .put('/users/updateData')
+            .put('/users')
             .set('Authorization', 'Valid TokenID')
             .field(signUpUserRequest)
             .attach('photo', fileContent,'test file');
@@ -148,7 +148,7 @@ describe('PUT /users/updateData', () => {
         const storageSpy = jest.spyOn(storage, 'savePicture').mockRejectedValueOnce('Error uploading image in firebase storage')
         const fileContent = Buffer.from('This is a test file');
         const response = await request(expressApp)
-            .put('/users/updateData')
+            .put('/users')
             .set('Authorization', 'Valid TokenID')
             .field(signUpUserRequest)
             .attach('photo', fileContent, 'test file');
@@ -164,7 +164,7 @@ describe('PUT /users/updateData', () => {
         const authSpy2 = jest.spyOn(auth,'updateUser').mockRejectedValueOnce('Updating new photo URL failed.');
         const fileContent = Buffer.from('This is a test file');
         const response = await request(expressApp)
-            .put('/users/updateData')
+            .put('/users')
             .set('Authorization', 'Valid TokenID')
             .field(signUpUserRequest)
             .attach('photo', fileContent, 'test file');
@@ -181,7 +181,7 @@ describe('PUT /users/updateData', () => {
         const authSpy2 = jest.spyOn(auth,'updateUser').mockResolvedValueOnce({uid: 'User Identification'} as any);
         const fileContent = Buffer.from('This is a test file');
         const response = await request(expressApp)
-            .put('/users/updateData')
+            .put('/users')
             .set('Authorization', 'Valid TokenID')
             .field(signUpUserRequest)
             .attach('photo', fileContent, 'test file');
@@ -196,7 +196,7 @@ describe('PUT /users/updateData', () => {
         const authSpy = jest.spyOn(auth,'verifyIdToken').mockResolvedValueOnce(verifyIdTokenResponse);
         const authSpy2 = jest.spyOn(auth,'updateUser').mockRejectedValueOnce('Updating new photo URL failed.');
         const response = await request(expressApp)
-            .put('/users/updateData')
+            .put('/users')
             .set('Authorization', 'Valid TokenID')
             .field(signUpUserRequest)
         
@@ -209,7 +209,7 @@ describe('PUT /users/updateData', () => {
         const authSpy = jest.spyOn(auth,'verifyIdToken').mockResolvedValueOnce(verifyIdTokenResponse);
         const authSpy2 = jest.spyOn(auth,'updateUser').mockResolvedValueOnce({uid: 'User Identification'} as any);
         const response = await request(expressApp)
-            .put('/users/updateData')
+            .put('/users')
             .set('Authorization', 'Valid TokenID')
             .field(signUpUserRequest)
         

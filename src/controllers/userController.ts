@@ -5,7 +5,7 @@ import { CustomError } from "../models/customError"
 import { auth, database, storage } from "../app"
 
 export const signUp: RequestHandler = (req, res) => {
-    if(!req.body.email || !req.body.emailVerified || !req.body.password || !req.body.displayName){
+    if(!req.body.email || !req.body.password || !req.body.displayName){
         return res.status(400).send(new CustomError('Bad request.'))
     }
 
@@ -38,7 +38,7 @@ export const signUp: RequestHandler = (req, res) => {
 }
 
 export const updateData: RequestHandler = (req, res) => {
-    if(!req.body.email || !req.body.emailVerified || !req.body.password || !req.body.displayName){
+    if(!req.body.email && !req.body.password && !req.body.displayName){
         return res.status(400).send(new CustomError('Bad request.'))
     }
 
